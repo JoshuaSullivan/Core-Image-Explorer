@@ -4,7 +4,7 @@ Core-Image-Explorer
 This project enumerates the available Core Image Filters on your iOS device and provides 
 simple controls for experimenting with them.
 
-------------------------------------------------------------------------------------------
+- - -
 
 ###TO DO:
 * Create input controls for Color Matrix filter.
@@ -14,7 +14,7 @@ simple controls for experimenting with them.
 * Allow user to pick different images from Library in image control cells.
 * Create awesome and/or radical app icon and startup screen.
 
-------------------------------------------------------------------------------------------
+- - -
 
 ###PLANNED FUTURE FEATURES:
 * Support for video input on filters in the CICategoryVideo group.
