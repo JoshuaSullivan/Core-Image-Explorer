@@ -1,0 +1,276 @@
+//
+//  FilterTestViewController.m
+//  Core Image Explorer
+//
+//  Created by Joshua Sullivan on 10/13/12.
+//  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
+//
+
+#import <CoreImage/CoreImage.h>
+#import <QuartzCore/QuartzCore.h>
+#import "FilterDetailViewController.h"
+#import "NumericSliderCell.h"
+#import "PhotoPickerCell.h"
+#import "AffineTransformCell.h"
+#import "PositionPickerCell.h"
+
+#define kGenericCellIdentifier @"GenericCellIdentifier"
+#define kNumericSliderCellIdentifier @"NumericSliderCellIdentifier"
+#define kPhotoPickerCellIdentifier @"PhotoPickerCellIdentifier"
+#define kPositionPickerCellIdentifier @"PositionPickerCellIdentifier"
+#define kColorPickerCellIdentifier @"ColorPickerCellIdentifier"
+#define kAffineTransformCellIdentifier @"AffineTransformCellIdentifier"
+
+@interface FilterDetailViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *outputImageView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *shadowBox;
+
+@property (strong, nonatomic) NSMutableArray *inputDescriptors;
+@property (strong, nonatomic) NSMutableArray *inputCells;
+@property (strong, nonatomic) NSMutableDictionary *inputValues;
+@property (assign, nonatomic) NSUInteger imageCount;
+
+@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
+@property (strong, nonatomic) GestureInputCell *activeGestureCell;
+
+@end
+
+@implementation FilterDetailViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.imageCount = 0;
+        
+    self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
+    self.shadowBox.layer.shadowOpacity = 0.4;
+    self.shadowBox.layer.shadowRadius = 4.0;
+    self.shadowBox.layer.shadowColor = [UIColor blackColor].CGColor;
+	
+    self.title = self.filter.attributes[kCIAttributeFilterDisplayName];
+    self.inputDescriptors = [NSMutableArray arrayWithCapacity:self.filter.inputKeys.count];
+    self.inputValues = [NSMutableDictionary dictionaryWithCapacity:self.filter.inputKeys.count];
+    
+//    NSLog(@"%@", self.title);
+    for (NSString *inputKey in self.filter.inputKeys) {
+        NSDictionary *inputAttributes = self.filter.attributes[inputKey];
+        self.inputValues[inputKey] = [self getDefaultValueForInput:inputAttributes withName:inputKey];
+//        NSLog(@"%@: %@", inputKey, self.inputValues[inputKey]);
+        [self.inputDescriptors addObject:inputAttributes];
+    }    
+    
+    if ([self.filter.name isEqualToString:@"CILightTunnel"]) {
+        [self.inputValues setValue:@200.0 forKey:@"inputRadius"];
+        [self.filter setValue:@0.0 forKey:@"inputRotation"];
+        [self.filter setValue:@200.0 forKey:@"inputRadius"];
+    }
+    
+    [self.tableView reloadData];
+    [self updateResultImage];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    self.outputImageView.image = nil;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.outputImageView.image = nil;
+    
+    self.inputDescriptors = nil;
+    [self.tableView reloadData];
+}
+
+#pragma mark - Update Filter Result
+
+- (void) updateResultImage
+{
+    for (NSString *inputKey in self.filter.inputKeys) {
+//        NSLog(@"Setting %@ = %@", inputKey, self.inputValues[inputKey]);
+        [self.filter setValue:self.inputValues[inputKey] forKey:inputKey];
+    }
+    
+    CIImage *outputImage = self.filter.outputImage;
+    CGRect extent = outputImage.extent;
+    if (CGRectIsInfinite(extent)) {
+        extent = CGRectMake(0.0, 0.0, 640.0, 480.0);
+    }
+    
+    CGImageRef cgImg = [self.ciContext createCGImage:outputImage
+                                            fromRect:extent];
+    UIImage *resultImage = [UIImage imageWithCGImage:cgImg];
+//    NSLog(@"%@", NSStringFromCGSize(resultImage.size));
+    self.outputImageView.image = resultImage;
+    CGImageRelease(cgImg);
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.inputDescriptors.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = self.inputCells[indexPath.row];
+    
+    if (cell) {
+        return cell;
+    }
+    
+    NSDictionary *attributes = self.inputDescriptors[indexPath.row];
+    NSString *inputName = self.filter.inputKeys[indexPath.row];
+    NSString *inputClass = attributes[kCIAttributeClass];
+    NSString *inputType = attributes[kCIAttributeType];
+    
+    if ([inputClass isEqualToString:@"NSNumber"]) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:kNumericSliderCellIdentifier];
+    } else if ([inputClass isEqualToString:@"CIImage"]) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoPickerCellIdentifier];
+    } else if ([inputClass isEqualToString:@"CIVector"]) {
+        // We've got to handle several different types of vectors with different intents.
+        if (inputType == kCIAttributeTypePosition) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:kPositionPickerCellIdentifier];
+            ((PositionPickerCell *)cell).gestureDelegate = self;
+        } else {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
+        }
+    } else if ([inputClass isEqualToString:@"CIColor"]) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:kColorPickerCellIdentifier];
+    } else if ([inputClass isEqualToString:@"NSValue"]) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:kAffineTransformCellIdentifier];
+        ((AffineTransformCell *)cell).gestureDelegate = self;
+    } else {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
+    }
+    
+    ((BaseInputControlCell *)cell).delegate = self;
+    [(BaseInputControlCell *)cell configWithDictionary:attributes
+                                         startingValue:self.inputValues[inputName]
+                                          andInputName:inputName];
+    
+    // The value ranges for the inputs in the attributes dictionary for CILightTunnel are incorrect.
+    if ([self.filter.name isEqualToString:@"CILightTunnel"]) {
+        if ([inputName isEqualToString:@"inputRotation"]) {
+            [(NumericSliderCell *)cell setInputRangeMinValue:@(-4.0 * M_PI)
+                                                    maxValue:@(4.0 * M_PI)
+                                             andDefaultValue:@0];
+        } else if ([inputName isEqualToString:@"inputRadius"]) {
+            [(NumericSliderCell *)cell setInputRangeMinValue:@8.0
+                                                    maxValue:@400.0
+                                             andDefaultValue:@200.0];
+        }
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *attributes = self.inputDescriptors[indexPath.row];
+    NSString *inputClass = attributes[kCIAttributeClass];
+    if ([inputClass isEqualToString:@"CIImage"] || [inputClass isEqualToString:@"CIColor"]) {
+        return 100.0;
+    }
+    
+    return tableView.rowHeight;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - InputCellDelegate
+- (void)inputControlCellValueDidChange:(BaseInputControlCell *)inputControlCell
+{
+    NSString *inputName = inputControlCell.inputName;
+    NSObject *inputValue = inputControlCell.value;
+    
+    self.inputValues[inputName] = inputValue;
+    
+    [self updateResultImage];
+}
+
+#pragma mark - GestureInputDelegate methods
+
+- (void)gestureInput:(GestureInputCell *)gestureInput addGesturesToImageView:(NSArray *)gestures withBorderColor:(UIColor *)borderColor
+{
+    if (self.activeGestureCell) {
+        [self.activeGestureCell deactivate];
+    }
+    
+    for (UIGestureRecognizer *gesture in gestures) {
+        [self.outputImageView addGestureRecognizer:gesture];
+    }
+    
+    self.activeGestureCell = gestureInput;
+    self.outputImageView.layer.borderColor = borderColor.CGColor;
+    self.outputImageView.layer.borderWidth = 4.0;
+}
+
+- (void)gestureInputDidDeactivate:(GestureInputCell *)gestureInput
+{
+    self.activeGestureCell = nil;
+    self.outputImageView.layer.borderWidth = 0.0;
+}
+
+#pragma mark - Helper methods
+
+- (NSObject *)getDefaultValueForInput:(NSDictionary *)attributes withName:(NSString *)inputName
+{
+    
+    NSObject *value;
+    NSString *inputClass = attributes[kCIAttributeClass];
+    NSString *inputType = attributes[kCIAttributeType];
+    if ([inputClass isEqualToString:@"CIImage"]) {
+        self.imageCount++;
+        UIImage *inputImage = [UIImage imageNamed:[NSString stringWithFormat:@"DefaultImage%d.png", self.imageCount]];
+        value = [CIImage imageWithCGImage:inputImage.CGImage];
+    } else if ([inputClass isEqualToString:@"CIVector"]) {
+        if (inputType == kCIAttributeTypePosition) {
+            value = [CIVector vectorWithCGPoint:CGPointMake(320.0, 240.0)];
+        } else if (inputType == kCIAttributeTypeRectangle) {
+            value = [CIVector vectorWithCGRect:CGRectMake(0.0, 0.0, 640.0, 480.0)];
+        } else {
+            NSObject *filterValue = [self.filter valueForKey:inputName];
+            value = filterValue ? filterValue : attributes[kCIAttributeDefault];
+        }
+    } else {
+        NSObject *filterValue = [self.filter valueForKey:inputName];
+        value = filterValue ? filterValue : attributes[kCIAttributeDefault];
+    }
+    return value;
+}
+
+#pragma mark - IBActions
+- (IBAction)resetFilter:(id)sender
+{
+    [self.filter setDefaults];
+    for (NSString *inputKey in self.filter.inputKeys) {
+        NSDictionary *inputAttributes = self.filter.attributes[inputKey];
+        if (![inputAttributes[kCIAttributeClass ] isEqualToString:@"CIImage"]) {
+            self.inputValues[inputKey] = inputAttributes[kCIAttributeDefault];
+        }
+    }
+    
+    [self.tableView reloadData];
+    [self updateResultImage];
+}
+
+@end

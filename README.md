@@ -5,6 +5,7 @@ This project enumerates the available Core Image Filters on your iOS device and 
 simple controls for experimenting with them.
 
 TO DO:
+------
 * Create input controls for Color Matrix filter.
 * Properly initialize Affine Transform control cells with pre-existing values.
 * Provide a better value display for Affine Transform control cells.
@@ -13,6 +14,7 @@ TO DO:
 * Create awesome and/or radical app icon and startup screen.
 
 PLANNED FUTURE FEATURES:
+------------------------
 * Support for video input on filters in the CICategoryVideo group.
 * Filter Stacking - Combine multiple filters.
 * iPad version.
