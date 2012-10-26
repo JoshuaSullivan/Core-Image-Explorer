@@ -54,6 +54,9 @@ typedef enum {
         if ([self isFilterExcluded:name]) continue;
         CIFilter *filter = [CIFilter filterWithName:name];
         [self.allFilters addObject:filter];
+        
+//        NSLog(@"%@\n%@", filter.name, filter.attributes);
+        
         NSArray *filterCategories = filter.attributes[kCIAttributeFilterCategories];
         for (NSString *categoryName in filterCategories) {
             if (![categories containsObject:categoryName]) {

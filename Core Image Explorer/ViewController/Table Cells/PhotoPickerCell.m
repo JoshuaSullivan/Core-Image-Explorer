@@ -20,7 +20,9 @@
 {
     [super configWithDictionary:attributeDictionary startingValue:value andInputName:inputName];
     
-    self.imageView.image = [UIImage imageWithCIImage:(CIImage *)self.value];
+    UIImage *image = [UIImage imageWithCIImage:(CIImage *)self.value];
+//    NSLog(@"PhotoPickerCell: %@ %@", image, NSStringFromCGSize(image.size));
+    self.imageView.image = image;
 }
 
 @end
