@@ -6,6 +6,11 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
+/*!
+ @class GestureInputCell
+ @abstract This is an abstract base class for AffineTransformCell and PositionPickerCell
+ */
+
 #import "BaseInputControlCell.h"
 
 @class GestureInputCell;

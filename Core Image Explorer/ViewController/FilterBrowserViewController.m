@@ -178,7 +178,6 @@ typedef enum {
 - (IBAction)tableModeControlValueChanged:(id)sender
 {
     self.tableMode = ((UISegmentedControl *)sender).selectedSegmentIndex;
-    NSLog(@"mode: %d", self.tableMode);
     [self.tableView reloadData];
 }
 
