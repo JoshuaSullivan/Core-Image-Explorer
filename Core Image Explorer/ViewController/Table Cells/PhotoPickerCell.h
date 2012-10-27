@@ -8,6 +8,23 @@
 
 #import "BaseInputControlCell.h"
 
-@interface PhotoPickerCell : BaseInputControlCell
+@class PhotoPickerCell;
+
+@protocol PhotoPickerDelegate <NSObject>
+
+@required
+- (void)photoPicker:(PhotoPickerCell *)photoPicker presentPickerController:(UIImagePickerController *)pickerController;
+- (void)photoPickerDismiss:(PhotoPickerCell *)photoPicker;
+
+@end
+
+@interface PhotoPickerCell : BaseInputControlCell <UIActionSheetDelegate,
+                                                   UIImagePickerControllerDelegate,
+                                                   UINavigationControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (assign, nonatomic) NSInteger defaultImageIndex;
+
+@property (weak, nonatomic) id <PhotoPickerDelegate> photoDelegate;
 
 @end

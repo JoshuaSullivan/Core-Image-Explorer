@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BaseInputControlCell.h"
 #import "GestureInputCell.h"
+#import "PhotoPickerCell.h"
 
-@interface FilterDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, InputCellDelegate, GestureInputDelegate>
+@interface FilterDetailViewController : UIViewController <UITableViewDataSource,
+                                                          UITableViewDelegate,
+                                                          InputCellDelegate,
+                                                          GestureInputDelegate,
+                                                          PhotoPickerDelegate>
 
 @property (strong, nonatomic) CIFilter *filter;
 @property (strong, nonatomic) CIContext *ciContext;

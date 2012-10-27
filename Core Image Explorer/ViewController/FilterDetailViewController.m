@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FilterDetailViewController.h"
 #import "NumericSliderCell.h"
-#import "PhotoPickerCell.h"
 #import "AffineTransformCell.h"
 #import "PositionPickerCell.h"
 
@@ -31,9 +30,11 @@
 @property (strong, nonatomic) NSMutableArray *inputCells;
 @property (strong, nonatomic) NSMutableDictionary *inputValues;
 @property (assign, nonatomic) NSUInteger imageCount;
+@property (assign, nonatomic) NSUInteger imageCellCount;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @property (strong, nonatomic) GestureInputCell *activeGestureCell;
+@property (assign, nonatomic) BOOL isPickingPhoto;
 
 @end
 
@@ -44,6 +45,8 @@
     [super viewDidLoad];
     
     self.imageCount = 0;
+    self.imageCellCount = 0;
+    self.isPickingPhoto = NO;
         
     self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
     self.shadowBox.layer.shadowOpacity = 0.4;
@@ -82,10 +85,13 @@
 {
     [super viewDidDisappear:animated];
     
-    self.outputImageView.image = nil;
-    
-    self.inputDescriptors = nil;
-    [self.tableView reloadData];
+    if (!self.isPickingPhoto) {
+        self.outputImageView.image = nil;
+        
+        self.inputDescriptors = nil;
+        [self.tableView reloadData];
+    }
+    self.isPickingPhoto = NO;
 }
 
 #pragma mark - Update Filter Result
@@ -139,7 +145,10 @@
     if ([inputClass isEqualToString:@"NSNumber"]) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:kNumericSliderCellIdentifier];
     } else if ([inputClass isEqualToString:@"CIImage"]) {
+        self.imageCellCount++;
         cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoPickerCellIdentifier];
+        ((PhotoPickerCell *)cell).defaultImageIndex = self.imageCellCount;
+        ((PhotoPickerCell *)cell).photoDelegate = self;
     } else if ([inputClass isEqualToString:@"CIVector"]) {
         // We've got to handle several different types of vectors with different intents.
         if (inputType == kCIAttributeTypePosition) {
@@ -174,7 +183,7 @@
                                              andDefaultValue:@200.0];
         }
     }
-    
+        
     return cell;
 }
 
@@ -228,6 +237,18 @@
 {
     self.activeGestureCell = nil;
     self.outputImageView.layer.borderWidth = 0.0;
+}
+
+#pragma mark - PhotoPickerDelegate
+- (void)photoPicker:(PhotoPickerCell *)photoPicker presentPickerController:(UIImagePickerController *)pickerController
+{
+    self.isPickingPhoto = YES;
+    [self presentViewController:pickerController animated:YES completion:nil];
+}
+
+- (void)photoPickerDismiss:(PhotoPickerCell *)photoPicker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Helper methods

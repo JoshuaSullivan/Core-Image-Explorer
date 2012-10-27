@@ -34,6 +34,7 @@
 		BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F145162E19AA008EE219 /* BaseInputControlCell.m */; };
 		BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */; };
 		BC61F14E162E208F008EE219 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14D162E208F008EE219 /* PhotoPickerCell.m */; };
+		BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,8 @@
 		BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumericSliderCell.m; sourceTree = "<group>"; };
 		BC61F14C162E208F008EE219 /* PhotoPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerCell.h; sourceTree = "<group>"; };
 		BC61F14D162E208F008EE219 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
+		BCEBB039163C3333005D4196 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */,
 				BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */,
 				BC24E6D91629BB2A006C7116 /* OpenGLES.framework in Frameworks */,
 				BC24E6D71629BB21006C7116 /* CoreImage.framework in Frameworks */,
@@ -116,6 +120,8 @@
 		BC24E6A21629B58E006C7116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */,
+				BCEBB039163C3333005D4196 /* CoreMedia.framework */,
 				BC0F2241162EF48200BE0663 /* QuartzCore.framework */,
 				BC24E6D81629BB2A006C7116 /* OpenGLES.framework */,
 				BC24E6D61629BB21006C7116 /* CoreImage.framework */,
