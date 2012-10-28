@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIView *shadowBox;
 
 @property (strong, nonatomic) NSMutableArray *inputDescriptors;
-@property (strong, nonatomic) NSMutableArray *inputCells;
+@property (strong, nonatomic) NSMutableDictionary *inputCells;
 @property (strong, nonatomic) NSMutableDictionary *inputValues;
 @property (assign, nonatomic) NSUInteger imageCount;
 @property (assign, nonatomic) NSUInteger imageCellCount;
@@ -47,6 +47,7 @@
     self.imageCount = 0;
     self.imageCellCount = 0;
     self.isPickingPhoto = NO;
+    self.inputCells = [NSMutableDictionary dictionary];
         
     self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
     self.shadowBox.layer.shadowOpacity = 0.4;
@@ -91,7 +92,6 @@
         self.inputDescriptors = nil;
         [self.tableView reloadData];
     }
-    self.isPickingPhoto = NO;
 }
 
 #pragma mark - Update Filter Result
@@ -131,14 +131,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = self.inputCells[indexPath.row];
+    NSString *inputName = self.filter.inputKeys[indexPath.row];
+    UITableViewCell *cell = self.inputCells[inputName];
     
     if (cell) {
         return cell;
     }
     
     NSDictionary *attributes = self.inputDescriptors[indexPath.row];
-    NSString *inputName = self.filter.inputKeys[indexPath.row];
     NSString *inputClass = attributes[kCIAttributeClass];
     NSString *inputType = attributes[kCIAttributeType];
     
@@ -165,6 +165,8 @@
     } else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
     }
+    
+    self.inputCells[inputName] = cell;
     
     ((BaseInputControlCell *)cell).delegate = self;
     [(BaseInputControlCell *)cell configWithDictionary:attributes
@@ -200,10 +202,7 @@
 
 #pragma mark - UITableViewDelegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
+// Don't need this one here.
 
 #pragma mark - InputCellDelegate
 - (void)inputControlCellValueDidChange:(BaseInputControlCell *)inputControlCell
@@ -249,6 +248,7 @@
 - (void)photoPickerDismiss:(PhotoPickerCell *)photoPicker
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    self.isPickingPhoto = NO;
 }
 
 #pragma mark - Helper methods
@@ -283,11 +283,12 @@
 - (IBAction)resetFilter:(id)sender
 {
     [self.filter setDefaults];
+    self.imageCount = 0;
+    self.imageCellCount = 0;
+    [self.inputCells removeAllObjects];
     for (NSString *inputKey in self.filter.inputKeys) {
         NSDictionary *inputAttributes = self.filter.attributes[inputKey];
-        if (![inputAttributes[kCIAttributeClass ] isEqualToString:@"CIImage"]) {
-            self.inputValues[inputKey] = inputAttributes[kCIAttributeDefault];
-        }
+        self.inputValues[inputKey] = [self getDefaultValueForInput:inputAttributes withName:inputKey];
     }
     
     [self.tableView reloadData];

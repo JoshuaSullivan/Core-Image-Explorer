@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
-#import "PhotoPickerCell.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "PhotoPickerCell.h"
+#import "UIImage+Transform.h"
 
 #define kDefaultImageWidth 120.0
 #define kDefaultImageHeight 90.0
@@ -76,7 +77,8 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - Picker methods
 - (void)resetToDefault
 {
-    UIImage *defaultImage = [UIImage imageNamed:[NSString stringWithFormat:@"DefaultImage%d.png", self.defaultImageIndex]];
+    NSString *imageName = [NSString stringWithFormat:@"DefaultImage%d.png", self.defaultImageIndex];
+    UIImage *defaultImage = [UIImage imageNamed:imageName];
     self.value = [CIImage imageWithCGImage:defaultImage.CGImage];
     self.imageView.image = defaultImage;
     
@@ -163,7 +165,17 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - UIImagePickerControllerDelegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"Picker dictionary: %@", info);
+    UIImage *newImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *scaledImage = [newImage imageByScalingProportionallyToMinimumSize:CGSizeMake(640.0, 480.0)];
+    self.value = [CIImage imageWithCGImage:scaledImage.CGImage];
+    self.imageView.image = scaledImage;
+    
+    [self.photoDelegate photoPickerDismiss:self];
+    [self.delegate inputControlCellValueDidChange:self];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
     [self.photoDelegate photoPickerDismiss:self];
 }
 
