@@ -37,6 +37,8 @@
 @property (strong, nonatomic) GestureInputCell *activeGestureCell;
 @property (assign, nonatomic) BOOL isPickingPhoto;
 
+@property (assign, nonatomic) BOOL cacheCells;
+
 @end
 
 @implementation FilterDetailViewController
@@ -48,6 +50,7 @@
     self.imageCount = 0;
     self.imageCellCount = 0;
     self.isPickingPhoto = NO;
+    self.cacheCells = ![self.filter.name isEqualToString:@"CIColorMatrix"];
     self.inputCells = [NSMutableDictionary dictionary];
         
     self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
@@ -135,7 +138,8 @@
     NSString *inputName = self.filter.inputKeys[indexPath.row];
     UITableViewCell *cell = self.inputCells[inputName];
     
-    if (cell) {
+    if (cell && self.cacheCells) {
+        NSLog(@"Returning cell named '%@' for indexPath: %@", inputName, indexPath);
         return cell;
     }
     
@@ -169,7 +173,6 @@
         cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
     }
     
-    self.inputCells[inputName] = cell;
     
     ((BaseInputControlCell *)cell).delegate = self;
     [(BaseInputControlCell *)cell configWithDictionary:attributes
@@ -188,7 +191,11 @@
                                              andDefaultValue:@200.0];
         }
     }
-        
+    
+    if (self.cacheCells) {
+        self.inputCells[inputName] = cell;
+    }
+    
     return cell;
 }
 

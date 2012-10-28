@@ -30,8 +30,6 @@
                    andInputName:inputName];
     [self updateValueLabel];
     
-    NSLog(@"%@", self.inputName);
-    
     CIVector *vec = (CIVector *)self.value;
     self.redSlider.value = vec.X;
     self.greenSlider.value = vec.Y;
