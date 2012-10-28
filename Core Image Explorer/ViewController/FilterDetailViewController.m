@@ -19,6 +19,7 @@
 #define kPositionPickerCellIdentifier @"PositionPickerCellIdentifier"
 #define kColorPickerCellIdentifier @"ColorPickerCellIdentifier"
 #define kAffineTransformCellIdentifier @"AffineTransformCellIdentifier"
+#define kColorMatrixCellIdentifier @"ColorMatrixCellIdentifier"
 
 @interface FilterDetailViewController ()
 
@@ -154,6 +155,8 @@
         if (inputType == kCIAttributeTypePosition) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kPositionPickerCellIdentifier];
             ((PositionPickerCell *)cell).gestureDelegate = self;
+        } else if ([self.filter.name isEqualToString:@"CIColorMatrix"]) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:kColorMatrixCellIdentifier];
         } else {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
         }
@@ -193,7 +196,10 @@
 {
     NSDictionary *attributes = self.inputDescriptors[indexPath.row];
     NSString *inputClass = attributes[kCIAttributeClass];
-    if ([inputClass isEqualToString:@"CIImage"] || [inputClass isEqualToString:@"CIColor"]) {
+    if ([inputClass isEqualToString:@"CIImage"] ||
+        [inputClass isEqualToString:@"CIColor"] ||
+        [self.filter.name isEqualToString:@"CIColorMatrix"])
+    {
         return 100.0;
     }
     

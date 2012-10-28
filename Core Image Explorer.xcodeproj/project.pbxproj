@@ -35,6 +35,7 @@
 		BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */; };
 		BC61F14E162E208F008EE219 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14D162E208F008EE219 /* PhotoPickerCell.m */; };
 		BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */; };
+		BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */; };
 		BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		BC61F14D162E208F008EE219 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
 		BCCFB59A163C9FEB00D89F0B /* UIImage+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Transform.h"; sourceTree = "<group>"; };
 		BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Transform.m"; sourceTree = "<group>"; };
+		BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrixCell.h; sourceTree = "<group>"; };
+		BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorMatrixCell.m; sourceTree = "<group>"; };
 		BCEBB039163C3333005D4196 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -205,6 +208,8 @@
 				BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */,
 				BC55A02B1634355C008F0B8C /* PositionPickerCell.h */,
 				BC55A02C1634355C008F0B8C /* PositionPickerCell.m */,
+				BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */,
+				BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				BC2BA0001638E80500F5EBBF /* AffineTransformCell.m in Sources */,
 				BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */,
 				BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */,
+				BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +391,7 @@
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Core Image Explorer";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -398,7 +404,7 @@
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Core Image Explorer";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
