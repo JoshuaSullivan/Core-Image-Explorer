@@ -14,6 +14,10 @@
 @property (assign, nonatomic) CGFloat scale;
 @property (assign, nonatomic) CGPoint translation;
 
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
+@property (strong, nonatomic) UIRotationGestureRecognizer *rotationRecognizer;
+@property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
+
 @end
 
 @implementation AffineTransformCell
@@ -22,25 +26,35 @@
 {
     [super awakeFromNib];
     
-    CGAffineTransform startingTransform = ((NSValue *)self.value).CGAffineTransformValue;
-    
-    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self
-                                                                                          action:@selector(imageWasPinched:)];
-    pinchRecognizer.scale = startingTransform.a;
-    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                                   action:@selector(imageWasRotated:)];
-    rotationRecognizer.rotation = startingTransform.b;
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(imageWasDragged:)];
-    [self.gestures addObject:pinchRecognizer];
-    [self.gestures addObject:rotationRecognizer];
-    [self.gestures addObject:panRecognizer];
+    self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                                                     action:@selector(imageWasPinched:)];
+    self.rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                           action:@selector(imageWasRotated:)];
+    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                 action:@selector(imageWasDragged:)];
+    [self.gestures addObject:self.pinchRecognizer];
+    [self.gestures addObject:self.rotationRecognizer];
+    [self.gestures addObject:self.panRecognizer];
     
     self.rotation = 0.0;
     self.scale = 1.0;
     self.translation = CGPointZero;
     
     self.borderColor = [UIColor greenColor];
+}
+
+- (void)configWithDictionary:(NSDictionary *)attributeDictionary
+               startingValue:(NSObject *)value
+                andInputName:(NSString *)inputName
+{
+    [super configWithDictionary:attributeDictionary
+                  startingValue:value
+                   andInputName:inputName];
+    
+    CGAffineTransform startingTransform = ((NSValue *)self.value).CGAffineTransformValue;
+    self.scale = startingTransform.a;
+    self.rotation = startingTransform.b;
+    self.translation = CGPointMake(startingTransform.tx, startingTransform.ty);
 }
 
 - (void)updateValueLabel
@@ -67,6 +81,18 @@
 {
     self.translation = [sender translationInView:sender.view];
     [self updateTransformValue];
+}
+
+#pragma mark - IBAction
+- (void)activateButtonTapped:(id)sender
+{
+    [super activateButtonTapped:sender];
+    
+    if (self.isActive) {
+        self.pinchRecognizer.scale = self.scale;
+        self.rotationRecognizer.rotation = self.rotation;
+        [self.panRecognizer setTranslation:self.translation inView:self.panRecognizer.view];
+    }
 }
 
 #pragma mark - Update the value
