@@ -41,7 +41,7 @@ typedef enum {
 {
     [super viewDidLoad];
 	
-    self.exclusionList = @[@"CIColorCube", @"CIMaskToAlpha"];
+    self.exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
     
     self.tableMode = self.modeControl.selectedSegmentIndex;
     
