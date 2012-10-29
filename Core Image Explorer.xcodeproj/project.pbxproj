@@ -34,6 +34,8 @@
 		BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F145162E19AA008EE219 /* BaseInputControlCell.m */; };
 		BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */; };
 		BC61F14E162E208F008EE219 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14D162E208F008EE219 /* PhotoPickerCell.m */; };
+		BC85E9C6163E086A0028CDD9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C5163E086A0028CDD9 /* Icon.png */; };
+		BC85E9C8163E08950028CDD9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C7163E08950028CDD9 /* Icon@2x.png */; };
 		BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */; };
 		BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */; };
 		BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */; };
@@ -80,6 +82,8 @@
 		BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumericSliderCell.m; sourceTree = "<group>"; };
 		BC61F14C162E208F008EE219 /* PhotoPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerCell.h; sourceTree = "<group>"; };
 		BC61F14D162E208F008EE219 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
+		BC85E9C5163E086A0028CDD9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		BC85E9C7163E08950028CDD9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BCCFB59A163C9FEB00D89F0B /* UIImage+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Transform.h"; sourceTree = "<group>"; };
 		BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Transform.m"; sourceTree = "<group>"; };
 		BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrixCell.h; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				BC24E6B51629B58E006C7116 /* Default.png */,
 				BC24E6B71629B58E006C7116 /* Default@2x.png */,
 				BC24E6B91629B58E006C7116 /* Default-568h@2x.png */,
+				BC85E9C7163E08950028CDD9 /* Icon@2x.png */,
+				BC85E9C5163E086A0028CDD9 /* Icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -284,6 +290,8 @@
 				BC0F223F162E56E700BE0663 /* DefaultImage3.png in Resources */,
 				BC55A03116343A05008F0B8C /* 13-target.png in Resources */,
 				BC55A03216343A05008F0B8C /* 13-target@2x.png in Resources */,
+				BC85E9C6163E086A0028CDD9 /* Icon.png in Resources */,
+				BC85E9C8163E08950028CDD9 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

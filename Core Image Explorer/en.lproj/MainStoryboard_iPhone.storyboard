@@ -8,7 +8,7 @@
         <scene sceneID="soj-6a-wfx">
             <objects>
                 <navigationController definesPresentationContext="YES" id="TsR-1f-7Ue" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="al4-YP-usv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="al4-YP-usv">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -58,7 +58,7 @@
                                     <outlet property="delegate" destination="Wtp-M1-aZz" id="njR-J6-D6e"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tuk-89-kvl">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="tuk-89-kvl">
                                 <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="1xB-uk-Pbv"/>
@@ -70,6 +70,7 @@
                                                 <segment title="All Filters"/>
                                                 <segment title="Grouped by Type"/>
                                             </segments>
+                                            <color key="tintColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="tableModeControlValueChanged:" destination="Wtp-M1-aZz" eventType="valueChanged" id="c4z-dw-2HT"/>
                                             </connections>
