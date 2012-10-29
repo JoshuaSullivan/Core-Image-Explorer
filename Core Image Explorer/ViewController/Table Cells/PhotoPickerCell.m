@@ -82,13 +82,16 @@ static NSString *kResetToDefault = @"Reset to Default";
     self.value = [CIImage imageWithCGImage:defaultImage.CGImage];
     self.imageView.image = defaultImage;
     
-    
     [self.delegate inputControlCellValueDidChange:self];
 }
 
 - (void)takePhoto
 {
-    NSLog(@"Take a photo.");
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+    self.imagePicker.allowsEditing = NO;
+    
+    [self.photoDelegate photoPicker:self presentPickerController:self.imagePicker];
 }
 
 - (void)pickFromLibrary
