@@ -36,6 +36,9 @@
                                                                            action:@selector(imageWasRotated:)];
     self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                  action:@selector(imageWasDragged:)];
+    self.pinchRecognizer.delegate = self;
+    self.rotationRecognizer.delegate = self;
+    
     [self.gestures addObject:self.pinchRecognizer];
     [self.gestures addObject:self.rotationRecognizer];
     [self.gestures addObject:self.panRecognizer];
@@ -73,32 +76,38 @@
 
 - (void)imageWasPinched:(UIPinchGestureRecognizer *)sender
 {
-    self.scale = sender.scale;
-    [self updateTransformValue];
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        sender.scale = self.scale;
+    } else {
+        self.scale = fmaxf(0.1, fminf(sender.scale, 2.0));
+        [self updateTransformValue];
+    }
 }
 
 - (void)imageWasRotated:(UIRotationGestureRecognizer *)sender
 {
-    self.rotation = sender.rotation;
-    [self updateTransformValue];
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        sender.rotation = self.rotation;
+    } else {
+        self.rotation = sender.rotation;
+        [self updateTransformValue];
+    }
 }
 
 - (void)imageWasDragged:(UIPanGestureRecognizer *)sender
 {
-    self.translation = [sender translationInView:sender.view];
-    [self updateTransformValue];
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [sender setTranslation:self.translation inView:sender.view];
+    } else {
+        self.translation = [sender translationInView:sender.view];
+        [self updateTransformValue];
+    }
 }
 
 #pragma mark - IBAction
 - (void)activateButtonTapped:(id)sender
 {
     [super activateButtonTapped:sender];
-    
-    if (self.isActive) {
-        self.pinchRecognizer.scale = self.scale;
-        self.rotationRecognizer.rotation = self.rotation;
-        [self.panRecognizer setTranslation:self.translation inView:self.panRecognizer.view];
-    }
 }
 
 #pragma mark - Update the value
@@ -112,6 +121,18 @@
     self.value = [NSValue valueWithCGAffineTransform:transform];
     [self updateValueLabel];
     [self.delegate inputControlCellValueDidChange:self];
+}
+
+#pragma mark - UIGestureRecognitionDelegate methods
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (gestureRecognizer == self.pinchRecognizer && otherGestureRecognizer == self.rotationRecognizer) {
+        return YES;
+    } else if (gestureRecognizer == self.rotationRecognizer && otherGestureRecognizer == self.pinchRecognizer) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

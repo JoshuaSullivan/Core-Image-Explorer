@@ -8,6 +8,6 @@
 
 #import "GestureInputCell.h"
 
-@interface AffineTransformCell : GestureInputCell
+@interface AffineTransformCell : GestureInputCell <UIGestureRecognizerDelegate>
 
 @end

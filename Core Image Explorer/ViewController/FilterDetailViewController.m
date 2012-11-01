@@ -136,7 +136,6 @@
     UITableViewCell *cell = self.inputCells[inputName];
     
     if (cell) {
-        NSLog(@"Returning cell named '%@' for indexPath: %@", inputName, indexPath);
         return cell;
     }
     
@@ -286,6 +285,8 @@
             NSObject *filterValue = [self.filter valueForKey:inputName];
             value = filterValue ? filterValue : attributes[kCIAttributeDefault];
         }
+    } else if ([inputClass isEqualToString:@"NSValue"]){
+        value = attributes[kCIAttributeDefault];
     } else {
         NSObject *filterValue = [self.filter valueForKey:inputName];
         value = filterValue ? filterValue : attributes[kCIAttributeDefault];
