@@ -24,7 +24,6 @@ typedef enum {
 @property (strong, nonatomic) NSMutableDictionary *filterMap;
 @property (strong, nonatomic) NSMutableArray *allFilters;
 
-@property (strong, nonatomic) EAGLContext *eaglContext;
 @property (strong, nonatomic) CIContext *ciContext;
 
 @property (assign, nonatomic) TableDisplayMode tableMode;
@@ -77,11 +76,20 @@ typedef enum {
     self.categories = [NSArray arrayWithArray:categories];
     [self.tableView reloadData];
     
-    self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    if (!self.eaglContext) NSLog(@"No EAGL Context created");
-    
-    self.ciContext = [CIContext contextWithEAGLContext:self.eaglContext];
-
+    NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
+    if ([iosVersion compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending) {
+        NSLog(@"iOS 6.0 or greater.");
+        EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        if (!eaglContext) {
+            NSLog(@"No EAGL Context created");
+            self.ciContext = [CIContext contextWithOptions:nil];
+        } else {
+            self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
+        }
+    } else {
+        NSLog(@"iOS 5.1");
+        self.ciContext = [CIContext contextWithOptions:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
