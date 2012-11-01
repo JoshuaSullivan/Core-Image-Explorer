@@ -76,20 +76,15 @@ typedef enum {
     self.categories = [NSArray arrayWithArray:categories];
     [self.tableView reloadData];
     
-    NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
-    if ([iosVersion compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending) {
-        NSLog(@"iOS 6.0 or greater.");
-        EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        if (!eaglContext) {
-            NSLog(@"No EAGL Context created");
-            self.ciContext = [CIContext contextWithOptions:nil];
-        } else {
-            self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
-        }
-    } else {
-        NSLog(@"iOS 5.1");
+    
+    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    if (!eaglContext) {
+        NSLog(@"No EAGL Context created");
         self.ciContext = [CIContext contextWithOptions:nil];
+    } else {
+        self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -617,6 +617,7 @@
         <class className="FilterBrowserViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterBrowserViewController.h"/>
             <relationships>
+                <relationship kind="action" name="tableModeControlValueChanged:"/>
                 <relationship kind="outlet" name="modeControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
