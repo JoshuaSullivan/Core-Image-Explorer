@@ -53,15 +53,13 @@
 - (void)setIsActive:(BOOL)isActive
 {
     _isActive = isActive;
-    self.activateButton.selected = _isActive;
+    self.activateButton.highlighted = _isActive;
     
     if (_isActive) {
         [self.gestureDelegate gestureInput:self addGesturesToImageView:self.gestures withBorderColor:self.borderColor];
     } else {
         [self.gestureDelegate gestureInputDidDeactivate:self];
-        for (UIGestureRecognizer *gesture in self.gestures) {
-            [gesture.view removeGestureRecognizer:gesture];
-        }
+        [self deactivate];
     }
     
     self.activateButton.selected = _isActive;

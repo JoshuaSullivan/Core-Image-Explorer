@@ -18,6 +18,10 @@
 @property (strong, nonatomic) UIRotationGestureRecognizer *rotationRecognizer;
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
 
+@property (strong, nonatomic) IBOutlet UILabel *scaleValueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *rotationValueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *translationValueLabel;
+
 @end
 
 @implementation AffineTransformCell
@@ -55,12 +59,14 @@
     self.scale = startingTransform.a;
     self.rotation = startingTransform.b;
     self.translation = CGPointMake(startingTransform.tx, startingTransform.ty);
+    [self updateValueLabel];
 }
 
 - (void)updateValueLabel
 {
-    CGAffineTransform transform = ((NSValue *)self.value).CGAffineTransformValue;
-    self.inputValueLabel.text = [NSString stringWithFormat:@"%@", NSStringFromCGAffineTransform(transform)];
+    self.scaleValueLabel.text = [NSString stringWithFormat:@"%0.2f", self.scale];
+    self.rotationValueLabel.text = [NSString stringWithFormat:@"%0.2f", self.rotation];
+    self.translationValueLabel.text = [NSString stringWithFormat:@"%0.1f, %0.1f", self.translation.x, self.translation.y];
 }
 
 #pragma mark - Gesture callbacks

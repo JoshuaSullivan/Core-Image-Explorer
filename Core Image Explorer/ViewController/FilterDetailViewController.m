@@ -37,8 +37,6 @@
 @property (strong, nonatomic) GestureInputCell *activeGestureCell;
 @property (assign, nonatomic) BOOL isPickingPhoto;
 
-@property (assign, nonatomic) BOOL cacheCells;
-
 @end
 
 @implementation FilterDetailViewController
@@ -50,7 +48,6 @@
     self.imageCount = 0;
     self.imageCellCount = 0;
     self.isPickingPhoto = NO;
-    self.cacheCells = ![self.filter.name isEqualToString:@"CIColorMatrix"];
     self.inputCells = [NSMutableDictionary dictionary];
         
     self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
@@ -138,10 +135,12 @@
     NSString *inputName = self.filter.inputKeys[indexPath.row];
     UITableViewCell *cell = self.inputCells[inputName];
     
-    if (cell && self.cacheCells) {
+    if (cell) {
         NSLog(@"Returning cell named '%@' for indexPath: %@", inputName, indexPath);
         return cell;
     }
+    
+    BOOL cacheCell = NO;
     
     NSDictionary *attributes = self.inputDescriptors[indexPath.row];
     NSString *inputClass = attributes[kCIAttributeClass];
@@ -159,6 +158,7 @@
         if (inputType == kCIAttributeTypePosition) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kPositionPickerCellIdentifier];
             ((PositionPickerCell *)cell).gestureDelegate = self;
+            cacheCell = YES;
         } else if ([self.filter.name isEqualToString:@"CIColorMatrix"]) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kColorMatrixCellIdentifier];
         } else {
@@ -169,6 +169,7 @@
     } else if ([inputClass isEqualToString:@"NSValue"]) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:kAffineTransformCellIdentifier];
         ((AffineTransformCell *)cell).gestureDelegate = self;
+        cacheCell = YES;
     } else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
     }
@@ -192,7 +193,7 @@
         }
     }
     
-    if (self.cacheCells) {
+    if (cacheCell) {
         self.inputCells[inputName] = cell;
     }
     
