@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "GestureInputCell.h"
 
 @implementation GestureInputCell
@@ -53,7 +54,7 @@
 - (void)setIsActive:(BOOL)isActive
 {
     _isActive = isActive;
-    self.activateButton.highlighted = _isActive;
+    self.activateButton.selected = _isActive;
     
     if (_isActive) {
         [self.gestureDelegate gestureInput:self addGesturesToImageView:self.gestures withBorderColor:self.borderColor];

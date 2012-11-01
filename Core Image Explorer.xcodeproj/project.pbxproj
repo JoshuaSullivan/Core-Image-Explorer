@@ -28,6 +28,12 @@
 		BC24E6DC1629F8B0006C7116 /* FilterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6DB1629F8B0006C7116 /* FilterDetailViewController.m */; };
 		BC2BA0001638E80500F5EBBF /* AffineTransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */; };
 		BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2BA0031638ED2F00F5EBBF /* GestureInputCell.m */; };
+		BC380EA4164327AF00F492F0 /* gestureButton_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380E9E164327AF00F492F0 /* gestureButton_blue.png */; };
+		BC380EA5164327AF00F492F0 /* gestureButton_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380E9F164327AF00F492F0 /* gestureButton_blue@2x.png */; };
+		BC380EA6164327AF00F492F0 /* gestureButton_green.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA0164327AF00F492F0 /* gestureButton_green.png */; };
+		BC380EA7164327AF00F492F0 /* gestureButton_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA1164327AF00F492F0 /* gestureButton_green@2x.png */; };
+		BC380EA8164327AF00F492F0 /* gestureButton_white.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA2164327AF00F492F0 /* gestureButton_white.png */; };
+		BC380EA9164327AF00F492F0 /* gestureButton_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA3164327AF00F492F0 /* gestureButton_white@2x.png */; };
 		BC55A02D1634355C008F0B8C /* PositionPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC55A02C1634355C008F0B8C /* PositionPickerCell.m */; };
 		BC55A03116343A05008F0B8C /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = BC55A02F16343A05008F0B8C /* 13-target.png */; };
 		BC55A03216343A05008F0B8C /* 13-target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC55A03016343A05008F0B8C /* 13-target@2x.png */; };
@@ -72,6 +78,12 @@
 		BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffineTransformCell.m; sourceTree = "<group>"; };
 		BC2BA0021638ED2F00F5EBBF /* GestureInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureInputCell.h; sourceTree = "<group>"; };
 		BC2BA0031638ED2F00F5EBBF /* GestureInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureInputCell.m; sourceTree = "<group>"; };
+		BC380E9E164327AF00F492F0 /* gestureButton_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gestureButton_blue.png; sourceTree = "<group>"; };
+		BC380E9F164327AF00F492F0 /* gestureButton_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureButton_blue@2x.png"; sourceTree = "<group>"; };
+		BC380EA0164327AF00F492F0 /* gestureButton_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gestureButton_green.png; sourceTree = "<group>"; };
+		BC380EA1164327AF00F492F0 /* gestureButton_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureButton_green@2x.png"; sourceTree = "<group>"; };
+		BC380EA2164327AF00F492F0 /* gestureButton_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gestureButton_white.png; sourceTree = "<group>"; };
+		BC380EA3164327AF00F492F0 /* gestureButton_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureButton_white@2x.png"; sourceTree = "<group>"; };
 		BC55A02B1634355C008F0B8C /* PositionPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionPickerCell.h; sourceTree = "<group>"; };
 		BC55A02C1634355C008F0B8C /* PositionPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionPickerCell.m; sourceTree = "<group>"; };
 		BC55A02F16343A05008F0B8C /* 13-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-target.png"; sourceTree = "<group>"; };
@@ -175,6 +187,12 @@
 		BC24E6D41629B5EA006C7116 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC380E9E164327AF00F492F0 /* gestureButton_blue.png */,
+				BC380E9F164327AF00F492F0 /* gestureButton_blue@2x.png */,
+				BC380EA0164327AF00F492F0 /* gestureButton_green.png */,
+				BC380EA1164327AF00F492F0 /* gestureButton_green@2x.png */,
+				BC380EA2164327AF00F492F0 /* gestureButton_white.png */,
+				BC380EA3164327AF00F492F0 /* gestureButton_white@2x.png */,
 				BC55A02F16343A05008F0B8C /* 13-target.png */,
 				BC55A03016343A05008F0B8C /* 13-target@2x.png */,
 				BC095DC8162B02D100B591BB /* DefaultImage1.png */,
@@ -292,6 +310,12 @@
 				BC55A03216343A05008F0B8C /* 13-target@2x.png in Resources */,
 				BC85E9C6163E086A0028CDD9 /* Icon.png in Resources */,
 				BC85E9C8163E08950028CDD9 /* Icon@2x.png in Resources */,
+				BC380EA4164327AF00F492F0 /* gestureButton_blue.png in Resources */,
+				BC380EA5164327AF00F492F0 /* gestureButton_blue@2x.png in Resources */,
+				BC380EA6164327AF00F492F0 /* gestureButton_green.png in Resources */,
+				BC380EA7164327AF00F492F0 /* gestureButton_green@2x.png in Resources */,
+				BC380EA8164327AF00F492F0 /* gestureButton_white.png in Resources */,
+				BC380EA9164327AF00F492F0 /* gestureButton_white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
