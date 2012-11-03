@@ -11,6 +11,7 @@
 		BC095DCB162B02D100B591BB /* DefaultImage2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC095DC9162B02D100B591BB /* DefaultImage2.png */; };
 		BC0F223F162E56E700BE0663 /* DefaultImage3.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F223E162E56E700BE0663 /* DefaultImage3.png */; };
 		BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0F2241162EF48200BE0663 /* QuartzCore.framework */; };
+		BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC10D3C2164564850031A7A2 /* OffsetInputCell.m */; };
 		BC2298621636C8DC006D98D7 /* ColorPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2298611636C8DC006D98D7 /* ColorPickerCell.m */; };
 		BC24E6A41629B58E006C7116 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6A31629B58E006C7116 /* UIKit.framework */; };
 		BC24E6A61629B58E006C7116 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6A51629B58E006C7116 /* Foundation.framework */; };
@@ -61,6 +62,8 @@
 		BC095DC9162B02D100B591BB /* DefaultImage2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultImage2.png; sourceTree = "<group>"; };
 		BC0F223E162E56E700BE0663 /* DefaultImage3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultImage3.png; sourceTree = "<group>"; };
 		BC0F2241162EF48200BE0663 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BC10D3C1164564850031A7A2 /* OffsetInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffsetInputCell.h; sourceTree = "<group>"; };
+		BC10D3C2164564850031A7A2 /* OffsetInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffsetInputCell.m; sourceTree = "<group>"; };
 		BC2298601636C8DC006D98D7 /* ColorPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerCell.h; sourceTree = "<group>"; };
 		BC2298611636C8DC006D98D7 /* ColorPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerCell.m; sourceTree = "<group>"; };
 		BC24E69F1629B58E006C7116 /* Core Image Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Core Image Explorer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +269,8 @@
 				BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */,
 				BC3ABC1116455441005D6221 /* RectDisplayCell.h */,
 				BC3ABC1216455441005D6221 /* RectDisplayCell.m */,
+				BC10D3C1164564850031A7A2 /* OffsetInputCell.h */,
+				BC10D3C2164564850031A7A2 /* OffsetInputCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */,
 				BC3ABC0E1644CE1E005D6221 /* InfoModalViewController.m in Sources */,
 				BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */,
+				BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

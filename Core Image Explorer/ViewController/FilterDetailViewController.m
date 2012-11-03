@@ -21,6 +21,7 @@
 #define kAffineTransformCellIdentifier @"AffineTransformCellIdentifier"
 #define kColorMatrixCellIdentifier @"ColorMatrixCellIdentifier"
 #define kRectDisplayCellIdentifier @"RectDisplayCellIdentifier"
+#define kOffsetInputCellIdentifier @"OffsetInputCellIdentifier"
 
 @interface FilterDetailViewController ()
 
@@ -163,6 +164,8 @@
             cell = [self.tableView dequeueReusableCellWithIdentifier:kColorMatrixCellIdentifier];
         } else if (inputType == kCIAttributeTypeRectangle) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kRectDisplayCellIdentifier];
+        } else if (inputType == kCIAttributeTypeOffset) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:kOffsetInputCellIdentifier];
         } else {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
         }
