@@ -156,19 +156,22 @@ typedef enum {
 #pragma mark - prepare for segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    
-    CIFilter * filter;
-    if (self.tableMode == TableDisplayModeAllFilters) {
-        filter = self.allFilters[indexPath.row];
-    } else {
-        NSString *category = self.categories[indexPath.section];
-        filter = ((NSArray *)self.filterMap[category])[indexPath.row];
+    if ([segue.identifier isEqualToString:@"filterDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        CIFilter * filter;
+        if (self.tableMode == TableDisplayModeAllFilters) {
+            filter = self.allFilters[indexPath.row];
+        } else {
+            NSString *category = self.categories[indexPath.section];
+            filter = ((NSArray *)self.filterMap[category])[indexPath.row];
+        }
+        
+        FilterDetailViewController *detailVC = (FilterDetailViewController *)segue.destinationViewController;
+        detailVC.filter = filter;
+        detailVC.ciContext = self.ciContext;
     }
     
-    FilterDetailViewController *detailVC = (FilterDetailViewController *)segue.destinationViewController;
-    detailVC.filter = filter;
-    detailVC.ciContext = self.ciContext;
 }
 
 #pragma mark - Check exclusion list for filter name

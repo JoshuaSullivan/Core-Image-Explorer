@@ -34,6 +34,15 @@
 		BC380EA7164327AF00F492F0 /* gestureButton_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA1164327AF00F492F0 /* gestureButton_green@2x.png */; };
 		BC380EA8164327AF00F492F0 /* gestureButton_white.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA2164327AF00F492F0 /* gestureButton_white.png */; };
 		BC380EA9164327AF00F492F0 /* gestureButton_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC380EA3164327AF00F492F0 /* gestureButton_white@2x.png */; };
+		BC3ABC021644B852005D6221 /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC001644B852005D6221 /* info_icon.png */; };
+		BC3ABC031644B852005D6221 /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC011644B852005D6221 /* info_icon@2x.png */; };
+		BC3ABC061644C665005D6221 /* carbon_fiber.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC041644C665005D6221 /* carbon_fiber.png */; };
+		BC3ABC071644C665005D6221 /* carbon_fiber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC051644C665005D6221 /* carbon_fiber@2x.png */; };
+		BC3ABC0A1644C805005D6221 /* InfoSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC081644C805005D6221 /* InfoSplash.png */; };
+		BC3ABC0B1644C805005D6221 /* InfoSplash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC091644C805005D6221 /* InfoSplash@2x.png */; };
+		BC3ABC0E1644CE1E005D6221 /* InfoModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */; };
+		BC3ABC101644D1A0005D6221 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */; };
+		BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3ABC1216455441005D6221 /* RectDisplayCell.m */; };
 		BC55A02D1634355C008F0B8C /* PositionPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC55A02C1634355C008F0B8C /* PositionPickerCell.m */; };
 		BC55A03116343A05008F0B8C /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = BC55A02F16343A05008F0B8C /* 13-target.png */; };
 		BC55A03216343A05008F0B8C /* 13-target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC55A03016343A05008F0B8C /* 13-target@2x.png */; };
@@ -84,6 +93,17 @@
 		BC380EA1164327AF00F492F0 /* gestureButton_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureButton_green@2x.png"; sourceTree = "<group>"; };
 		BC380EA2164327AF00F492F0 /* gestureButton_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gestureButton_white.png; sourceTree = "<group>"; };
 		BC380EA3164327AF00F492F0 /* gestureButton_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureButton_white@2x.png"; sourceTree = "<group>"; };
+		BC3ABC001644B852005D6221 /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
+		BC3ABC011644B852005D6221 /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
+		BC3ABC041644C665005D6221 /* carbon_fiber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carbon_fiber.png; sourceTree = "<group>"; };
+		BC3ABC051644C665005D6221 /* carbon_fiber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carbon_fiber@2x.png"; sourceTree = "<group>"; };
+		BC3ABC081644C805005D6221 /* InfoSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoSplash.png; sourceTree = "<group>"; };
+		BC3ABC091644C805005D6221 /* InfoSplash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoSplash@2x.png"; sourceTree = "<group>"; };
+		BC3ABC0C1644CE1E005D6221 /* InfoModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoModalViewController.h; sourceTree = "<group>"; };
+		BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoModalViewController.m; sourceTree = "<group>"; };
+		BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BC3ABC1116455441005D6221 /* RectDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectDisplayCell.h; sourceTree = "<group>"; };
+		BC3ABC1216455441005D6221 /* RectDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectDisplayCell.m; sourceTree = "<group>"; };
 		BC55A02B1634355C008F0B8C /* PositionPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionPickerCell.h; sourceTree = "<group>"; };
 		BC55A02C1634355C008F0B8C /* PositionPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionPickerCell.m; sourceTree = "<group>"; };
 		BC55A02F16343A05008F0B8C /* 13-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-target.png"; sourceTree = "<group>"; };
@@ -109,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC3ABC101644D1A0005D6221 /* MessageUI.framework in Frameworks */,
 				BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */,
 				BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */,
 				BC24E6D91629BB2A006C7116 /* OpenGLES.framework in Frameworks */,
@@ -142,6 +163,7 @@
 		BC24E6A21629B58E006C7116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */,
 				BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */,
 				BCEBB039163C3333005D4196 /* CoreMedia.framework */,
 				BC0F2241162EF48200BE0663 /* QuartzCore.framework */,
@@ -187,6 +209,12 @@
 		BC24E6D41629B5EA006C7116 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC3ABC081644C805005D6221 /* InfoSplash.png */,
+				BC3ABC091644C805005D6221 /* InfoSplash@2x.png */,
+				BC3ABC041644C665005D6221 /* carbon_fiber.png */,
+				BC3ABC051644C665005D6221 /* carbon_fiber@2x.png */,
+				BC3ABC001644B852005D6221 /* info_icon.png */,
+				BC3ABC011644B852005D6221 /* info_icon@2x.png */,
 				BC380E9E164327AF00F492F0 /* gestureButton_blue.png */,
 				BC380E9F164327AF00F492F0 /* gestureButton_blue@2x.png */,
 				BC380EA0164327AF00F492F0 /* gestureButton_green.png */,
@@ -209,6 +237,8 @@
 				BC24E6C91629B58E006C7116 /* FilterBrowserViewController.m */,
 				BC24E6DA1629F8B0006C7116 /* FilterDetailViewController.h */,
 				BC24E6DB1629F8B0006C7116 /* FilterDetailViewController.m */,
+				BC3ABC0C1644CE1E005D6221 /* InfoModalViewController.h */,
+				BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
 			);
 			name = "View Controllers";
@@ -234,6 +264,8 @@
 				BC55A02C1634355C008F0B8C /* PositionPickerCell.m */,
 				BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */,
 				BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */,
+				BC3ABC1116455441005D6221 /* RectDisplayCell.h */,
+				BC3ABC1216455441005D6221 /* RectDisplayCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -316,6 +348,12 @@
 				BC380EA7164327AF00F492F0 /* gestureButton_green@2x.png in Resources */,
 				BC380EA8164327AF00F492F0 /* gestureButton_white.png in Resources */,
 				BC380EA9164327AF00F492F0 /* gestureButton_white@2x.png in Resources */,
+				BC3ABC021644B852005D6221 /* info_icon.png in Resources */,
+				BC3ABC031644B852005D6221 /* info_icon@2x.png in Resources */,
+				BC3ABC061644C665005D6221 /* carbon_fiber.png in Resources */,
+				BC3ABC071644C665005D6221 /* carbon_fiber@2x.png in Resources */,
+				BC3ABC0A1644C805005D6221 /* InfoSplash.png in Resources */,
+				BC3ABC0B1644C805005D6221 /* InfoSplash@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +377,8 @@
 				BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */,
 				BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */,
 				BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */,
+				BC3ABC0E1644CE1E005D6221 /* InfoModalViewController.m in Sources */,
+				BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,11 +459,13 @@
 		BC24E6D21629B58E006C7116 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Core Image Explorer";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -432,11 +474,15 @@
 		BC24E6D31629B58E006C7116 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Core Image Explorer";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

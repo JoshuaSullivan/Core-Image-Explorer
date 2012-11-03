@@ -20,6 +20,7 @@
 #define kColorPickerCellIdentifier @"ColorPickerCellIdentifier"
 #define kAffineTransformCellIdentifier @"AffineTransformCellIdentifier"
 #define kColorMatrixCellIdentifier @"ColorMatrixCellIdentifier"
+#define kRectDisplayCellIdentifier @"RectDisplayCellIdentifier"
 
 @interface FilterDetailViewController ()
 
@@ -160,6 +161,8 @@
             cacheCell = YES;
         } else if ([self.filter.name isEqualToString:@"CIColorMatrix"]) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kColorMatrixCellIdentifier];
+        } else if (inputType == kCIAttributeTypeRectangle) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:kRectDisplayCellIdentifier];
         } else {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
         }
