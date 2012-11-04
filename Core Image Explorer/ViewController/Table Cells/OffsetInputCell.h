@@ -10,6 +10,8 @@
 
 @interface OffsetInputCell : BaseInputControlCell
 
+- (void)setSliderRangeMinX:(CGFloat)minX maxX:(CGFloat)maxX minY:(CGFloat)minY maxY:(CGFloat)maxY;
+
 - (IBAction)sliderValueChanged:(id)sender;
 
 @end

@@ -36,7 +36,16 @@
 - (void)updateValueLabel
 {
     CIVector *offset = (CIVector *)self.value;
-    self.valueLabel.text = [NSString stringWithFormat:@"[%0.1f, %0.1f]", offset.X, offset.Y];
+    self.valueLabel.text = [NSString stringWithFormat:@"[%0.2f, %0.2f]", offset.X, offset.Y];
+}
+
+#pragma mark - Set the input ranges.
+- (void)setSliderRangeMinX:(CGFloat)minX maxX:(CGFloat)maxX minY:(CGFloat)minY maxY:(CGFloat)maxY
+{
+    self.xSlider.minimumValue = minX;
+    self.xSlider.maximumValue = maxX;
+    self.ySlider.minimumValue = minY;
+    self.ySlider.maximumValue = maxY;
 }
 
 #pragma mark - IBActions

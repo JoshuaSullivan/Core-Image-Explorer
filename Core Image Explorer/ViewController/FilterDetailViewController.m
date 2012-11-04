@@ -12,6 +12,7 @@
 #import "NumericSliderCell.h"
 #import "AffineTransformCell.h"
 #import "PositionPickerCell.h"
+#import "OffsetInputCell.h"
 
 #define kGenericCellIdentifier @"GenericCellIdentifier"
 #define kNumericSliderCellIdentifier @"NumericSliderCellIdentifier"
@@ -166,6 +167,17 @@
             cell = [self.tableView dequeueReusableCellWithIdentifier:kRectDisplayCellIdentifier];
         } else if (inputType == kCIAttributeTypeOffset) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kOffsetInputCellIdentifier];
+            if ([self.filter.name isEqualToString:@"CITemperatureAndTint"]) {
+                [(OffsetInputCell *)cell setSliderRangeMinX:2000.0
+                                                       maxX:15000.0
+                                                       minY:-100.0
+                                                       maxY:100.0];
+            } else if ([self.filter.name isEqualToString:@"CIToneCurve"]) {
+                [(OffsetInputCell *)cell setSliderRangeMinX:0.0
+                                                       maxX:1.0
+                                                       minY:0.0
+                                                       maxY:1.0];
+            }
         } else {
             cell = [self.tableView dequeueReusableCellWithIdentifier:kGenericCellIdentifier];
         }
