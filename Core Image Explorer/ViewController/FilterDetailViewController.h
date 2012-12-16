@@ -16,8 +16,14 @@
                                                           InputCellDelegate,
                                                           GestureInputDelegate,
                                                           PhotoPickerDelegate>
-
+/*!
+ @abstract The filter to be manipulated.
+ */
 @property (strong, nonatomic) CIFilter *filter;
+
+/*!
+ @abstract The shared context (maintained by FilterBrowserViewController)
+ */
 @property (strong, nonatomic) CIContext *ciContext;
 
 @end

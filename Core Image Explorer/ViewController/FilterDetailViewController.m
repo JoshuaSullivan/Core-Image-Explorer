@@ -39,6 +39,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @property (strong, nonatomic) GestureInputCell *activeGestureCell;
 @property (assign, nonatomic) BOOL isPickingPhoto;
+@property (weak, nonatomic) PhotoPickerCell *pickerUsingVideo;
 
 @end
 
@@ -280,6 +281,29 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     self.isPickingPhoto = NO;
+}
+
+- (BOOL)photoPickerAllowedToUseVideo:(PhotoPickerCell *)photoPicker
+{
+    NSArray *filterCategories = self.filter.attributes[kCIAttributeFilterCategories];
+    BOOL filterAllowsVideo = [filterCategories indexOfObject:(id)kCICategoryVideo] != NSNotFound;
+//    BOOL videoAvailable = (self.pickerUsingVideo == nil || self.pickerUsingVideo == photoPicker);
+    return filterAllowsVideo;
+}
+
+- (void)photoPicker:(PhotoPickerCell *)photoPicker isUsingVideo:(BOOL)usingVideo
+{
+    if (usingVideo) {
+        if (self.pickerUsingVideo) {
+            DLog(@"A PhotoPicker is already using video. Forcing it to stop.");
+            [self.pickerUsingVideo stopUsingVideo];
+        }
+        self.pickerUsingVideo = photoPicker;
+    } else {
+        if (photoPicker == self.pickerUsingVideo) {
+            self.pickerUsingVideo = nil;
+        }
+    }
 }
 
 #pragma mark - Helper methods

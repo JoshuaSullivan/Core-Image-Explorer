@@ -14,24 +14,20 @@
 #define kDefaultImageHeight 90.0
 #define kMargin 20.0
 
-typedef enum {
-    PickerModeNone = 0,
-    PickerModePhoto,
-    PickerModeLibrary,
-    PickerModePhotoAndLibrary
-} PickerMode;
-
 static NSString *kSheetTitle = @"Choose an Image";
 static NSString *kCancelLabel = @"Cancel";
-static NSString *kCameraLabel = @"Take a Photo";
 static NSString *kLibraryLabel = @"Pick from Library";
+static NSString *kCameraLabel = @"Take a Photo";
+static NSString *kVideoLabel = @"Use Live Video";
 static NSString *kResetToDefault = @"Reset to Default";
 
 @interface PhotoPickerCell ()
 
-@property (assign, nonatomic) PickerMode pickerMode;
 @property (strong, nonatomic) UIActionSheet *photoPickerSheet;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
+@property (assign, nonatomic) BOOL hasLibrary;
+@property (assign, nonatomic) BOOL hasCamera;
+@property (assign, nonatomic) BOOL hasVideo;
 
 @end
 
@@ -45,10 +41,15 @@ static NSString *kResetToDefault = @"Reset to Default";
                                                                                  action:@selector(imageWasTapped:)];
     [self.imageView addGestureRecognizer:tapGesture];
     
-    BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    BOOL hasLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
-    
-    self.pickerMode = hasCamera | hasLibrary << 1;
+    self.hasLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+    self.hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    self.hasVideo = NO;
+    if (self.hasCamera) {
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        if ([mediaTypes indexOfObject:(id)kUTTypeMovie]) {
+            self.hasVideo = YES;
+        }
+    }
     
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
@@ -74,9 +75,17 @@ static NSString *kResetToDefault = @"Reset to Default";
     self.imageView.frame = CGRectMake(imageX, imageY, kDefaultImageWidth, kDefaultImageHeight);
 }
 
+#pragma mark - Force this picker to stop using video
+- (void)stopUsingVideo
+{
+    DLog(@"Got it, boss!");
+}
+
 #pragma mark - Picker methods
 - (void)resetToDefault
 {
+    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    
     NSString *imageName = [NSString stringWithFormat:@"DefaultImage%d.png", self.defaultImageIndex];
     UIImage *defaultImage = [UIImage imageNamed:imageName];
     self.value = [CIImage imageWithCGImage:defaultImage.CGImage];
@@ -87,6 +96,8 @@ static NSString *kResetToDefault = @"Reset to Default";
 
 - (void)takePhoto
 {
+    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
     self.imagePicker.allowsEditing = NO;
@@ -94,8 +105,16 @@ static NSString *kResetToDefault = @"Reset to Default";
     [self.photoDelegate photoPicker:self presentPickerController:self.imagePicker];
 }
 
+- (void)takeVideo
+{
+    [self.photoDelegate photoPicker:self isUsingVideo:YES];
+    DLog(@"Starting video capture...");
+}
+
 - (void)pickFromLibrary
 {
+    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
     self.imagePicker.allowsEditing = NO;
@@ -106,30 +125,26 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - Display picker action sheet
 - (void)imageWasTapped:(UITapGestureRecognizer *)sender
 {
-    if (!self.photoPickerSheet) {        
-        if (self.pickerMode == PickerModePhotoAndLibrary) {
-        
-            self.photoPickerSheet = [[UIActionSheet alloc] initWithTitle:kSheetTitle
-                                                                delegate:self
-                                                       cancelButtonTitle:kCancelLabel
-                                                  destructiveButtonTitle:nil
-                                                       otherButtonTitles:kCameraLabel, kLibraryLabel, kResetToDefault, nil];
-        } else if (self.pickerMode == PickerModePhoto) {
-            self.photoPickerSheet = [[UIActionSheet alloc] initWithTitle:kSheetTitle
-                                                                delegate:self
-                                                       cancelButtonTitle:kCancelLabel
-                                                  destructiveButtonTitle:nil
-                                                       otherButtonTitles:kCameraLabel, kResetToDefault, nil];
-        } else if (self.pickerMode == PickerModeLibrary) {
-            self.photoPickerSheet = [[UIActionSheet alloc] initWithTitle:kSheetTitle
-                                                                delegate:self
-                                                       cancelButtonTitle:kCancelLabel
-                                                  destructiveButtonTitle:nil
-                                                       otherButtonTitles:kLibraryLabel, kResetToDefault, nil];
-
-        } else {
-            return;
+    if (!self.photoPickerSheet) {
+        self.photoPickerSheet = [[UIActionSheet alloc] initWithTitle:kSheetTitle
+                                                            delegate:self
+                                                   cancelButtonTitle:kCancelLabel
+                                              destructiveButtonTitle:nil
+                                                   otherButtonTitles:nil];
+        if (self.hasLibrary) {
+            [self.photoPickerSheet addButtonWithTitle:kLibraryLabel];
         }
+        
+        if (self.hasCamera) {
+            [self.photoPickerSheet addButtonWithTitle:kCameraLabel];
+        }
+        
+        BOOL videoAllowed = [self.photoDelegate photoPickerAllowedToUseVideo:self];
+        if (self.hasVideo && videoAllowed) {
+            [self.photoPickerSheet addButtonWithTitle:kVideoLabel];
+        }
+        
+        [self.photoPickerSheet addButtonWithTitle:kResetToDefault];
     }
     
     [self.photoPickerSheet showInView:self.window];
@@ -138,30 +153,18 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - UIActionSheetDelegate methods
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (self.pickerMode == PickerModePhotoAndLibrary) {
-        switch (buttonIndex) {
-            case 0:
-                [self takePhoto];
-                break;
-            case 1:
-                [self pickFromLibrary];
-                break;
-            default:
-                [self resetToDefault];
-                break;
-        }
-    } else if (self.pickerMode == PickerModePhoto) {
-        if (buttonIndex == 0) {
-            [self takePhoto];
-        } else {
-            [self resetToDefault];
-        }
-    } else if (self.pickerMode == PickerModeLibrary) {
-        if (buttonIndex == 0) {
-            [self pickFromLibrary];
-        } else {
-            [self resetToDefault];
-        }
+    NSString *buttonLabel = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([buttonLabel isEqualToString:kResetToDefault]) {
+        [self resetToDefault];
+    } else if ([buttonLabel isEqualToString:kLibraryLabel]) {
+        [self pickFromLibrary];
+    } else if ([buttonLabel isEqualToString:kCameraLabel]) {
+        [self takePhoto];
+    } else if ([buttonLabel isEqualToString:kVideoLabel]) {
+        [self takeVideo];
+    } else {
+        DLog(@"Unrecognized button label: %@", buttonLabel);
     }
 }
 
