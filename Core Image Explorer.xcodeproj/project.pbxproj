@@ -41,8 +41,6 @@
 		BC3ABC071644C665005D6221 /* carbon_fiber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC051644C665005D6221 /* carbon_fiber@2x.png */; };
 		BC3ABC0A1644C805005D6221 /* InfoSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC081644C805005D6221 /* InfoSplash.png */; };
 		BC3ABC0B1644C805005D6221 /* InfoSplash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3ABC091644C805005D6221 /* InfoSplash@2x.png */; };
-		BC3ABC0E1644CE1E005D6221 /* InfoModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */; };
-		BC3ABC101644D1A0005D6221 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */; };
 		BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3ABC1216455441005D6221 /* RectDisplayCell.m */; };
 		BC55A02D1634355C008F0B8C /* PositionPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC55A02C1634355C008F0B8C /* PositionPickerCell.m */; };
 		BC55A03116343A05008F0B8C /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = BC55A02F16343A05008F0B8C /* 13-target.png */; };
@@ -50,6 +48,7 @@
 		BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F145162E19AA008EE219 /* BaseInputControlCell.m */; };
 		BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */; };
 		BC61F14E162E208F008EE219 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F14D162E208F008EE219 /* PhotoPickerCell.m */; };
+		BC7DDC3B1661BEF9006F8FA7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */; };
 		BC85E9C6163E086A0028CDD9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C5163E086A0028CDD9 /* Icon.png */; };
 		BC85E9C8163E08950028CDD9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C7163E08950028CDD9 /* Icon@2x.png */; };
 		BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */; };
@@ -102,8 +101,6 @@
 		BC3ABC051644C665005D6221 /* carbon_fiber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carbon_fiber@2x.png"; sourceTree = "<group>"; };
 		BC3ABC081644C805005D6221 /* InfoSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoSplash.png; sourceTree = "<group>"; };
 		BC3ABC091644C805005D6221 /* InfoSplash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoSplash@2x.png"; sourceTree = "<group>"; };
-		BC3ABC0C1644CE1E005D6221 /* InfoModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoModalViewController.h; sourceTree = "<group>"; };
-		BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoModalViewController.m; sourceTree = "<group>"; };
 		BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BC3ABC1116455441005D6221 /* RectDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectDisplayCell.h; sourceTree = "<group>"; };
 		BC3ABC1216455441005D6221 /* RectDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectDisplayCell.m; sourceTree = "<group>"; };
@@ -117,6 +114,7 @@
 		BC61F14A162E1CEB008EE219 /* NumericSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumericSliderCell.m; sourceTree = "<group>"; };
 		BC61F14C162E208F008EE219 /* PhotoPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerCell.h; sourceTree = "<group>"; };
 		BC61F14D162E208F008EE219 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
+		BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BC85E9C5163E086A0028CDD9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BC85E9C7163E08950028CDD9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BCCFB59A163C9FEB00D89F0B /* UIImage+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Transform.h"; sourceTree = "<group>"; };
@@ -132,7 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC3ABC101644D1A0005D6221 /* MessageUI.framework in Frameworks */,
+				BC7DDC3B1661BEF9006F8FA7 /* AVFoundation.framework in Frameworks */,
 				BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */,
 				BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */,
 				BC24E6D91629BB2A006C7116 /* OpenGLES.framework in Frameworks */,
@@ -166,6 +164,7 @@
 		BC24E6A21629B58E006C7116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */,
 				BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */,
 				BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */,
 				BCEBB039163C3333005D4196 /* CoreMedia.framework */,
@@ -240,8 +239,6 @@
 				BC24E6C91629B58E006C7116 /* FilterBrowserViewController.m */,
 				BC24E6DA1629F8B0006C7116 /* FilterDetailViewController.h */,
 				BC24E6DB1629F8B0006C7116 /* FilterDetailViewController.m */,
-				BC3ABC0C1644CE1E005D6221 /* InfoModalViewController.h */,
-				BC3ABC0D1644CE1E005D6221 /* InfoModalViewController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
 			);
 			name = "View Controllers";
@@ -382,7 +379,6 @@
 				BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */,
 				BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */,
 				BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */,
-				BC3ABC0E1644CE1E005D6221 /* InfoModalViewController.m in Sources */,
 				BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */,
 				BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */,
 			);

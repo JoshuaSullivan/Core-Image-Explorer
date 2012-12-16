@@ -174,6 +174,10 @@ typedef enum {
     
 }
 
+-(IBAction)returned:(UIStoryboardSegue *)segue {
+   // Reserved for future post-info actions, I guess.
+}
+
 #pragma mark - Check exclusion list for filter name
 - (BOOL)isFilterExcluded:(NSString *)filterName
 {
