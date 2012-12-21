@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.videoCaptureController = [[VideoCaptureController alloc] init];
+    
     return YES;
 }
 							

@@ -8,6 +8,7 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "PhotoPickerCell.h"
+#import "VideoCaptureController.h"
 #import "UIImage+Transform.h"
 
 #define kDefaultImageWidth 120.0
@@ -25,13 +26,15 @@ static NSString *kResetToDefault = @"Reset to Default";
 
 @property (strong, nonatomic) UIActionSheet *photoPickerSheet;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
-@property (assign, nonatomic) BOOL hasLibrary;
-@property (assign, nonatomic) BOOL hasCamera;
-@property (assign, nonatomic) BOOL hasVideo;
+@property (assign, nonatomic) BOOL hasCapabilityLibrary;
+@property (assign, nonatomic) BOOL hasCapabilityCamera;
+@property (assign, nonatomic) BOOL hasCapabilityVideo;
 
 @end
 
 @implementation PhotoPickerCell
+
+@synthesize isUsingVideo = _isUsingVideo;
 
 - (void)awakeFromNib
 {
@@ -41,13 +44,13 @@ static NSString *kResetToDefault = @"Reset to Default";
                                                                                  action:@selector(imageWasTapped:)];
     [self.imageView addGestureRecognizer:tapGesture];
     
-    self.hasLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
-    self.hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    self.hasVideo = NO;
-    if (self.hasCamera) {
+    self.hasCapabilityLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+    self.hasCapabilityCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    self.hasCapabilityVideo = NO;
+    if (self.hasCapabilityCamera) {
         NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
         if ([mediaTypes indexOfObject:(id)kUTTypeMovie]) {
-            self.hasVideo = YES;
+            self.hasCapabilityVideo = YES;
         }
     }
     
@@ -78,13 +81,13 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - Force this picker to stop using video
 - (void)stopUsingVideo
 {
-    DLog(@"Got it, boss!");
+    [self stopVideoCapture];
 }
 
 #pragma mark - Picker methods
 - (void)resetToDefault
 {
-    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    [self stopVideoCapture];
     
     NSString *imageName = [NSString stringWithFormat:@"DefaultImage%d.png", self.defaultImageIndex];
     UIImage *defaultImage = [UIImage imageNamed:imageName];
@@ -96,7 +99,7 @@ static NSString *kResetToDefault = @"Reset to Default";
 
 - (void)takePhoto
 {
-    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    [self stopVideoCapture];
     
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
@@ -107,19 +110,37 @@ static NSString *kResetToDefault = @"Reset to Default";
 
 - (void)takeVideo
 {
-    [self.photoDelegate photoPicker:self isUsingVideo:YES];
-    DLog(@"Starting video capture...");
+    [self startVideoCapture];    
 }
 
 - (void)pickFromLibrary
 {
-    [self.photoDelegate photoPicker:self isUsingVideo:NO];
+    [self stopVideoCapture];
     
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
     self.imagePicker.allowsEditing = NO;
     
     [self.photoDelegate photoPicker:self presentPickerController:self.imagePicker];
+}
+
+#pragma mark - Start and Stop video
+- (void)startVideoCapture
+{
+    _isUsingVideo = YES;
+    [self.photoDelegate photoPicker:self isUsingVideo:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kVideoControllerCaptureStart
+                                                        object:self];
+}
+
+- (void)stopVideoCapture
+{
+    if (_isUsingVideo) {
+        _isUsingVideo = NO;
+        [self.photoDelegate photoPicker:self isUsingVideo:NO];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kVideoControllerCaptureStop
+                                                        object:self];
+    }
 }
 
 #pragma mark - Display picker action sheet
@@ -131,16 +152,16 @@ static NSString *kResetToDefault = @"Reset to Default";
                                                    cancelButtonTitle:kCancelLabel
                                               destructiveButtonTitle:nil
                                                    otherButtonTitles:nil];
-        if (self.hasLibrary) {
+        if (self.hasCapabilityLibrary) {
             [self.photoPickerSheet addButtonWithTitle:kLibraryLabel];
         }
         
-        if (self.hasCamera) {
+        if (self.hasCapabilityCamera) {
             [self.photoPickerSheet addButtonWithTitle:kCameraLabel];
         }
         
         BOOL videoAllowed = [self.photoDelegate photoPickerAllowedToUseVideo:self];
-        if (self.hasVideo && videoAllowed) {
+        if (self.hasCapabilityVideo && videoAllowed) {
             [self.photoPickerSheet addButtonWithTitle:kVideoLabel];
         }
         
@@ -187,5 +208,16 @@ static NSString *kResetToDefault = @"Reset to Default";
 
 #pragma mark - UINavigationControllerDelegate methods
 // Nothing here?
+
+#pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate methods
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+       fromConnection:(AVCaptureConnection *)connection
+{
+    CVPixelBufferRef pixelBuffer = (CVPixelBufferRef) CMSampleBufferGetImageBuffer(sampleBuffer);
+    int width = CVPixelBufferGetWidth(pixelBuffer);
+    int height = CVPixelBufferGetHeight(pixelBuffer);
+    NSLog(@"got sample buffer, width %d, height %d", width, height);
+}
 
 @end

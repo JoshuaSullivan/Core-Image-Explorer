@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "BaseInputControlCell.h"
 
 @class PhotoPickerCell;
@@ -22,10 +23,12 @@
 
 @interface PhotoPickerCell : BaseInputControlCell <UIActionSheetDelegate,
                                                    UIImagePickerControllerDelegate,
-                                                   UINavigationControllerDelegate>
+                                                   UINavigationControllerDelegate,
+                                                   AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (assign, nonatomic) NSInteger defaultImageIndex;
+@property (readonly) BOOL isUsingVideo;
 @property (weak, nonatomic) id <PhotoPickerDelegate> photoDelegate;
 
 - (void)stopUsingVideo;

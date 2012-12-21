@@ -51,6 +51,9 @@
 		BC7DDC3B1661BEF9006F8FA7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */; };
 		BC85E9C6163E086A0028CDD9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C5163E086A0028CDD9 /* Icon.png */; };
 		BC85E9C8163E08950028CDD9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85E9C7163E08950028CDD9 /* Icon@2x.png */; };
+		BC91D2931682C4B300895BA4 /* VideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC91D2921682C4B300895BA4 /* VideoCaptureController.m */; };
+		BC91D29516834E1600895BA4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB039163C3333005D4196 /* CoreMedia.framework */; };
+		BC91D29716834E3A00895BA4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC91D29616834E3A00895BA4 /* CoreVideo.framework */; };
 		BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */; };
 		BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */; };
 		BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */; };
@@ -117,6 +120,9 @@
 		BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BC85E9C5163E086A0028CDD9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BC85E9C7163E08950028CDD9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		BC91D2911682C4B300895BA4 /* VideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCaptureController.h; sourceTree = "<group>"; };
+		BC91D2921682C4B300895BA4 /* VideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCaptureController.m; sourceTree = "<group>"; };
+		BC91D29616834E3A00895BA4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		BCCFB59A163C9FEB00D89F0B /* UIImage+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Transform.h"; sourceTree = "<group>"; };
 		BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Transform.m"; sourceTree = "<group>"; };
 		BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrixCell.h; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC91D29716834E3A00895BA4 /* CoreVideo.framework in Frameworks */,
+				BC91D29516834E1600895BA4 /* CoreMedia.framework in Frameworks */,
 				BC7DDC3B1661BEF9006F8FA7 /* AVFoundation.framework in Frameworks */,
 				BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */,
 				BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */,
@@ -164,6 +172,7 @@
 		BC24E6A21629B58E006C7116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC91D29616834E3A00895BA4 /* CoreVideo.framework */,
 				BC7DDC3A1661BEF9006F8FA7 /* AVFoundation.framework */,
 				BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */,
 				BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */,
@@ -239,6 +248,8 @@
 				BC24E6C91629B58E006C7116 /* FilterBrowserViewController.m */,
 				BC24E6DA1629F8B0006C7116 /* FilterDetailViewController.h */,
 				BC24E6DB1629F8B0006C7116 /* FilterDetailViewController.m */,
+				BC91D2911682C4B300895BA4 /* VideoCaptureController.h */,
+				BC91D2921682C4B300895BA4 /* VideoCaptureController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
 			);
 			name = "View Controllers";
@@ -381,6 +392,7 @@
 				BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */,
 				BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */,
 				BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */,
+				BC91D2931682C4B300895BA4 /* VideoCaptureController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
