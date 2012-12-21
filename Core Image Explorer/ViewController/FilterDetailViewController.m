@@ -13,6 +13,7 @@
 #import "AffineTransformCell.h"
 #import "PositionPickerCell.h"
 #import "OffsetInputCell.h"
+#import "VideoCaptureController.h"
 
 #define kGenericCellIdentifier @"GenericCellIdentifier"
 #define kNumericSliderCellIdentifier @"NumericSliderCellIdentifier"
@@ -85,6 +86,13 @@
 {
     [super didReceiveMemoryWarning];
     self.outputImageView.image = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kVideoControllerCaptureStop
+                                                        object:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -58,6 +58,13 @@ static NSString *kResetToDefault = @"Reset to Default";
     self.imagePicker.delegate = self;
 }
 
+- (void)dealloc
+{
+    if (_isUsingVideo) {
+        [self stopVideoCapture];
+    }
+}
+
 - (void)configWithDictionary:(NSDictionary *)attributeDictionary
                startingValue:(NSObject *)value
                 andInputName:(NSString *)inputName
@@ -215,9 +222,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
 {
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef) CMSampleBufferGetImageBuffer(sampleBuffer);
-    int width = CVPixelBufferGetWidth(pixelBuffer);
-    int height = CVPixelBufferGetHeight(pixelBuffer);
-    NSLog(@"got sample buffer, width %d, height %d", width, height);
+    self.value = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+//    self.imageView.image = [UIImage imageWithCIImage:(CIImage *)self.value];
+    [self.delegate inputControlCellValueDidChange:self];
 }
 
 @end

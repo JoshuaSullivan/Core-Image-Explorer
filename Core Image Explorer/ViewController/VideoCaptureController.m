@@ -110,9 +110,9 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
 {
     if (self.captureSession.running) {
         [self.captureSession stopRunning];
+        [self.dataOutput setSampleBufferDelegate:nil
+                                           queue:NULL];
     }
-    [self.dataOutput setSampleBufferDelegate:nil
-                                       queue:NULL];
 }
 
 @end
