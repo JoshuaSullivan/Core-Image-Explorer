@@ -222,7 +222,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
 {
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef) CMSampleBufferGetImageBuffer(sampleBuffer);
-    self.value = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    CIImage *bufferImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    CGAffineTransform transform = CGAffineTransformMakeRotation(-M_PI_2);
+    CGAffineTransformTranslate(transform, 0.0, 480.0);
+    self.value = [bufferImage imageByApplyingTransform:transform];
 //    self.imageView.image = [UIImage imageWithCIImage:(CIImage *)self.value];
     [self.delegate inputControlCellValueDidChange:self];
 }
