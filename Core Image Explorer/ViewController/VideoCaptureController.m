@@ -53,14 +53,18 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
     // Device input
     NSError *error;
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
-    [self.captureSession addInput:deviceInput];
+    if ([self.captureSession canAddInput:deviceInput]) {
+        [self.captureSession addInput:deviceInput];
+    }
     
     // Data Output
     self.dataOutput = [AVCaptureVideoDataOutput new];
     self.dataOutput.videoSettings = @{(id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA)};
     self.dataOutput.alwaysDiscardsLateVideoFrames = YES;
-//    [dataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
-    [self.captureSession addOutput:self.dataOutput];
+    if ([self.captureSession canAddOutput:self.dataOutput]) {
+        [self.captureSession addOutput:self.dataOutput];
+    }
+    
     [self.captureSession commitConfiguration];
 }
 
