@@ -8,6 +8,7 @@
 
 #import <CoreImage/CoreImage.h>
 #import <QuartzCore/QuartzCore.h>
+#import <GLKit/GLKit.h>
 #import "FilterDetailViewController.h"
 #import "NumericSliderCell.h"
 #import "AffineTransformCell.h"
@@ -28,6 +29,7 @@
 @interface FilterDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *outputImageView;
+@property (weak, nonatomic) IBOutlet GLKView *glView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *shadowBox;
 
@@ -60,6 +62,8 @@
     self.shadowBox.layer.shadowRadius = 4.0;
     self.shadowBox.layer.shadowColor = [UIColor blackColor].CGColor;
 	
+//    self.glView.context = self.ciContext
+    
     self.title = self.filter.attributes[kCIAttributeFilterDisplayName];
     self.inputDescriptors = [NSMutableArray arrayWithCapacity:self.filter.inputKeys.count];
     self.inputValues = [NSMutableDictionary dictionaryWithCapacity:self.filter.inputKeys.count];
@@ -117,11 +121,8 @@
     }
     
     CIImage *outputImage = self.filter.outputImage;
-    CGRect extent = outputImage.extent;
-    if (CGRectIsInfinite(extent)) {
-        extent = CGRectMake(0.0, 0.0, 640.0, 480.0);
-    }
-    
+    CGRect extent = CGRectMake(0.0, 0.0, 640.0, 480.0);
+
     CGImageRef cgImg = [self.ciContext createCGImage:outputImage
                                             fromRect:extent];
     UIImage *resultImage = [UIImage imageWithCGImage:cgImg];

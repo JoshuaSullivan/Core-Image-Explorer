@@ -14,6 +14,7 @@
 #define kDefaultImageWidth 120.0
 #define kDefaultImageHeight 90.0
 #define kMargin 20.0
+#define kVideoTargetWidth 640.0
 
 static NSString *kSheetTitle = @"Choose an Image";
 static NSString *kCancelLabel = @"Cancel";
@@ -88,7 +89,7 @@ static NSString *kResetToDefault = @"Reset to Default";
 #pragma mark - Force this picker to stop using video
 - (void)stopUsingVideo
 {
-    [self stopVideoCapture];
+    [self resetToDefault];
 }
 
 #pragma mark - Picker methods
@@ -191,8 +192,6 @@ static NSString *kResetToDefault = @"Reset to Default";
         [self takePhoto];
     } else if ([buttonLabel isEqualToString:kVideoLabel]) {
         [self takeVideo];
-    } else {
-        DLog(@"Unrecognized button label: %@", buttonLabel);
     }
 }
 
@@ -223,10 +222,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef) CMSampleBufferGetImageBuffer(sampleBuffer);
     CIImage *bufferImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    CGFloat scale = kVideoTargetWidth / CVPixelBufferGetHeight(pixelBuffer);
     CGAffineTransform transform = CGAffineTransformMakeRotation(-M_PI_2);
-    CGAffineTransformTranslate(transform, 0.0, 480.0);
-    self.value = [bufferImage imageByApplyingTransform:transform];
-//    self.imageView.image = [UIImage imageWithCIImage:(CIImage *)self.value];
+    transform = CGAffineTransformScale(transform, scale, scale);
+    transform = CGAffineTransformTranslate(transform, -480.0, 0.0);
+    bufferImage = [bufferImage imageByApplyingTransform:transform];
+    bufferImage = [bufferImage imageByCroppingToRect:CGRectMake(0.0, 0.0, 640.0, 480.0)];
+    self.value = bufferImage;
+    CGFloat thumbScale = kDefaultImageWidth / kVideoTargetWidth;
+    CGAffineTransform thumbTransform = CGAffineTransformMakeScale(thumbScale, thumbScale);
+    CIImage *thumbImage = [bufferImage imageByApplyingTransform:thumbTransform];
+    self.imageView.image = [UIImage imageWithCIImage:thumbImage];
     [self.delegate inputControlCellValueDidChange:self];
 }
 
