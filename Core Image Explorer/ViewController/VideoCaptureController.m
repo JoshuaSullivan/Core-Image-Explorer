@@ -18,6 +18,7 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoDataOutput *dataOutput;
 @property (weak, nonatomic) id <AVCaptureAudioDataOutputSampleBufferDelegate> delegate;
+@property (assign, nonatomic) dispatch_queue_t delegateQueue;
 
 @end
 
@@ -28,6 +29,7 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
     if (self) {
         [self configureVideo];
         [self addVideoListeners];
+        self.delegateQueue = dispatch_get_main_queue();
     }
     return self;
 }
@@ -102,7 +104,7 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
     
     if (note.object != self.dataOutput.sampleBufferDelegate) {
         [self.dataOutput setSampleBufferDelegate:note.object
-                                           queue:dispatch_get_main_queue()];
+                                           queue:self.delegateQueue];
     }
     
     if (!self.captureSession.running) {

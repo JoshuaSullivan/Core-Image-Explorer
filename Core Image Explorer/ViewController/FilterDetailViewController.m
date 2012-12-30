@@ -29,7 +29,7 @@
 @interface FilterDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *outputImageView;
-@property (weak, nonatomic) IBOutlet GLKView *glView;
+//@property (weak, nonatomic) IBOutlet GLKView *glView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *shadowBox;
 
@@ -43,6 +43,7 @@
 @property (strong, nonatomic) GestureInputCell *activeGestureCell;
 @property (assign, nonatomic) BOOL isPickingPhoto;
 @property (weak, nonatomic) PhotoPickerCell *pickerUsingVideo;
+@property (assign, nonatomic) BOOL isRendering;
 
 @end
 
@@ -55,6 +56,7 @@
     self.imageCount = 0;
     self.imageCellCount = 0;
     self.isPickingPhoto = NO;
+    self.isRendering = NO;
     self.inputCells = [NSMutableDictionary dictionary];
         
     self.shadowBox.layer.shadowOffset = CGSizeMake(0, 1);
@@ -115,6 +117,7 @@
 
 - (void) updateResultImage
 {
+    self.isRendering = YES;
     for (NSString *inputKey in self.filter.inputKeys) {
 //        NSLog(@"Setting %@ = %@", inputKey, self.inputValues[inputKey]);
         [self.filter setValue:self.inputValues[inputKey] forKey:inputKey];
@@ -129,6 +132,7 @@
 //    NSLog(@"%@", NSStringFromCGSize(resultImage.size));
     self.outputImageView.image = resultImage;
     CGImageRelease(cgImg);
+    self.isRendering = NO;
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -248,12 +252,14 @@
 #pragma mark - InputCellDelegate
 - (void)inputControlCellValueDidChange:(BaseInputControlCell *)inputControlCell
 {
-    NSString *inputName = inputControlCell.inputName;
-    NSObject *inputValue = inputControlCell.value;
-    
-    self.inputValues[inputName] = inputValue;
-    
-    [self updateResultImage];
+    if (!self.isRendering) {
+        NSString *inputName = inputControlCell.inputName;
+        NSObject *inputValue = inputControlCell.value;
+        
+        self.inputValues[inputName] = inputValue;
+        
+        [self updateResultImage];
+    }
 }
 
 #pragma mark - GestureInputDelegate methods
@@ -308,9 +314,11 @@
             [self.pickerUsingVideo stopUsingVideo];
         }
         self.pickerUsingVideo = photoPicker;
+        self.tableView.bounces = NO;
     } else {
         if (photoPicker == self.pickerUsingVideo) {
             self.pickerUsingVideo = nil;
+            self.tableView.bounces = YES;
         }
     }
 }
@@ -355,6 +363,10 @@
     for (NSString *inputKey in self.filter.inputKeys) {
         NSDictionary *inputAttributes = self.filter.attributes[inputKey];
         self.inputValues[inputKey] = [self getDefaultValueForInput:inputAttributes withName:inputKey];
+    }
+    
+    if (self.pickerUsingVideo) {
+        [self.pickerUsingVideo stopUsingVideo];
     }
     
     [self.tableView reloadData];
