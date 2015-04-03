@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B1839381ACEE6B7003CC4F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839371ACEE6B7003CC4F8 /* Images.xcassets */; };
+		7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */; };
+		9474CD7E394B5C8390F5885B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9474C7C1DC9AC76905D8E474 /* Main.storyboard */; };
 		BC095DCA162B02D100B591BB /* DefaultImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC095DC8162B02D100B591BB /* DefaultImage1.png */; };
 		BC095DCB162B02D100B591BB /* DefaultImage2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC095DC9162B02D100B591BB /* DefaultImage2.png */; };
 		BC0F223F162E56E700BE0663 /* DefaultImage3.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F223E162E56E700BE0663 /* DefaultImage3.png */; };
@@ -22,7 +25,6 @@
 		BC24E6B61629B58E006C7116 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BC24E6B51629B58E006C7116 /* Default.png */; };
 		BC24E6B81629B58E006C7116 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC24E6B71629B58E006C7116 /* Default@2x.png */; };
 		BC24E6BA1629B58E006C7116 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC24E6B91629B58E006C7116 /* Default-568h@2x.png */; };
-		BC24E6BD1629B58E006C7116 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC24E6BB1629B58E006C7116 /* MainStoryboard_iPhone.storyboard */; };
 		BC24E6CA1629B58E006C7116 /* FilterBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6C91629B58E006C7116 /* FilterBrowserViewController.m */; };
 		BC24E6D71629BB21006C7116 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6D61629BB21006C7116 /* CoreImage.framework */; };
 		BC24E6D91629BB2A006C7116 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6D81629BB2A006C7116 /* OpenGLES.framework */; };
@@ -60,6 +62,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B1839371ACEE6B7003CC4F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		9474CDF84F4D49B2237CBDF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "Core Image Explorer/en.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		BC095DC8162B02D100B591BB /* DefaultImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultImage1.png; sourceTree = "<group>"; };
 		BC095DC9162B02D100B591BB /* DefaultImage2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultImage2.png; sourceTree = "<group>"; };
 		BC0F223E162E56E700BE0663 /* DefaultImage3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultImage3.png; sourceTree = "<group>"; };
@@ -81,7 +86,6 @@
 		BC24E6B51629B58E006C7116 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BC24E6B71629B58E006C7116 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BC24E6B91629B58E006C7116 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		BC24E6BC1629B58E006C7116 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		BC24E6C81629B58E006C7116 /* FilterBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBrowserViewController.h; sourceTree = "<group>"; };
 		BC24E6C91629B58E006C7116 /* FilterBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBrowserViewController.m; sourceTree = "<group>"; };
 		BC24E6D61629BB21006C7116 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -152,6 +156,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9474C9274F6760614E59425E /* UserInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				9474C7C1DC9AC76905D8E474 /* Main.storyboard */,
+				7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */,
+			);
+			path = UserInterfaces;
+			sourceTree = "<group>";
+		};
 		BC24E6941629B58E006C7116 = {
 			isa = PBXGroup;
 			children = (
@@ -192,11 +205,12 @@
 			children = (
 				BC24E6B21629B58E006C7116 /* AppDelegate.h */,
 				BC24E6B31629B58E006C7116 /* AppDelegate.m */,
-				BC24E6BB1629B58E006C7116 /* MainStoryboard_iPhone.storyboard */,
 				BC24E6D51629B614006C7116 /* View Controllers */,
 				BCCFB599163C9D7B00D89F0B /* Categories */,
 				BC24E6D41629B5EA006C7116 /* Resources */,
+				7B1839371ACEE6B7003CC4F8 /* Images.xcassets */,
 				BC24E6AA1629B58E006C7116 /* Supporting Files */,
+				9474C9274F6760614E59425E /* UserInterfaces */,
 			);
 			path = "Core Image Explorer";
 			sourceTree = "<group>";
@@ -320,6 +334,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Joshua Sullivan";
+				TargetAttributes = {
+					BC24E69E1629B58E006C7116 = {
+						DevelopmentTeam = 6VVBUBU9QC;
+					};
+				};
 			};
 			buildConfigurationList = BC24E6991629B58E006C7116 /* Build configuration list for PBXProject "Core Image Explorer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -344,10 +363,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC24E6AE1629B58E006C7116 /* InfoPlist.strings in Resources */,
+				7B1839381ACEE6B7003CC4F8 /* Images.xcassets in Resources */,
 				BC24E6B61629B58E006C7116 /* Default.png in Resources */,
 				BC24E6B81629B58E006C7116 /* Default@2x.png in Resources */,
 				BC24E6BA1629B58E006C7116 /* Default-568h@2x.png in Resources */,
-				BC24E6BD1629B58E006C7116 /* MainStoryboard_iPhone.storyboard in Resources */,
 				BC095DCA162B02D100B591BB /* DefaultImage1.png in Resources */,
 				BC095DCB162B02D100B591BB /* DefaultImage2.png in Resources */,
 				BC0F223F162E56E700BE0663 /* DefaultImage3.png in Resources */,
@@ -365,8 +384,10 @@
 				BC3ABC031644B852005D6221 /* info_icon@2x.png in Resources */,
 				BC3ABC061644C665005D6221 /* carbon_fiber.png in Resources */,
 				BC3ABC071644C665005D6221 /* carbon_fiber@2x.png in Resources */,
+				7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */,
 				BC3ABC0A1644C805005D6221 /* InfoSplash.png in Resources */,
 				BC3ABC0B1644C805005D6221 /* InfoSplash@2x.png in Resources */,
+				9474CD7E394B5C8390F5885B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,20 +420,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9474C7C1DC9AC76905D8E474 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9474CDF84F4D49B2237CBDF2 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		BC24E6AC1629B58E006C7116 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BC24E6AD1629B58E006C7116 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BC24E6BB1629B58E006C7116 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BC24E6BC1629B58E006C7116 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -473,14 +494,16 @@
 		BC24E6D21629B58E006C7116 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "Core Image Explorer";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -488,16 +511,18 @@
 		BC24E6D31629B58E006C7116 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core Image Explorer/Core Image Explorer-Prefix.pch";
 				INFOPLIST_FILE = "Core Image Explorer/Core Image Explorer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "Core Image Explorer";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
