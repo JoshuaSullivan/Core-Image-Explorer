@@ -1,5 +1,5 @@
 //
-//  SecondViewController.m
+//  FilterBrowserTableViewController.m
 //  Core Image Explorer
 //
 //  Created by Joshua Sullivan on 10/13/12.
@@ -7,84 +7,88 @@
 //
 
 #import <CoreImage/CoreImage.h>
-#import "FilterBrowserViewController.h"
+#import "FilterBrowserTableViewController.h"
+#import "FilterControlsViewController.h"
 #import "FilterDetailViewController.h"
 
 typedef enum {
-    TableDisplayModeAllFilters,
+    TableDisplayModeAlphabetical,
     TableDisplayModeGroupedByType
 } TableDisplayMode;
 
-@interface FilterBrowserViewController ()
+static NSString * const kAlphabeticalButtonLabel = @"A→Z";
+static NSString * const kCategoryButtonLabel = @"Category";
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
+@interface FilterBrowserTableViewController ()
 
 @property (strong, nonatomic) NSArray *categories;
-@property (strong, nonatomic) NSMutableDictionary *filterMap;
-@property (strong, nonatomic) NSMutableArray *allFilters;
-
-@property (strong, nonatomic) CIContext *ciContext;
+@property (strong, nonatomic) NSDictionary *filterMap;
+@property (strong, nonatomic) NSArray *allFilters;
 
 @property (assign, nonatomic) TableDisplayMode tableMode;
 
-@property (strong, nonatomic) NSArray *exclusionList;
+@property (strong, nonatomic) CIContext *ciContext;
+@property (strong, nonatomic) EAGLContext *eaglContext;
 
-//@property (weak, nonatomic) IBOutle
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *tableModeButton;
 
 @end
 
-@implementation FilterBrowserViewController
+@implementation FilterBrowserTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
-    
-    self.tableMode = self.modeControl.selectedSegmentIndex;
-    
-    NSArray *allFilters = [CIFilter filterNamesInCategory:kCICategoryBuiltIn];
+
+    // Try for ES3 first, then fall back to ES2.
+    self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    if (!self.eaglContext) {
+        self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    }
+    self.ciContext = [CIContext contextWithEAGLContext:self.eaglContext];
+
+    [self createFilterData];
+
+    self.tableModeButton.title = kAlphabeticalButtonLabel;
+    self.tableMode = TableDisplayModeAlphabetical;
+}
+
+- (void)createFilterData
+{
+    NSArray *exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
+
+    NSArray *allFilterNames = [CIFilter filterNamesInCategory:kCICategoryBuiltIn];
     NSMutableArray *categories = [NSMutableArray array];
-    self.filterMap = [NSMutableDictionary dictionary];
-    self.allFilters = [NSMutableArray arrayWithCapacity:allFilters.count];
-        
-    for (NSString *name in allFilters) {
-        if ([self isFilterExcluded:name]) continue;
+    NSMutableDictionary *filterMap = [NSMutableDictionary dictionary];
+    NSMutableArray *allFilters = [NSMutableArray arrayWithCapacity:allFilterNames.count];
+
+    for (NSString *name in allFilterNames) {
+        if ([exclusionList containsObject:name]) {
+            continue;
+        }
         CIFilter *filter = [CIFilter filterWithName:name];
-        [self.allFilters addObject:filter];
-        
-//        NSLog(@"%@\n%@", filter.name, filter.attributes);
-        
+        [allFilters addObject:filter];
+
         NSArray *filterCategories = filter.attributes[kCIAttributeFilterCategories];
         for (NSString *categoryName in filterCategories) {
             if (![categories containsObject:categoryName]) {
                 [categories addObject:categoryName];
             }
-                        
-            if (!self.filterMap[categoryName]) {
-                self.filterMap[categoryName] = [NSMutableArray array];
+
+            if (!filterMap[categoryName]) {
+                filterMap[categoryName] = [NSMutableArray array];
             }
-            
-            [((NSMutableArray *)self.filterMap[categoryName]) addObject:filter];
+
+            [((NSMutableArray *)filterMap[categoryName]) addObject:filter];
         }
     }
-    
+
     [categories removeObject:kCICategoryBuiltIn];
-    [self.filterMap removeObjectForKey:kCICategoryBuiltIn];
-    
+    [filterMap removeObjectForKey:kCICategoryBuiltIn];
+
+    self.allFilters = [NSArray arrayWithArray:allFilters];
+    self.filterMap = [NSDictionary dictionaryWithDictionary:filterMap];
     self.categories = [NSArray arrayWithArray:categories];
-    [self.tableView reloadData];
-    
-    
-    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    if (!eaglContext) {
-        NSLog(@"No EAGL Context created");
-        self.ciContext = [CIContext contextWithOptions:nil];
-    } else {
-        self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,7 +102,7 @@ typedef enum {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger count;
-    if (self.tableMode == TableDisplayModeAllFilters) {
+    if (self.tableMode == TableDisplayModeAlphabetical) {
         count = 1;
     } else {
         count = self.categories.count;
@@ -109,10 +113,10 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger count;
-    if (self.tableMode == TableDisplayModeAllFilters) {
+    if (self.tableMode == TableDisplayModeAlphabetical) {
         count = self.allFilters.count;
     } else {
-        NSString *category = self.categories[section];
+        NSString *category = self.categories[(NSUInteger)section];
         count = ((NSMutableArray *)self.filterMap[category]).count;
     }
     
@@ -124,7 +128,7 @@ typedef enum {
     static NSString *reuseIdentifier = @"FilterCell";
     CIFilter *filter;
     
-    if (self.tableMode == TableDisplayModeAllFilters) {
+    if (self.tableMode == TableDisplayModeAlphabetical) {
         filter = self.allFilters[indexPath.row];
     } else {
         NSString *category = self.categories[indexPath.section];
@@ -160,7 +164,7 @@ typedef enum {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
         CIFilter * filter;
-        if (self.tableMode == TableDisplayModeAllFilters) {
+        if (self.tableMode == TableDisplayModeAlphabetical) {
             filter = self.allFilters[indexPath.row];
         } else {
             NSString *category = self.categories[indexPath.section];
@@ -170,6 +174,7 @@ typedef enum {
         FilterDetailViewController *detailVC = (FilterDetailViewController *)segue.destinationViewController;
         detailVC.filter = filter;
         detailVC.ciContext = self.ciContext;
+        detailVC.eaglContext = self.eaglContext;
     }
     
 }
@@ -178,20 +183,21 @@ typedef enum {
    // Reserved for future post-info actions, I guess.
 }
 
-#pragma mark - Check exclusion list for filter name
-- (BOOL)isFilterExcluded:(NSString *)filterName
-{
-    for (NSString *excludedFilter in self.exclusionList) {
-        if ([filterName isEqualToString:excludedFilter]) return YES;
-    }
-    return NO;
-}
-
 #pragma mark - IBActions
-- (IBAction)tableModeControlValueChanged:(id)sender
+- (IBAction)tableModeButtonTapped:(id)sender
 {
-    self.tableMode = ((UISegmentedControl *)sender).selectedSegmentIndex;
+    switch (self.tableMode) {
+        case TableDisplayModeAlphabetical:
+            self.tableMode = TableDisplayModeGroupedByType;
+            self.tableModeButton.title = kCategoryButtonLabel;
+            break;
+        case TableDisplayModeGroupedByType:
+            self.tableMode = TableDisplayModeAlphabetical;
+            self.tableModeButton.title = kAlphabeticalButtonLabel;
+            break;
+    }
     [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 @end

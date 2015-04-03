@@ -23,7 +23,7 @@
         <!--Browse Filters-->
         <scene sceneID="ZUJ-oC-KaE">
             <objects>
-                <viewController id="Wtp-M1-aZz" customClass="FilterBrowserViewController" sceneMemberID="viewController">
+                <viewController id="Wtp-M1-aZz" customClass="FilterBrowserTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Ub-kc-pRO"/>
                         <viewControllerLayoutGuide type="bottom" id="8KQ-ra-MPa"/>
@@ -164,7 +164,7 @@
         <!--Filter Detail View Controller-->
         <scene sceneID="Y9V-hb-NJy">
             <objects>
-                <viewController id="Ivy-af-7Xj" customClass="FilterDetailViewController" sceneMemberID="viewController">
+                <viewController id="Ivy-af-7Xj" customClass="FilterControlsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OFz-N0-B1U"/>
                         <viewControllerLayoutGuide type="bottom" id="cfO-DY-toC"/>

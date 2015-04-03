@@ -1,29 +1,17 @@
 //
-//  FilterTestViewController.h
-//  Core Image Explorer
+// FilterDetailViewController.h
+// Core Image Explorer
 //
-//  Created by Joshua Sullivan on 10/13/12.
-//  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
-//
+// Created by Joshua Sullivan on 4/3/15.
+// Copyright (c) 2015 Joshua Sullivan. All rights reserved.
 
-#import <UIKit/UIKit.h>
-#import "BaseInputControlCell.h"
-#import "GestureInputCell.h"
-#import "PhotoPickerCell.h"
 
-@interface FilterDetailViewController : UIViewController <UITableViewDataSource,
-                                                          UITableViewDelegate,
-                                                          InputCellDelegate,
-                                                          GestureInputDelegate,
-                                                          PhotoPickerDelegate>
-/*!
- @abstract The filter to be manipulated.
- */
+@import UIKit;
+
+@interface FilterDetailViewController : UIViewController
+
 @property (strong, nonatomic) CIFilter *filter;
-
-/*!
- @abstract The shared context (maintained by FilterBrowserViewController)
- */
 @property (strong, nonatomic) CIContext *ciContext;
+@property (strong, nonatomic) EAGLContext *eaglContext;
 
 @end

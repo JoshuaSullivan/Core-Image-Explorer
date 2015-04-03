@@ -1,5 +1,5 @@
 //
-//  FilterTypeViewController.h
+//  FilterBrowserTableViewController.h
 //  Core Image Explorer
 //
 //  Created by Joshua Sullivan on 10/13/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterBrowserViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FilterBrowserTableViewController : UITableViewController
 
 @end
