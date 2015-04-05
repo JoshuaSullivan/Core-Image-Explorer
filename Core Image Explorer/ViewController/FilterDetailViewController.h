@@ -11,7 +11,5 @@
 @interface FilterDetailViewController : UIViewController
 
 @property (strong, nonatomic) CIFilter *filter;
-@property (strong, nonatomic) CIContext *ciContext;
-@property (strong, nonatomic) EAGLContext *eaglContext;
 
 @end

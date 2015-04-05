@@ -29,8 +29,6 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 
 @property (assign, nonatomic) TableDisplayMode tableMode;
 
-@property (strong, nonatomic) CIContext *ciContext;
-@property (strong, nonatomic) EAGLContext *eaglContext;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tableModeButton;
 
@@ -42,12 +40,6 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 {
     [super viewDidLoad];
 
-    // Try for ES3 first, then fall back to ES2.
-    self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!self.eaglContext) {
-        self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    }
-    self.ciContext = [CIContext contextWithEAGLContext:self.eaglContext];
 
     [self createFilterData];
 
@@ -57,12 +49,15 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 
 - (void)createFilterData
 {
-    NSArray *exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
+//    NSArray *exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
+    NSArray *exclusionList = @[];
 
     NSArray *allFilterNames = [CIFilter filterNamesInCategory:kCICategoryBuiltIn];
     NSMutableArray *categories = [NSMutableArray array];
     NSMutableDictionary *filterMap = [NSMutableDictionary dictionary];
     NSMutableArray *allFilters = [NSMutableArray arrayWithCapacity:allFilterNames.count];
+
+    NSMutableString *outString = [NSMutableString string];
 
     for (NSString *name in allFilterNames) {
         if ([exclusionList containsObject:name]) {
@@ -70,6 +65,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
         }
         CIFilter *filter = [CIFilter filterWithName:name];
         [allFilters addObject:filter];
+        [outString appendFormat:@"%@\n\n", [self enumerateFilter:filter]];
 
         NSArray *filterCategories = filter.attributes[kCIAttributeFilterCategories];
         for (NSString *categoryName in filterCategories) {
@@ -91,6 +87,8 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     self.allFilters = [NSArray arrayWithArray:allFilters];
     self.filterMap = [NSDictionary dictionaryWithDictionary:filterMap];
     self.categories = [NSArray arrayWithArray:categories];
+
+    NSLog(@"Filter enumerations:\n\n%@", outString);
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,7 +119,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
         NSString *category = self.categories[(NSUInteger)section];
         count = ((NSMutableArray *)self.filterMap[category]).count;
     }
-    
+
     return count;
 }
 
@@ -129,14 +127,14 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 {
     static NSString *reuseIdentifier = @"FilterCell";
     CIFilter *filter;
-    
+
     if (self.tableMode == TableDisplayModeAlphabetical) {
         filter = self.allFilters[indexPath.row];
     } else {
         NSString *category = self.categories[indexPath.section];
         filter = ((NSArray *)self.filterMap[category])[indexPath.row];
     }
-    
+
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 
     cell.textLabel.text = filter.attributes[kCIAttributeFilterDisplayName];
@@ -164,7 +162,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 {
     if ([segue.identifier isEqualToString:kBrowserToDetailSegueIdentifier]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        
+
         CIFilter * filter;
         if (self.tableMode == TableDisplayModeAlphabetical) {
             filter = self.allFilters[indexPath.row];
@@ -172,17 +170,11 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
             NSString *category = self.categories[indexPath.section];
             filter = ((NSArray *)self.filterMap[category])[indexPath.row];
         }
-        
+
         FilterDetailViewController *detailVC = (FilterDetailViewController *)segue.destinationViewController;
         detailVC.filter = filter;
-        detailVC.ciContext = self.ciContext;
-        detailVC.eaglContext = self.eaglContext;
     }
-    
-}
 
--(IBAction)returned:(UIStoryboardSegue *)segue {
-   // Reserved for future post-info actions, I guess.
 }
 
 #pragma mark - IBActions
@@ -200,6 +192,43 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     }
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+}
+
+// Unwind segue
+-(IBAction)returned:(UIStoryboardSegue *)segue {
+    // Reserved for future post-info actions, I guess.
+}
+
+#pragma mark - Helper Methods
+
+- (NSString *)enumerateFilter:(CIFilter *)filter
+{
+    NSDictionary *attributes = filter.attributes;
+    NSString *enumString = [NSString stringWithFormat:@"%@ {\n%@}\n", attributes[kCIAttributeFilterName], [self recursivelyDescribeDictionary:attributes
+                                                                                                                                 currentDepth:1]];
+    return enumString;
+}
+
+- (NSString *)recursivelyDescribeDictionary:(NSDictionary *)dict currentDepth:(NSInteger)depth
+{
+    NSMutableString *dictString = [NSMutableString string];
+    NSString *prefix = @"";
+    for (NSInteger i = 0; i < depth; i++) {
+        prefix = [prefix stringByAppendingString:@"\t"];
+    }
+    NSArray *allKeys = [[dict allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString *key in allKeys) {
+        id value = dict[key];
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            NSString *dictEnum = [self recursivelyDescribeDictionary:value currentDepth:depth + 1];
+            [dictString appendFormat:@"%@%@ : {\n%@%@}\n", prefix, key, dictEnum, prefix];
+        } else if ([value isKindOfClass:[NSArray class]]) {
+            [dictString appendFormat:@"%@%@ : [%@]\n", prefix, key, [(NSArray *)value componentsJoinedByString:@", "]];
+        } else {
+            [dictString appendFormat:@"%@%@ : %@\n", prefix, key, value];
+        }
+    }
+    return [NSString stringWithString:dictString];
 }
 
 @end

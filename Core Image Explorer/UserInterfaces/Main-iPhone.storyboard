@@ -86,21 +86,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <glkView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYK-l8-ler">
+                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-5w-iRk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </glkView>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hYK-l8-ler" firstAttribute="top" secondItem="fRC-63-XYj" secondAttribute="top" id="PGc-4e-LK3"/>
-                            <constraint firstItem="hYK-l8-ler" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="RDb-db-y44"/>
-                            <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="hYK-l8-ler" secondAttribute="bottom" id="RLQ-7c-HDf"/>
-                            <constraint firstAttribute="trailing" secondItem="hYK-l8-ler" secondAttribute="trailing" id="cS8-83-0ae"/>
+                            <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="7eU-5w-iRk" secondAttribute="bottom" id="4sR-MV-ENF"/>
+                            <constraint firstItem="7eU-5w-iRk" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="dgG-us-9JS"/>
+                            <constraint firstAttribute="trailing" secondItem="7eU-5w-iRk" secondAttribute="trailing" id="mQH-wl-Tdx"/>
+                            <constraint firstItem="7eU-5w-iRk" firstAttribute="top" secondItem="fRC-63-XYj" secondAttribute="top" id="n7M-wk-9PH"/>
                         </constraints>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="glView" destination="hYK-l8-ler" id="vmg-6h-IXB"/>
+                        <outlet property="imageView" destination="7eU-5w-iRk" id="hlN-2e-t1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-bb-IZz" userLabel="First Responder" sceneMemberID="firstResponder"/>

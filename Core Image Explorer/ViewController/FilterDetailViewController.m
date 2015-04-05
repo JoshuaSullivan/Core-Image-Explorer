@@ -8,13 +8,12 @@
 
 #import "FilterDetailViewController.h"
 
-@import GLKit;
-
 @interface FilterDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet GLKView *glView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (assign, nonatomic) CGRect sourceRect;
 @property (assign, nonatomic) CGRect targetRect;
+@property (strong, nonatomic) CIContext *ciContext;
 
 @end
 
@@ -24,32 +23,43 @@
 {
     [super viewDidLoad];
 
-    self.glView.context = self.eaglContext;
+    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
 
-    self.sourceRect = CGRectZero;
-    self.targetRect = CGRectZero;
+    CGFloat screenScale = [UIScreen mainScreen].scale;
+    CGRect screenSize = [UIScreen mainScreen].bounds;
+    self.sourceRect = screenSize;
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(screenScale, screenScale);
+    self.targetRect = CGRectApplyAffineTransform(screenSize, scaleTransform);
 
-//    UIImage *image = [UIImage imageNamed:@"Sample1"];
-//    CIImage *ciImage = [CIImage imageWithCGImage:image.CGImage];
-//    [self.filter setValue:ciImage forKey:kCIInputImageKey];
-//    CGRect extent = [ciImage extent];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(handleTapGesture:)];
+    [self.view addGestureRecognizer:tapGesture];
 
     self.navigationItem.title = self.filter.attributes[kCIAttributeFilterDisplayName];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.targetRect = self.glView.bounds;
-    self.sourceRect = self.targetRect;
-    
+    [super viewWillAppear:animated];
+
     [self renderImage];
 }
 
 - (void)renderImage
 {
-    CIImage *renderImage = self.filter.outputImage;
-    [self.ciContext drawImage:renderImage inRect:self.targetRect fromRect:self.sourceRect];
-    [self.glView display];
+    CIImage *inputImage = self.filter.outputImage;
+    CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
+    UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
+    self.imageView.image = finalImage;
+    CGImageRelease(renderImage);
+}
+
+#pragma mark - IBActions
+
+- (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGesture
+{
+    [self renderImage];
 }
 
 @end

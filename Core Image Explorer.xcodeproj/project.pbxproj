@@ -29,6 +29,7 @@
 		BC24E6DC1629F8B0006C7116 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6DB1629F8B0006C7116 /* FilterControlsViewController.m */; };
 		BC2BA0001638E80500F5EBBF /* AffineTransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */; };
 		BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2BA0031638ED2F00F5EBBF /* GestureInputCell.m */; };
+		BC33F1961AD1E3110059C163 /* FilterControls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC33F1951AD1E3110059C163 /* FilterControls.storyboard */; };
 		BC3ABC1316455441005D6221 /* RectDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3ABC1216455441005D6221 /* RectDisplayCell.m */; };
 		BC55A02D1634355C008F0B8C /* PositionPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC55A02C1634355C008F0B8C /* PositionPickerCell.m */; };
 		BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61F145162E19AA008EE219 /* BaseInputControlCell.m */; };
@@ -77,6 +78,7 @@
 		BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffineTransformCell.m; sourceTree = "<group>"; };
 		BC2BA0021638ED2F00F5EBBF /* GestureInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureInputCell.h; sourceTree = "<group>"; };
 		BC2BA0031638ED2F00F5EBBF /* GestureInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureInputCell.m; sourceTree = "<group>"; };
+		BC33F1951AD1E3110059C163 /* FilterControls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FilterControls.storyboard; sourceTree = "<group>"; };
 		BC3ABC0F1644D1A0005D6221 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BC3ABC1116455441005D6221 /* RectDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectDisplayCell.h; sourceTree = "<group>"; };
 		BC3ABC1216455441005D6221 /* RectDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectDisplayCell.m; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */,
 				7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */,
 				7BC573A71ACF2F7200C4E2EA /* Main-iPad.storyboard */,
+				BC33F1951AD1E3110059C163 /* FilterControls.storyboard */,
 			);
 			path = UserInterfaces;
 			sourceTree = "<group>";
@@ -211,9 +214,9 @@
 				BC24E6DB1629F8B0006C7116 /* FilterControlsViewController.m */,
 				BC91D2911682C4B300895BA4 /* VideoCaptureController.h */,
 				BC91D2921682C4B300895BA4 /* VideoCaptureController.m */,
-				BC61F148162E19B2008EE219 /* Table Cells */,
 				9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */,
 				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
+				BC61F148162E19B2008EE219 /* Table Cells */,
 			);
 			name = "View Controllers";
 			path = ViewController;
@@ -314,6 +317,7 @@
 				BC24E6AE1629B58E006C7116 /* InfoPlist.strings in Resources */,
 				7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */,
 				7B18393C1ACEE8B3003CC4F8 /* Main-iPhone.storyboard in Resources */,
+				BC33F1961AD1E3110059C163 /* FilterControls.storyboard in Resources */,
 				7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */,
 				9474CD7E394B5C8390F5885B /* Old.storyboard in Resources */,
 				7BC573A81ACF2F7200C4E2EA /* Main-iPad.storyboard in Resources */,
