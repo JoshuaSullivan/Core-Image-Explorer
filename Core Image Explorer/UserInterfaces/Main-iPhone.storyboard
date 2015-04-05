@@ -50,7 +50,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="366-g5-TeM" kind="show" id="5hx-S1-8Ee"/>
+                                    <segue destination="366-g5-TeM" kind="show" identifier="kBrowserToDetailSegueIdentifier" id="5hx-S1-8Ee"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="1437.5" y="198.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Filter Detail View Controller-->
         <scene sceneID="Jd2-4X-OLk">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="366-g5-TeM" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="366-g5-TeM" customClass="FilterDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pwg-8B-pUd"/>
                         <viewControllerLayoutGuide type="bottom" id="jAV-rU-xLE"/>
@@ -99,6 +99,9 @@
                         </constraints>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="glView" destination="hYK-l8-ler" id="vmg-6h-IXB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-bb-IZz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

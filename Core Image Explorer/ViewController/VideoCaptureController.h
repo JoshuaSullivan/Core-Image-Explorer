@@ -6,11 +6,15 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-extern NSString * const kVideoControllerCaptureStart;
-extern NSString * const kVideoControllerCaptureStop;
+@protocol AVCaptureVideoDataOutputSampleBufferDelegate;
 
 @interface VideoCaptureController : NSObject
+
++ (VideoCaptureController *)sharedManager;
+
+- (void)startVideoCaptureWithDelegate:(id <AVCaptureVideoDataOutputSampleBufferDelegate>)delegate;
+- (void)stopVideoCapture;
 
 @end

@@ -137,8 +137,6 @@ static NSString *kResetToDefault = @"Reset to Default";
 {
     _isUsingVideo = YES;
     [self.photoDelegate photoPicker:self isUsingVideo:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kVideoControllerCaptureStart
-                                                        object:self];
 }
 
 - (void)stopVideoCapture
@@ -146,8 +144,6 @@ static NSString *kResetToDefault = @"Reset to Default";
     if (_isUsingVideo) {
         _isUsingVideo = NO;
         [self.photoDelegate photoPicker:self isUsingVideo:NO];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kVideoControllerCaptureStop
-                                                        object:self];
     }
 }
 

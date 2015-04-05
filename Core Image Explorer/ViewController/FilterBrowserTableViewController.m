@@ -19,6 +19,8 @@ typedef enum {
 static NSString * const kAlphabeticalButtonLabel = @"A→Z";
 static NSString * const kCategoryButtonLabel = @"Category";
 
+static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegueIdentifier";
+
 @interface FilterBrowserTableViewController ()
 
 @property (strong, nonatomic) NSArray *categories;
@@ -160,7 +162,7 @@ static NSString * const kCategoryButtonLabel = @"Category";
 #pragma mark - prepare for segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"filterDetail"]) {
+    if ([segue.identifier isEqualToString:kBrowserToDetailSegueIdentifier]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
         CIFilter * filter;

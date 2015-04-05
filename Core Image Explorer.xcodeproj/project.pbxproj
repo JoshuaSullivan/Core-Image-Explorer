@@ -212,8 +212,8 @@
 				BC91D2911682C4B300895BA4 /* VideoCaptureController.h */,
 				BC91D2921682C4B300895BA4 /* VideoCaptureController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
-				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
 				9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */,
+				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
 			);
 			name = "View Controllers";
 			path = ViewController;

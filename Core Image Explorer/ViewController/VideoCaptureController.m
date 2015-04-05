@@ -17,19 +17,26 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoDataOutput *dataOutput;
-@property (weak, nonatomic) id <AVCaptureAudioDataOutputSampleBufferDelegate> delegate;
-@property (assign, nonatomic) dispatch_queue_t delegateQueue;
 
 @end
 
 @implementation VideoCaptureController
 
+static VideoCaptureController *_instance;
+
++ (VideoCaptureController *)sharedManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[VideoCaptureController alloc] init];
+    });
+    return _instance;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
         [self configureVideo];
-        [self addVideoListeners];
-        self.delegateQueue = dispatch_get_main_queue();
     }
     return self;
 }
@@ -37,7 +44,6 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
 - (void)dealloc
 {
     [self.captureSession stopRunning];
-    [self removeVideoListeners];
 }
 
 - (void)configureVideo
@@ -45,8 +51,8 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
     // Create the capture session
     self.captureSession = [AVCaptureSession new];
     [self.captureSession beginConfiguration];
-    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset640x480]) {
-        [self.captureSession setSessionPreset:AVCaptureSessionPreset640x480];
+    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
+        [self.captureSession setSessionPreset:AVCaptureSessionPresetHigh];
     }
     
     // Capture device
@@ -70,54 +76,23 @@ NSString * const kVideoControllerCaptureStop =  @"kVideoControllerCaptureStop";
     [self.captureSession commitConfiguration];
 }
 
-#pragma mark - Add/Remove video event listeners
+#pragma mark - Start/Stop Video Capture
 
-- (void)addVideoListeners
+- (void)startVideoCaptureWithDelegate:(id <AVCaptureVideoDataOutputSampleBufferDelegate>)delegate
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleVideoStart:)
-                                                 name:kVideoControllerCaptureStart
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleVideoStop:)
-                                                 name:kVideoControllerCaptureStop
-                                               object:nil];
-}
+    NSParameterAssert(delegate);
+    [self.dataOutput setSampleBufferDelegate:delegate
+                                       queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
 
-- (void)removeVideoListeners
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kVideoControllerCaptureStart
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kVideoControllerCaptureStop
-                                                  object:nil];
-}
-
-#pragma mark - Video Event Handlers
-- (void)handleVideoStart:(NSNotification *)note
-{
-    if (!note.object) {
-        DLog(@"OY! You gotta pass an object for this to work.");
-        return;
-    }
-    
-    if (note.object != self.dataOutput.sampleBufferDelegate) {
-        [self.dataOutput setSampleBufferDelegate:note.object
-                                           queue:self.delegateQueue];
-    }
-    
     if (!self.captureSession.running) {
         [self.captureSession startRunning];
     }
 }
 
-- (void)handleVideoStop:(NSNotification *)note
+- (void)stopVideoCapture
 {
     if (self.captureSession.running) {
         [self.captureSession stopRunning];
-        [self.dataOutput setSampleBufferDelegate:nil
-                                           queue:NULL];
     }
 }
 
