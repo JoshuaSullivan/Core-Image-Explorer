@@ -8,7 +8,7 @@
 
 #import <CoreImage/CoreImage.h>
 #import "FilterBrowserTableViewController.h"
-#import "FilterControlsViewController.h"
+#import "OldFilterControlsViewController.h"
 #import "FilterDetailViewController.h"
 
 typedef enum {
@@ -57,7 +57,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     NSMutableDictionary *filterMap = [NSMutableDictionary dictionary];
     NSMutableArray *allFilters = [NSMutableArray arrayWithCapacity:allFilterNames.count];
 
-    NSMutableString *outString = [NSMutableString string];
+//    NSMutableString *outString = [NSMutableString string];
 
     for (NSString *name in allFilterNames) {
         if ([exclusionList containsObject:name]) {
@@ -65,7 +65,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
         }
         CIFilter *filter = [CIFilter filterWithName:name];
         [allFilters addObject:filter];
-        [outString appendFormat:@"%@\n\n", [self enumerateFilter:filter]];
+//        [outString appendFormat:@"%@\n\n", [self enumerateFilter:filter]];
 
         NSArray *filterCategories = filter.attributes[kCIAttributeFilterCategories];
         for (NSString *categoryName in filterCategories) {
@@ -88,7 +88,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     self.filterMap = [NSDictionary dictionaryWithDictionary:filterMap];
     self.categories = [NSArray arrayWithArray:categories];
 
-    NSLog(@"Filter enumerations:\n\n%@", outString);
+//    NSLog(@"Filter enumerations:\n\n%@", outString);
 }
 
 - (void)didReceiveMemoryWarning

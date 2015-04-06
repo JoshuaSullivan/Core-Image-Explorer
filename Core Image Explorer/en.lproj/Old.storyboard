@@ -164,7 +164,7 @@
         <!--Filter Detail View Controller-->
         <scene sceneID="Y9V-hb-NJy">
             <objects>
-                <viewController id="Ivy-af-7Xj" customClass="FilterControlsViewController" sceneMemberID="viewController">
+                <viewController id="Ivy-af-7Xj" customClass="OldFilterControlsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OFz-N0-B1U"/>
                         <viewControllerLayoutGuide type="bottom" id="cfO-DY-toC"/>

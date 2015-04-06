@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
 		7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */; };
 		7B18393C1ACEE8B3003CC4F8 /* Main-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */; };
 		7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393D1ACF0B78003CC4F8 /* Images.xcassets */; };
@@ -26,7 +27,7 @@
 		BC24E6CA1629B58E006C7116 /* FilterBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6C91629B58E006C7116 /* FilterBrowserTableViewController.m */; };
 		BC24E6D71629BB21006C7116 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6D61629BB21006C7116 /* CoreImage.framework */; };
 		BC24E6D91629BB2A006C7116 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC24E6D81629BB2A006C7116 /* OpenGLES.framework */; };
-		BC24E6DC1629F8B0006C7116 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6DB1629F8B0006C7116 /* FilterControlsViewController.m */; };
+		BC24E6DC1629F8B0006C7116 /* OldFilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC24E6DB1629F8B0006C7116 /* OldFilterControlsViewController.m */; };
 		BC2BA0001638E80500F5EBBF /* AffineTransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */; };
 		BC2BA0041638ED2F00F5EBBF /* GestureInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2BA0031638ED2F00F5EBBF /* GestureInputCell.m */; };
 		BC33F1961AD1E3110059C163 /* FilterControls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC33F1951AD1E3110059C163 /* FilterControls.storyboard */; };
@@ -45,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlsViewController.m; sourceTree = "<group>"; };
+		4BA909518943943910261215 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
 		7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPhone.storyboard"; sourceTree = "<group>"; };
 		7B18393D1ACF0B78003CC4F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -72,8 +75,8 @@
 		BC24E6C91629B58E006C7116 /* FilterBrowserTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBrowserTableViewController.m; sourceTree = "<group>"; };
 		BC24E6D61629BB21006C7116 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		BC24E6D81629BB2A006C7116 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		BC24E6DA1629F8B0006C7116 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
-		BC24E6DB1629F8B0006C7116 /* FilterControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlsViewController.m; sourceTree = "<group>"; };
+		BC24E6DA1629F8B0006C7116 /* OldFilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldFilterControlsViewController.h; sourceTree = "<group>"; };
+		BC24E6DB1629F8B0006C7116 /* OldFilterControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldFilterControlsViewController.m; sourceTree = "<group>"; };
 		BC2B9FFE1638E80500F5EBBF /* AffineTransformCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffineTransformCell.h; sourceTree = "<group>"; };
 		BC2B9FFF1638E80500F5EBBF /* AffineTransformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffineTransformCell.m; sourceTree = "<group>"; };
 		BC2BA0021638ED2F00F5EBBF /* GestureInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureInputCell.h; sourceTree = "<group>"; };
@@ -210,13 +213,15 @@
 			children = (
 				BC24E6C81629B58E006C7116 /* FilterBrowserTableViewController.h */,
 				BC24E6C91629B58E006C7116 /* FilterBrowserTableViewController.m */,
-				BC24E6DA1629F8B0006C7116 /* FilterControlsViewController.h */,
-				BC24E6DB1629F8B0006C7116 /* FilterControlsViewController.m */,
+				BC24E6DA1629F8B0006C7116 /* OldFilterControlsViewController.h */,
+				BC24E6DB1629F8B0006C7116 /* OldFilterControlsViewController.m */,
 				BC91D2911682C4B300895BA4 /* VideoCaptureController.h */,
 				BC91D2921682C4B300895BA4 /* VideoCaptureController.m */,
 				9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */,
 				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
+				4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */,
+				4BA909518943943910261215 /* FilterControlsViewController.h */,
 			);
 			name = "View Controllers";
 			path = ViewController;
@@ -334,7 +339,7 @@
 				BC24E6B01629B58E006C7116 /* main.m in Sources */,
 				BC24E6B41629B58E006C7116 /* AppDelegate.m in Sources */,
 				BC24E6CA1629B58E006C7116 /* FilterBrowserTableViewController.m in Sources */,
-				BC24E6DC1629F8B0006C7116 /* FilterControlsViewController.m in Sources */,
+				BC24E6DC1629F8B0006C7116 /* OldFilterControlsViewController.m in Sources */,
 				BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */,
 				BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */,
 				BC61F14E162E208F008EE219 /* PhotoPickerCell.m in Sources */,
@@ -348,6 +353,7 @@
 				BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */,
 				BC91D2931682C4B300895BA4 /* VideoCaptureController.m in Sources */,
 				9474C8355080B42B5C5D9447 /* FilterDetailViewController.m in Sources */,
+				4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
