@@ -18,6 +18,9 @@
 {
     [super viewDidLoad];
 
+    UIBarButtonItem *defaultButton = [[UIBarButtonItem alloc] initWithTitle:@"Default" style:UIBarButtonItemStylePlain target:self action:@selector(defaultButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = defaultButton;
+
     NSDictionary *configDict = self.filter.attributes[self.inputKeyToConfigure];
     if (!configDict) {
         NSAssert(NO, @"ERROR: No input found for key '%@'.", self.inputKeyToConfigure);
@@ -40,6 +43,17 @@
 {
     NSAssert(NO, @"ERROR: Child classes must override the getter for controlSize");
     return CGSizeZero;
+}
+
+- (IBAction)defaultButtonTapped:(id)sender
+{
+    NSDictionary *configDict = self.filter.attributes[self.inputKeyToConfigure];
+    id defaultValue = configDict[kCIAttributeDefault];
+    [self.filter setValue:defaultValue forKey:self.inputKeyToConfigure];
+
+    if ([self.filterConfigurationDelegate respondsToSelector:@selector(filterConfigurationControl:didModifyFilter:)]) {
+        [self.filterConfigurationDelegate filterConfigurationControl:self didModifyFilter:self.filter];
+    }
 }
 
 @end

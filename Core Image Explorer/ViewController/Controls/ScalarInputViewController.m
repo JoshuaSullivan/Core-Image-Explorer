@@ -21,6 +21,10 @@ typedef NS_ENUM(NSInteger, ValuePrecision) {
 @property (assign, nonatomic) ValuePrecision precision;
 @property (strong, nonatomic) NSNumberFormatter *valueFormatter;
 
+@property (assign, nonatomic) CGFloat pixelWidth;
+
+@property (assign, nonatomic) BOOL isInitialLayout;
+
 @end
 
 @implementation ScalarInputViewController
@@ -39,6 +43,7 @@ typedef NS_ENUM(NSInteger, ValuePrecision) {
     self.precision = (ValuePrecision)(2 - (NSInteger)logDiff);
     self.valueFormatter = [[NSNumberFormatter alloc] init];
     self.valueFormatter.usesGroupingSeparator = YES;
+    self.valueFormatter.minimumIntegerDigits = 1;
     switch (self.precision) {
         case ValuePrecisionInteger:
             self.valueFormatter.maximumFractionDigits = 0;
@@ -56,26 +61,32 @@ typedef NS_ENUM(NSInteger, ValuePrecision) {
             break;
     }
     self.scrollView.scrollsToTop = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    CGSize scrollViewSize = self.scrollView.bounds.size;
-    CGSize gaugeSize = self.gaugeImageView.image.size;
-    CGFloat halfScrollWidth = scrollViewSize.width / 2.0f;
-    self.gaugeImageView.frame = CGRectMake(0.0f, scrollViewSize.height - gaugeSize.height, gaugeSize.width, gaugeSize.height);
-    self.scrollView.contentSize = gaugeSize;
-
+    self.pixelWidth = 1.0f / self.gaugeImageView.image.scale;
+    self.isInitialLayout = YES;
     self.value = [self.filter valueForKey:self.inputKeyToConfigure];
+    self.scrollView.contentSize = self.gaugeImageView.image.size;
 }
 
 - (void)viewDidLayoutSubviews
 {
-    CGFloat subPixelOffset = 1.0f / self.gaugeImageView.image.scale;
-    CGFloat w = self.scrollView.bounds.size.width / 2.0f;
-    self.scrollView.contentInset = UIEdgeInsetsMake(0.0f, w - subPixelOffset, 0.0f, w);
+    if (self.isInitialLayout) {
+        [self calibrateGaugeToWidth:self.view.bounds.size.width];
+        self.isInitialLayout = NO;
+    }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [self calibrateGaugeToWidth:size.width];
+}
+
+- (void)calibrateGaugeToWidth:(CGFloat)width
+{
+    CGFloat w = width / 2.0f;
+    self.scrollView.contentInset = UIEdgeInsetsMake(0.0f, w - self.pixelWidth, 0.0f, w);
+    [self syncGaugeToValue];
 }
 
 - (BOOL)isControlSuitableForInput:(NSDictionary *)inputDictionary
@@ -93,8 +104,6 @@ typedef NS_ENUM(NSInteger, ValuePrecision) {
 {
     _value = value;
     self.valueLabel.text = [self.valueFormatter stringFromNumber:value];
-    CGFloat floatValue = [value floatValue];
-
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -102,10 +111,18 @@ typedef NS_ENUM(NSInteger, ValuePrecision) {
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat gaugeWidth = self.gaugeImageView.image.size.width;
-    CGFloat x = scrollView.contentOffset.x;
-    CGFloat ratio = x / gaugeWidth;
-    NSLog(@"v: %0.2f", ratio);
+    CGFloat x = scrollView.contentOffset.x + scrollView.contentInset.left;
+    double ratio = fmax(0.0, fmin(x / (gaugeWidth - self.pixelWidth), 1.0));
+    double value = ratio * (self.valueMax - self.valueMin) + self.valueMin;
+    self.value = @(value);
 }
 
+- (void)syncGaugeToValue
+{
+    double ratio = ([self.value doubleValue] - self.valueMin) / (self.valueMax - self.valueMin);
+    CGFloat gaugeWidth = self.gaugeImageView.image.size.width;
+    CGFloat x = (CGFloat)ratio * gaugeWidth - self.scrollView.contentInset.left;
+    [self.scrollView setContentOffset:CGPointMake(x, 0.0f) animated:NO];
+}
 
 @end

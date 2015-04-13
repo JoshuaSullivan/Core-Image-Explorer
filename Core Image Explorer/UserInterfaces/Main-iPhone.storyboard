@@ -113,7 +113,7 @@
                 <navigationController id="Aas-X7-OFD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Browse" image="telescope_off" id="BfP-mB-uVK">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="telescope_off"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="telescope_on"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Zh-at-9Lk">
@@ -153,5 +153,6 @@
         <image name="rocket_off" width="28" height="28"/>
         <image name="rocket_on" width="28" height="28"/>
         <image name="telescope_off" width="28" height="27"/>
+        <image name="telescope_on" width="28" height="27"/>
     </resources>
 </document>

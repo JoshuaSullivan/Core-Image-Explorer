@@ -58,33 +58,32 @@
                         <viewControllerLayoutGuide type="bottom" id="9Wl-ha-CyL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="onM-eT-luC">
-                        <rect key="frame" x="0.0" y="44" width="300" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="300" height="116"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Kh-1dj">
-                                <rect key="frame" x="0.0" y="64" width="300" height="32"/>
+                                <rect key="frame" x="0.0" y="52" width="300" height="64"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ScalarControlGauge" translatesAutoresizingMaskIntoConstraints="NO" id="MSr-zY-VFR">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
+                                        <rect key="frame" x="0.0" y="30" width="400" height="32"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="Bj8-Df-AKC"/>
+                                    <constraint firstAttribute="height" constant="64" id="Bj8-Df-AKC"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="iFB-AS-lRo" id="qWv-oO-86b"/>
                                 </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScalarCenterBar" translatesAutoresizingMaskIntoConstraints="NO" id="p80-uQ-aRe">
-                                <rect key="frame" x="150" y="64" width="1" height="32"/>
+                                <rect key="frame" x="150" y="52" width="1" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="D2x-cc-cWn"/>
                                     <constraint firstAttribute="width" constant="1" id="o3B-Uo-azy"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoL-0T-u3K">
-                                <rect key="frame" x="16" y="9" width="268" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoL-0T-u3K" userLabel="Value Label">
+                                <rect key="frame" x="16" y="3" width="268" height="46"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="40"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -97,15 +96,16 @@
                             <constraint firstItem="9Wl-ha-CyL" firstAttribute="top" secondItem="hoV-Kh-1dj" secondAttribute="bottom" id="GaC-7k-Y54"/>
                             <constraint firstAttribute="bottomMargin" secondItem="p80-uQ-aRe" secondAttribute="bottom" id="NLv-Wq-imJ"/>
                             <constraint firstAttribute="trailing" secondItem="hoV-Kh-1dj" secondAttribute="trailing" id="QHB-lR-Fwx"/>
-                            <constraint firstAttribute="centerY" secondItem="RoL-0T-u3K" secondAttribute="centerY" constant="16" id="YgF-CJ-Qz2"/>
+                            <constraint firstAttribute="centerY" secondItem="RoL-0T-u3K" secondAttribute="centerY" constant="32" id="YgF-CJ-Qz2"/>
                             <constraint firstItem="RoL-0T-u3K" firstAttribute="leading" secondItem="onM-eT-luC" secondAttribute="leadingMargin" id="rPt-Kb-542"/>
+                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="height" secondItem="p80-uQ-aRe" secondAttribute="height" id="smm-a5-z0e"/>
                             <constraint firstItem="hoV-Kh-1dj" firstAttribute="centerX" secondItem="p80-uQ-aRe" secondAttribute="centerX" id="zfk-wq-DzE"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Scalar Input" id="l76-1p-GSX"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="140"/>
+                    <size key="freeformSize" width="300" height="160"/>
                     <connections>
                         <outlet property="gaugeImageView" destination="MSr-zY-VFR" id="Ni9-bY-wtw"/>
                         <outlet property="scrollView" destination="hoV-Kh-1dj" id="Qqr-C3-CXE"/>
@@ -138,7 +138,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ScalarCenterBar" width="1" height="32"/>
+        <image name="ScalarCenterBar" width="1" height="64"/>
         <image name="ScalarControlGauge" width="400" height="32"/>
     </resources>
 </document>
