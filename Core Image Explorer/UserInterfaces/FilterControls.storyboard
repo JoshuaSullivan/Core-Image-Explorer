@@ -43,13 +43,33 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5k-CN-Q5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="644" y="383"/>
+            <point key="canvasLocation" x="914" y="361"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cOI-WK-5eL">
+            <objects>
+                <viewController id="iFB-AS-lRo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EV6-hL-mTH"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Wl-ha-CyL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="onM-eT-luC">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="100"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVC-2E-2n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1263" y="48"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ecf-AP-Ya6">
             <objects>
                 <navigationController navigationBarHidden="YES" id="oHF-Lh-gZ6" sceneMemberID="viewController">
-                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>
@@ -63,7 +83,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBP-O2-CHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245" y="383"/>
+            <point key="canvasLocation" x="515" y="361"/>
         </scene>
     </scenes>
 </document>

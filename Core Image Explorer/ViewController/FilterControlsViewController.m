@@ -5,9 +5,51 @@
 
 #import "FilterControlsViewController.h"
 
-@interface FilterControlsViewController ()
+static NSString * const kStoryboardIdentifier = @"FilterControls";
+static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
+
+@interface FilterControlsViewController () <UINavigationControllerDelegate>
+
+@property (strong, nonatomic) CIFilter *filter;
+@property (weak, nonatomic) UINavigationController *navController;
 
 @end
 
 @implementation FilterControlsViewController
+
+- (instancetype)initWithFilter:(CIFilter *)filter
+{
+    self = [[UIStoryboard storyboardWithName:kStoryboardIdentifier bundle:nil] instantiateInitialViewController];
+    if (!self) {
+        NSLog(@"ERROR: Cannot create FilterControlsViewController from storyboard.");
+        return nil;
+    }
+    _filter = filter;
+    self.delegate = self;
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                fromViewController:(UIViewController *)fromVC
+                                                  toViewController:(UIViewController *)toVC
+{
+    return nil;
+}
+
+
 @end
