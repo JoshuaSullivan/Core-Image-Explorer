@@ -61,17 +61,20 @@
                         <rect key="frame" x="0.0" y="44" width="300" height="96"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Kh-1dj">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Kh-1dj">
                                 <rect key="frame" x="0.0" y="64" width="300" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ScalarControlGauge" translatesAutoresizingMaskIntoConstraints="NO" id="MSr-zY-VFR">
-                                        <rect key="frame" x="150" y="0.0" width="400" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Bj8-Df-AKC"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="iFB-AS-lRo" id="qWv-oO-86b"/>
+                                </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScalarCenterBar" translatesAutoresizingMaskIntoConstraints="NO" id="p80-uQ-aRe">
                                 <rect key="frame" x="150" y="64" width="1" height="32"/>

@@ -9,4 +9,8 @@
 
 @property (strong, nonatomic) NSNumber *value;
 
+@property (assign, nonatomic) double valueMin;
+@property (assign, nonatomic) double valueMax;
+@property (assign, nonatomic) double valueDefault;
+
 @end

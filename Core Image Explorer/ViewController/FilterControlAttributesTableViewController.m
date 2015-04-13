@@ -84,7 +84,7 @@ static NSString * const kScalarInputSegueIdentifier = @"kScalarInputSegueIdentif
     configVC.filter = self.filter;
     configVC.inputKeyToConfigure = self.inputKeyToConfigure;
     if ([segue.identifier isEqualToString:kScalarInputSegueIdentifier]) {
-        // Reserved for control-specific configuraiton.
+        // Reserved for control-specific configuraton.
     }
 }
 
