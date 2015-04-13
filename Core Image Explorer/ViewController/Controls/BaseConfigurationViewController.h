@@ -8,14 +8,7 @@
 
 @interface BaseConfigurationViewController : UIViewController <FilterConfigurationControl>
 
-@property (readonly, nonatomic) CIFilter *filter;
-
 @property (weak, nonatomic) id <FilterConfigurationDelegate> filterConfigurationDelegate;
-
-/**
-* Child classes which override this method should invoke super or the filter will not be available.
-*/
-- (void)configureInputKey:(NSString *)key forFilter:(CIFilter *)filter;
 
 /**
 * Determines if the control is suitable for the input it is supposed to configure.

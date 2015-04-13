@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oHF-Lh-gZ6">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Filter Attributes-->
         <scene sceneID="flC-sd-HU1">
             <objects>
-                <tableViewController id="FbB-OA-zRS" sceneMemberID="viewController">
+                <tableViewController id="FbB-OA-zRS" customClass="FilterControlAttributesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kP7-cj-nSq">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="kControlValueCellIdentifier" textLabel="tRE-k0-4Ph" detailTextLabel="QGx-3L-f20" style="IBUITableViewCellStyleValue1" id="mYy-7g-fmo">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="kDefaultCellIdentifier" textLabel="tRE-k0-4Ph" detailTextLabel="QGx-3L-f20" style="IBUITableViewCellStyleValue1" id="mYy-7g-fmo">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mYy-7g-fmo" id="fc6-rH-dMw">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -39,37 +40,84 @@
                             <outlet property="delegate" destination="FbB-OA-zRS" id="xxp-Zv-9JS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="rPp-TU-JGM"/>
+                    <navigationItem key="navigationItem" title="Filter Attributes" id="rPp-TU-JGM"/>
+                    <connections>
+                        <segue destination="iFB-AS-lRo" kind="show" identifier="kScalarInputSegueIdentifier" id="ALC-mB-EFO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5k-CN-Q5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="914" y="361"/>
         </scene>
-        <!--View Controller-->
+        <!--Scalar Input-->
         <scene sceneID="cOI-WK-5eL">
             <objects>
-                <viewController id="iFB-AS-lRo" sceneMemberID="viewController">
+                <viewController id="iFB-AS-lRo" customClass="ScalarInputViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EV6-hL-mTH"/>
                         <viewControllerLayoutGuide type="bottom" id="9Wl-ha-CyL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="onM-eT-luC">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                        <rect key="frame" x="0.0" y="44" width="300" height="96"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Kh-1dj">
+                                <rect key="frame" x="0.0" y="64" width="300" height="32"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ScalarControlGauge" translatesAutoresizingMaskIntoConstraints="NO" id="MSr-zY-VFR">
+                                        <rect key="frame" x="150" y="0.0" width="400" height="32"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Bj8-Df-AKC"/>
+                                </constraints>
+                            </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScalarCenterBar" translatesAutoresizingMaskIntoConstraints="NO" id="p80-uQ-aRe">
+                                <rect key="frame" x="150" y="64" width="1" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="D2x-cc-cWn"/>
+                                    <constraint firstAttribute="width" constant="1" id="o3B-Uo-azy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoL-0T-u3K">
+                                <rect key="frame" x="16" y="9" width="268" height="46"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="leading" secondItem="onM-eT-luC" secondAttribute="leading" id="3kv-Ls-6ab"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RoL-0T-u3K" secondAttribute="trailing" id="GQ4-kC-B3d"/>
+                            <constraint firstItem="9Wl-ha-CyL" firstAttribute="top" secondItem="hoV-Kh-1dj" secondAttribute="bottom" id="GaC-7k-Y54"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="p80-uQ-aRe" secondAttribute="bottom" id="NLv-Wq-imJ"/>
+                            <constraint firstAttribute="trailing" secondItem="hoV-Kh-1dj" secondAttribute="trailing" id="QHB-lR-Fwx"/>
+                            <constraint firstAttribute="centerY" secondItem="RoL-0T-u3K" secondAttribute="centerY" constant="16" id="YgF-CJ-Qz2"/>
+                            <constraint firstItem="RoL-0T-u3K" firstAttribute="leading" secondItem="onM-eT-luC" secondAttribute="leadingMargin" id="rPt-Kb-542"/>
+                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="centerX" secondItem="p80-uQ-aRe" secondAttribute="centerX" id="zfk-wq-DzE"/>
+                        </constraints>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Scalar Input" id="l76-1p-GSX"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="100"/>
+                    <size key="freeformSize" width="300" height="140"/>
+                    <connections>
+                        <outlet property="gaugeImageView" destination="MSr-zY-VFR" id="Ni9-bY-wtw"/>
+                        <outlet property="scrollView" destination="hoV-Kh-1dj" id="Qqr-C3-CXE"/>
+                        <outlet property="valueLabel" destination="RoL-0T-u3K" id="exN-fV-l61"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVC-2E-2n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1263" y="48"/>
+            <point key="canvasLocation" x="1282" y="-99"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Filter Controls View Controller-->
         <scene sceneID="Ecf-AP-Ya6">
             <objects>
-                <navigationController navigationBarHidden="YES" id="oHF-Lh-gZ6" sceneMemberID="viewController">
+                <navigationController id="oHF-Lh-gZ6" customClass="FilterControlsViewController" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>
@@ -86,4 +134,8 @@
             <point key="canvasLocation" x="515" y="361"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ScalarCenterBar" width="1" height="32"/>
+        <image name="ScalarControlGauge" width="400" height="32"/>
+    </resources>
 </document>

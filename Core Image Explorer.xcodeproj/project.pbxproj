@@ -10,6 +10,7 @@
 		4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */; };
 		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
+		7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */; };
 		7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */; };
 		7B18393C1ACEE8B3003CC4F8 /* Main-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */; };
 		7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393D1ACF0B78003CC4F8 /* Images.xcassets */; };
@@ -55,6 +56,8 @@
 		4BA909518943943910261215 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
 		4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalarInputViewController.m; sourceTree = "<group>"; };
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
+		7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlAttributesTableViewController.h; sourceTree = "<group>"; };
+		7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlAttributesTableViewController.m; sourceTree = "<group>"; };
 		7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPhone.storyboard"; sourceTree = "<group>"; };
 		7B18393D1ACF0B78003CC4F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
 				4BA909518943943910261215 /* FilterControlsViewController.h */,
 				4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */,
+				7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */,
+				7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
 				4BA9071C696E6AA4B54EF914 /* Controls */,
 			);
@@ -384,6 +389,7 @@
 				4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */,
 				4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */,
 				4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */,
+				7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

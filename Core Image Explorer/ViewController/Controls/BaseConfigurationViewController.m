@@ -7,26 +7,27 @@
 
 @interface BaseConfigurationViewController ()
 
-@property (strong, nonatomic) CIFilter *filter;
-
 @end
 
 @implementation BaseConfigurationViewController
 
-- (void)configureInputKey:(NSString *)key forFilter:(CIFilter *)filter
+@synthesize filter = _filter;
+@synthesize inputKeyToConfigure = _inputKeyToConfigure;
+
+- (void)viewDidLoad
 {
-    NSDictionary *configDict = filter.attributes[key];
+    [super viewDidLoad];
+
+    NSDictionary *configDict = self.filter.attributes[self.inputKeyToConfigure];
     if (!configDict) {
-        NSAssert(NO, @"ERROR: No input found for key '%@'.", key);
+        NSAssert(NO, @"ERROR: No input found for key '%@'.", self.inputKeyToConfigure);
         return;
     }
 
     if (![self isControlSuitableForInput:configDict]) {
-        NSAssert(NO, @"This this control is not appropriate for the input '%@'.", key);
+        NSAssert(NO, @"This this control is not appropriate for the input '%@'.", self.inputKeyToConfigure);
         return;
     }
-
-    self.filter = filter;
 }
 
 - (BOOL)isControlSuitableForInput:(NSDictionary *)inputDictionary
@@ -34,4 +35,11 @@
     NSAssert(NO, @"ERROR: Child classes must override isControlSuitableForInput:");
     return NO;
 }
+
+- (CGSize)controlSize
+{
+    NSAssert(NO, @"ERROR: Child classes must override the getter for controlSize");
+    return CGSizeZero;
+}
+
 @end

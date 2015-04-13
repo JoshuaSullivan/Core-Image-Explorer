@@ -4,6 +4,7 @@
 //
 
 #import "FilterControlsViewController.h"
+#import "FilterControlAttributesTableViewController.h"
 
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
@@ -11,7 +12,6 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
 @interface FilterControlsViewController () <UINavigationControllerDelegate>
 
 @property (strong, nonatomic) CIFilter *filter;
-@property (weak, nonatomic) UINavigationController *navController;
 
 @end
 
@@ -33,12 +33,8 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
 {
     [super viewDidLoad];
 
-
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-
+    FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
+    attributesVC.filter = self.filter;
 }
 
 #pragma mark - UINavigationControllerDelegate

@@ -10,9 +10,16 @@
 
 @protocol FilterConfigurationControl <NSObject>
 
+/** The delegate for FilterConfigurationDelegate messaging. */
 @property (weak, nonatomic) id <FilterConfigurationDelegate> filterConfigurationDelegate;
 
-- (void)configureInputKey:(NSString *)key forFilter:(CIFilter *)filter;
+/** The filter to be configured. */
+@property (strong, nonatomic) CIFilter *filter;
+
+/** The specific input key on the filter to configure. */
+@property (strong, nonatomic) NSString *inputKeyToConfigure;
+
+@property (readonly, nonatomic) CGSize controlSize;
 
 @end
 

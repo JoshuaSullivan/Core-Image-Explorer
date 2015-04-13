@@ -7,6 +7,7 @@
 
 
 #import "FilterDetailViewController.h"
+#import "FilterControlsViewController.h"
 
 @interface FilterDetailViewController ()
 
@@ -59,7 +60,8 @@
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGesture
 {
-    [self renderImage];
+    FilterControlsViewController *controlsVC = [[FilterControlsViewController alloc] initWithFilter:self.filter];
+    [self presentViewController:controlsVC animated:YES completion:nil];
 }
 
 @end
