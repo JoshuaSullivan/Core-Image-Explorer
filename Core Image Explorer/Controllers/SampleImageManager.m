@@ -118,8 +118,7 @@ static SampleImageManager *_instance;
     CIImage *rawImage = [CIImage imageWithContentsOfURL:rawImageURL];
     CGRect imageRect = [rawImage extent];
     CGRect screenRect = [UIScreen mainScreen].nativeBounds;
-    if ((orientation == ImageOrientationPortrait && screenRect.size.width > screenRect.size.height) ||
-        (orientation == ImageOrientationLandscape && screenRect.size.width < screenRect.size.height)) {
+    if (orientation == ImageOrientationLandscape) {
         screenRect = CGRectMake(0.0f, 0.0f, screenRect.size.height, screenRect.size.width);
     }
     CGFloat dw = imageRect.size.width / screenRect.size.width;
@@ -145,6 +144,9 @@ static SampleImageManager *_instance;
     imageRect = [croppedImage extent];
     CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(-imageRect.origin.x, -imageRect.origin.y);
     croppedImage = [croppedImage imageByApplyingTransform:moveTransform];
+    CGImageRef renderedImage = [self.context createCGImage:croppedImage fromRect:[croppedImage extent]];
+    UIImage *finalImage = [UIImage imageWithCGImage:renderedImage scale:self.screenScale orientation:UIImageOrientationUp];
+    CGImageRelease(renderedImage);
 
 }
 
