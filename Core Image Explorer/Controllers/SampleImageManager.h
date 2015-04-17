@@ -36,6 +36,8 @@ typedef void (^SampleCompletionBlock)(UIImage *image, NSError *error);
 
 - (void)createSamplesIfNeeded;
 
-- (void)getImageSource:(ImageSource)imageSource forIntent:(ImageIntent)intent completion:(SampleCompletionBlock)completion;
-
+- (void)getImageSource:(ImageSource)imageSource
+             forIntent:(ImageIntent)intent
+         inOrientation:(ImageOrientation)orientation
+            completion:(SampleCompletionBlock)completion;
 @end

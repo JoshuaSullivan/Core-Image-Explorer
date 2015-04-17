@@ -147,7 +147,11 @@ static SampleImageManager *_instance;
     CGImageRef renderedImage = [self.context createCGImage:croppedImage fromRect:[croppedImage extent]];
     UIImage *finalImage = [UIImage imageWithCGImage:renderedImage scale:self.screenScale orientation:UIImageOrientationUp];
     CGImageRelease(renderedImage);
-
+    NSString *filePath = [self pathForImageSource:imageSource forIntent:intent inOrientation:orientation];
+    NSData *imageData = UIImagePNGRepresentation(finalImage);
+    DLog(@"Writing image (%@) to file: %@", finalImage, filePath);
+    [imageData writeToFile:filePath atomically:YES];
+    return YES;
 }
 
 - (BOOL)imageSourceExists:(ImageSource)imageSource forIntent:(ImageIntent)intent inOrientation:(ImageOrientation)orientation
