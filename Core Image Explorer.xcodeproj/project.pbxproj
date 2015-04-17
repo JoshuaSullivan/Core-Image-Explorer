@@ -11,6 +11,8 @@
 		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
 		7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */; };
+		7B16EC671AE17ED600D2E160 /* ImageInputCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */; };
+		7B16EC691AE182A400D2E160 /* ImageInputControlConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B16EC681AE182A400D2E160 /* ImageInputControlConfiguration.plist */; };
 		7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */; };
 		7B18393C1ACEE8B3003CC4F8 /* Main-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */; };
 		7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393D1ACF0B78003CC4F8 /* Images.xcassets */; };
@@ -64,6 +66,9 @@
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
 		7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlAttributesTableViewController.h; sourceTree = "<group>"; };
 		7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlAttributesTableViewController.m; sourceTree = "<group>"; };
+		7B16EC651AE17ED600D2E160 /* ImageInputCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputCollectionViewCell.h; sourceTree = "<group>"; };
+		7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInputCollectionViewCell.m; sourceTree = "<group>"; };
+		7B16EC681AE182A400D2E160 /* ImageInputControlConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ImageInputControlConfiguration.plist; sourceTree = "<group>"; };
 		7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7B18393B1ACEE8B3003CC4F8 /* Main-iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPhone.storyboard"; sourceTree = "<group>"; };
 		7B18393D1ACF0B78003CC4F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -172,6 +177,23 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		9474C34B2E8A1144C12089E0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7B16EC681AE182A400D2E160 /* ImageInputControlConfiguration.plist */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9474C8218BF3838922D1FD2A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B16EC651AE17ED600D2E160 /* ImageInputCollectionViewCell.h */,
+				7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9474C9274F6760614E59425E /* UserInterfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +260,7 @@
 				4BA904BF0DF122C8E9F32C3F /* Protocols */,
 				9474CEE35A6A490308C6E06C /* Controllers */,
 				BC24E6D51629B614006C7116 /* View Controllers */,
+				9474C8218BF3838922D1FD2A /* Views */,
 				BC24E6D41629B5EA006C7116 /* Resources */,
 				BC24E6AA1629B58E006C7116 /* Supporting Files */,
 				9474C9274F6760614E59425E /* UserInterfaces */,
@@ -261,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				BC385F211ADF5F4E00666CC1 /* Images */,
+				9474C34B2E8A1144C12089E0 /* Data */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -392,6 +416,7 @@
 			files = (
 				BC385F291ADF5F4E00666CC1 /* Sample4Raw.png in Resources */,
 				BC24E6AE1629B58E006C7116 /* InfoPlist.strings in Resources */,
+				7B16EC691AE182A400D2E160 /* ImageInputControlConfiguration.plist in Resources */,
 				7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */,
 				BC385F281ADF5F4E00666CC1 /* Sample3Raw.png in Resources */,
 				BC385F261ADF5F4E00666CC1 /* Sample1Raw.jpg in Resources */,
@@ -430,6 +455,7 @@
 				9474C8355080B42B5C5D9447 /* FilterDetailViewController.m in Sources */,
 				4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */,
 				4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */,
+				7B16EC671AE17ED600D2E160 /* ImageInputCollectionViewCell.m in Sources */,
 				4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */,
 				7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */,
 				9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */,
