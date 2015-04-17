@@ -46,10 +46,7 @@ static SampleImageManager *_instance;
     _screenSize = [UIScreen mainScreen].bounds.size;
     _screenResolution = CGSizeApplyAffineTransform(_screenSize, CGAffineTransformMakeScale(_screenScale, _screenScale));
 
-    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!eaglContext) {
-        eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    }
+    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     _context = [CIContext contextWithEAGLContext:eaglContext];
 
     NSArray *caches = [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
@@ -192,7 +189,6 @@ static SampleImageManager *_instance;
     switch (imageSource) {
         case ImageSourceSample1:
         case ImageSourceSample2:
-            fileExtension = @"jpg";
         case ImageSourceSample3:
         case ImageSourceSample4:
             fileName = [NSString stringWithFormat:@"Sample%li", (long)imageSource];
