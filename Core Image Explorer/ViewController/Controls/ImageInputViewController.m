@@ -7,10 +7,16 @@
 
 
 #import "ImageInputViewController.h"
+#import "ImageInputCollectionViewCell.h"
+#import "SampleImageManager.h"
+
+static NSString * const kImageInputDataFile = @"ImageInputControlConfiguration";
+static NSString * const kImageInputCellIdentifier = @"kImageInputCellIdentifier";
 
 @interface ImageInputViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet NSArray *data;
 
 @end
 
@@ -20,6 +26,8 @@
 {
     [super viewDidLoad];
 
+    NSURL *dataURL = [[NSBundle mainBundle] URLForResource:kImageInputDataFile withExtension:@"plist"];
+    _data = [NSArray arrayWithContentsOfURL:dataURL];
 
 }
 
@@ -38,13 +46,26 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 0;
+    return self.data.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    ImageInputCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kImageInputCellIdentifier
+                                                                                   forIndexPath:indexPath];
+    NSDictionary *itemData = self.data[(NSUInteger)indexPath.item];
+    cell.captionLabel = itemData[@"label"];
+    ImageSource imageSource = (ImageSource)[itemData[@"source"] integerValue];
+    [[SampleImageManager sharedManager] getThumbnailForSourceInCurrentOrientation:imageSource completion:^(UIImage *image) {
+        if (image) {
+            cell.imageView.image = image;
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"CameraRollIcon"];
+        }
+    }];
+
+    return cell;
 }
 
 #pragma mark - UICollectionViewDelegate

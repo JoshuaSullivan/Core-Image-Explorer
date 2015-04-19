@@ -12,8 +12,10 @@ typedef NS_ENUM(NSInteger, ImageSource) {
     ImageSourceSample2,
     ImageSourceSample3,
     ImageSourceSample4,
-    ImageSourceUserSelected,
-    ImageSourceLibrary
+    ImageSourceUser1,
+    ImageSourceUser2,
+    ImageSourceUser3,
+    ImageSourceLiveVideo
 };
 
 typedef NS_ENUM(NSInteger, ImageIntent) {
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSInteger, ImageOrientation) {
     ImageOrientationPortrait
 };
 
-typedef void (^SampleCompletionBlock)(UIImage *image, NSError *error);
+typedef void (^SampleCompletionBlock)(UIImage *image);
 
 @interface SampleImageManager : NSObject
 
@@ -36,8 +38,9 @@ typedef void (^SampleCompletionBlock)(UIImage *image, NSError *error);
 
 - (void)createSamplesIfNeeded;
 
-- (void)getImageSource:(ImageSource)imageSource
-             forIntent:(ImageIntent)intent
-         inOrientation:(ImageOrientation)orientation
-            completion:(SampleCompletionBlock)completion;
+- (BOOL)imageSourceExists:(ImageSource)imageSource forIntent:(ImageIntent)intent inOrientation:(ImageOrientation)orientation;
+- (void)getThumbnailForSourceInCurrentOrientation:(ImageSource)imageSource completion:(SampleCompletionBlock)completion;
+- (void)getCompositionImageForSourceInCurrentOrientation:(ImageSource)imageSource completion:(SampleCompletionBlock)completion;
+
+
 @end

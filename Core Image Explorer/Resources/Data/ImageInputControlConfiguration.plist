@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<array>
+	<dict>
+		<key>label</key>
+		<string>Sample 1</string>
+		<key>source</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>Sample 2</string>
+		<key>source</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>Mask 1</string>
+		<key>source</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>Mask 2</string>
+		<key>source</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>User 1</string>
+		<key>source</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>User 2</string>
+		<key>source</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>User 3</string>
+		<key>source</key>
+		<integer>7</integer>
+	</dict>
+	<dict>
+		<key>label</key>
+		<string>Live Video</string>
+		<key>source</key>
+		<integer>8</integer>
+	</dict>
+</array>
 </plist>

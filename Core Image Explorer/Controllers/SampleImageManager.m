@@ -44,7 +44,7 @@ static SampleImageManager *_instance;
     }
     _screenScale = [UIScreen mainScreen].scale;
     _screenSize = [UIScreen mainScreen].bounds.size;
-    _screenResolution = CGSizeApplyAffineTransform(_screenSize, CGAffineTransformMakeScale(_screenScale, _screenScale));
+    _screenResolution = [UIScreen mainScreen].nativeBounds.size;
 
     EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     _context = [CIContext contextWithEAGLContext:eaglContext];
@@ -92,21 +92,44 @@ static SampleImageManager *_instance;
             NSString *imagePath = [self pathForImageSource:imageSource forIntent:intent inOrientation:orientation];
             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
             dispatch_async(dispatch_get_main_queue(), ^{
-                completion(image, nil);
+                completion(image);
             });
         });
 
     } else {
         NSString *imagePath = [self pathForImageSource:imageSource forIntent:intent inOrientation:orientation];
         UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-        completion(image, nil);
+        completion(image);
     }
 
 }
 
+- (void)getThumbnailForSourceInCurrentOrientation:(ImageSource)imageSource completion:(SampleCompletionBlock)completion
+{
+    if (imageSource == ImageSourceLiveVideo) {
+        completion([UIImage imageNamed:@"LiveVideoIcon"]);
+        return;
+    }
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    ImageOrientation orientation = screenSize.width > screenSize.height ? ImageOrientationLandscape : ImageOrientationPortrait;
+    [self getImageSource:imageSource forIntent:ImageIntentThumbnail inOrientation:orientation completion:completion];
+}
+
+- (void)getCompositionImageForSourceInCurrentOrientation:(ImageSource)imageSource completion:(SampleCompletionBlock)completion
+{
+    if (imageSource == ImageSourceLiveVideo) {
+        NSAssert(NO, @"ERROR: There is no composition image for video.");
+        completion(nil);
+    }
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    ImageOrientation orientation = screenSize.width > screenSize.height ? ImageOrientationLandscape : ImageOrientationPortrait;
+    [self getImageSource:imageSource forIntent:ImageIntentComposition inOrientation:orientation completion:completion];
+}
+
+
 - (BOOL)createSampleImageSource:(ImageSource)imageSource forIntent:(ImageIntent)intent inOrientation:(ImageOrientation)orientation
 {
-    BOOL isSample = imageSource == ImageSourceSample1 || imageSource == ImageSourceSample2 || imageSource == ImageSourceSample3 || imageSource == ImageSourceSample4;
+    BOOL isSample = [self imageSourceIsSample:imageSource];
     if (!isSample) {
         NSAssert(NO, @"ERROR: createSampleImageSource can only be used for Sample ImageSources.");
         return NO;
@@ -167,7 +190,7 @@ static SampleImageManager *_instance;
             fileExtension = @"jpg";
         case ImageSourceSample3:
         case ImageSourceSample4:
-            fileName = [NSString stringWithFormat:@"Sample%iRaw", imageSource];
+            fileName = [NSString stringWithFormat:@"Sample%liRaw", (long)imageSource];
             return [[NSBundle mainBundle] URLForResource:fileName withExtension:fileExtension];
         default:
             NSAssert(NO, @"ERROR: Only the Sample ImageSource types have raw images.");
@@ -190,18 +213,36 @@ static SampleImageManager *_instance;
         case ImageSourceSample1:
         case ImageSourceSample2:
         case ImageSourceSample3:
-        case ImageSourceSample4:
-            fileName = [NSString stringWithFormat:@"Sample%li", (long)imageSource];
+        case ImageSourceSample4: {
+            NSInteger index = imageSource - ImageSourceSample1 + 1;
+            fileName = [NSString stringWithFormat:@"Sample%li", (long)index];
             break;
-        case ImageSourceUserSelected:
-            fileName = @"UserImage";
+        }
+        case ImageSourceUser1:
+        case ImageSourceUser2:
+        case ImageSourceUser3: {
+            NSUInteger index = imageSource - ImageSourceUser1 + 1;
+            fileName = [NSString stringWithFormat:@"UserImage%li", (long)index];
             break;
+        }
         default:
             return nil;
     }
     NSString *intentString = (intent == ImageIntentThumbnail) ? @"-Thumbnail" : @"";
     NSString *composedName = [NSString stringWithFormat:@"%@-%@%@.%@", fileName, suffix, intentString, fileExtension];
     return composedName;
+}
+
+- (BOOL)imageSourceIsSample:(ImageSource)imageSource
+{
+    BOOL isSample = imageSource == ImageSourceSample1 || imageSource == ImageSourceSample2 || imageSource == ImageSourceSample3 || imageSource == ImageSourceSample4;
+    return isSample;
+}
+
+- (BOOL)imageSourceIsUser:(ImageSource)imageSource
+{
+    BOOL isUser = imageSource == ImageSourceUser1 || imageSource == ImageSourceUser2 || imageSource == ImageSourceUser3;
+    return isUser;
 }
 
 @end
