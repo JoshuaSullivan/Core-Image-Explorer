@@ -27,8 +27,8 @@ static NSString * const kImageInputCellIdentifier = @"kImageInputCellIdentifier"
     [super viewDidLoad];
 
     NSURL *dataURL = [[NSBundle mainBundle] URLForResource:kImageInputDataFile withExtension:@"plist"];
-    _data = [NSArray arrayWithContentsOfURL:dataURL];
-
+    self.data = [NSArray arrayWithContentsOfURL:dataURL];
+    self.collectionView.contentInset = UIEdgeInsetsMake(20.0f, 20.0f, 20.0f, 20.0f);
 }
 
 - (BOOL)isControlSuitableForInput:(NSDictionary *)inputDictionary
@@ -68,7 +68,7 @@ static NSString * const kImageInputCellIdentifier = @"kImageInputCellIdentifier"
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    DLog(@"Selected: %@", indexPath);
 }
 
 

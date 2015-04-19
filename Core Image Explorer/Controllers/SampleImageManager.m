@@ -87,6 +87,11 @@ static SampleImageManager *_instance;
             completion:(SampleCompletionBlock)completion
 {
     if (![self imageSourceExists:imageSource forIntent:intent inOrientation:orientation]) {
+        if ([self imageSourceIsUser:imageSource]) {
+            // Picker time!
+            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+            
+        }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self createSampleImageSource:imageSource forIntent:intent inOrientation:orientation];
             NSString *imagePath = [self pathForImageSource:imageSource forIntent:intent inOrientation:orientation];
@@ -113,11 +118,12 @@ static SampleImageManager *_instance;
         return;
     }
     if ([self imageSourceIsUser:imageSource]){
-        if (![self imageSourceExists:imageSource forIntent:ImageIntentThumbnail inOrientation:orientation]) {
+        if (![self imageSourceExists:imageSource forIntent:ImageIntentComposition inOrientation:orientation]) {
             UIImage *cameraRollIcon = [UIImage imageNamed:@"CameraRollIcon"];
             completion(cameraRollIcon);
             return;
         }
+        //TODO: I should probably check for the existence of the thumbnail, too, and recreate it if necessary.
     }
     [self getImageSource:imageSource forIntent:ImageIntentThumbnail inOrientation:orientation completion:completion];
 }
