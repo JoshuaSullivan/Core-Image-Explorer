@@ -106,12 +106,19 @@ static SampleImageManager *_instance;
 
 - (void)getThumbnailForSourceInCurrentOrientation:(ImageSource)imageSource completion:(SampleCompletionBlock)completion
 {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    ImageOrientation orientation = screenSize.width > screenSize.height ? ImageOrientationLandscape : ImageOrientationPortrait;
     if (imageSource == ImageSourceLiveVideo) {
         completion([UIImage imageNamed:@"LiveVideoIcon"]);
         return;
     }
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    ImageOrientation orientation = screenSize.width > screenSize.height ? ImageOrientationLandscape : ImageOrientationPortrait;
+    if ([self imageSourceIsUser:imageSource]){
+        if (![self imageSourceExists:imageSource forIntent:ImageIntentThumbnail inOrientation:orientation]) {
+            UIImage *cameraRollIcon = [UIImage imageNamed:@"CameraRollIcon"];
+            completion(cameraRollIcon);
+            return;
+        }
+    }
     [self getImageSource:imageSource forIntent:ImageIntentThumbnail inOrientation:orientation completion:completion];
 }
 
@@ -228,8 +235,9 @@ static SampleImageManager *_instance;
         default:
             return nil;
     }
+    NSString *scaleString = self.screenScale > 1.0f ? [NSString stringWithFormat:@"@%ix", (int)self.screenScale] : @"";
     NSString *intentString = (intent == ImageIntentThumbnail) ? @"-Thumbnail" : @"";
-    NSString *composedName = [NSString stringWithFormat:@"%@-%@%@.%@", fileName, suffix, intentString, fileExtension];
+    NSString *composedName = [NSString stringWithFormat:@"%@-%@%@%@.%@", fileName, suffix, intentString, scaleString, fileExtension];
     return composedName;
 }
 

@@ -167,12 +167,12 @@
 		4BA9071C696E6AA4B54EF914 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */,
 				4BA905E1CA9F609BC7C31EB2 /* ScalarInputViewController.h */,
-				4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */,
+				4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */,
 				4BA9049AF802C44A2966710C /* BaseConfigurationViewController.h */,
-				9474C0C5E9E9694EC748427E /* ImageInputViewController.m */,
+				4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */,
 				9474C79C13C8B7EB122B1349 /* ImageInputViewController.h */,
+				9474C0C5E9E9694EC748427E /* ImageInputViewController.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";

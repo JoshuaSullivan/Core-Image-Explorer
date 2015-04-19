@@ -16,7 +16,7 @@ static NSString * const kImageInputCellIdentifier = @"kImageInputCellIdentifier"
 @interface ImageInputViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) IBOutlet NSArray *data;
+@property (strong, nonatomic) NSArray *data;
 
 @end
 
@@ -55,14 +55,10 @@ static NSString * const kImageInputCellIdentifier = @"kImageInputCellIdentifier"
     ImageInputCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kImageInputCellIdentifier
                                                                                    forIndexPath:indexPath];
     NSDictionary *itemData = self.data[(NSUInteger)indexPath.item];
-    cell.captionLabel = itemData[@"label"];
+    cell.captionLabel.text = itemData[@"label"];
     ImageSource imageSource = (ImageSource)[itemData[@"source"] integerValue];
     [[SampleImageManager sharedManager] getThumbnailForSourceInCurrentOrientation:imageSource completion:^(UIImage *image) {
-        if (image) {
-            cell.imageView.image = image;
-        } else {
-            cell.imageView.image = [UIImage imageNamed:@"CameraRollIcon"];
-        }
+        cell.imageView.image = image;
     }];
 
     return cell;

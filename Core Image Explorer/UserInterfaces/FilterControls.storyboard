@@ -43,7 +43,7 @@
                     <navigationItem key="navigationItem" title="Filter Attributes" id="rPp-TU-JGM"/>
                     <connections>
                         <segue destination="iFB-AS-lRo" kind="show" identifier="kScalarInputSegueIdentifier" id="ALC-mB-EFO"/>
-                        <segue destination="bWI-kt-mBJ" kind="show" id="QSG-kG-CTO"/>
+                        <segue destination="bWI-kt-mBJ" kind="show" identifier="kImageInputSegueIdentifier" id="QSG-kG-CTO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5k-CN-Q5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -175,6 +175,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="bWI-kt-mBJ" id="lZI-Hd-jL6"/>
+                                    <outlet property="delegate" destination="bWI-kt-mBJ" id="P3F-gV-DDu"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -194,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFO-wc-1SZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1363" y="209"/>
+            <point key="canvasLocation" x="1363" y="122"/>
         </scene>
         <!--Filter Controls View Controller-->
         <scene sceneID="Ecf-AP-Ya6">

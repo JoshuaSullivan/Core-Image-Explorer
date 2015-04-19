@@ -14,6 +14,7 @@ static NSString * const kDefaultCellIdentifier = @"kDefaultCellIdentifier";
 
 // Segue Identifiers
 static NSString * const kScalarInputSegueIdentifier = @"kScalarInputSegueIdentifier";
+static NSString * const kImageInputSegueIdentifier = @"kImageInputSegueIdentifier";
 
 @interface FilterControlAttributesTableViewController ()
 
@@ -71,9 +72,11 @@ static NSString * const kScalarInputSegueIdentifier = @"kScalarInputSegueIdentif
     NSString *inputKey = self.filter.inputKeys[(NSUInteger)indexPath.row];
     self.inputKeyToConfigure = inputKey;
     NSDictionary *attributeDict = self.filter.attributes[inputKey];
-    if ([attributeDict[kCIAttributeType] isEqualToString:kCIAttributeTypeScalar]) {
-        [self performSegueWithIdentifier:kScalarInputSegueIdentifier sender:self];
+    NSString *identifier = [self segueIdentifierForAttributeDictionary:attributeDict];
+    if (!identifier) {
+        return;
     }
+    [self performSegueWithIdentifier:identifier sender:self];
 }
 
 #pragma mark - Navigation
@@ -90,5 +93,15 @@ static NSString * const kScalarInputSegueIdentifier = @"kScalarInputSegueIdentif
 
 #pragma mark - Helpers
 
+- (NSString *)segueIdentifierForAttributeDictionary:(NSDictionary *)attributeDict
+{
+    NSString *type = attributeDict[kCIAttributeType];
+    if ([type isEqualToString:kCIAttributeTypeScalar]) {
+        return kScalarInputSegueIdentifier;
+    } else if ([type isEqualToString:kCIAttributeTypeImage]) {
+        return kImageInputSegueIdentifier;
+    }
+
+}
 
 @end
