@@ -89,8 +89,8 @@ static SampleImageManager *_instance;
     if (![self imageSourceExists:imageSource forIntent:intent inOrientation:orientation]) {
         if ([self imageSourceIsUser:imageSource]) {
             // Picker time!
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            
+            //TODO: Implement the picker. I don't want to do that right now.
+
         }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self createSampleImageSource:imageSource forIntent:intent inOrientation:orientation];
