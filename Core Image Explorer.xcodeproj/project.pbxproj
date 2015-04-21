@@ -51,6 +51,7 @@
 		BC91D2931682C4B300895BA4 /* VideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC91D2921682C4B300895BA4 /* VideoCaptureController.m */; };
 		BC91D29516834E1600895BA4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB039163C3333005D4196 /* CoreMedia.framework */; };
 		BC91D29716834E3A00895BA4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC91D29616834E3A00895BA4 /* CoreVideo.framework */; };
+		BCA2C4551AE67F7D00DE23CB /* MinimalistInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCA2C4541AE67F7D00DE23CB /* MinimalistInputViewController.m */; };
 		BCCFB59C163C9FEB00D89F0B /* UIImage+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */; };
 		BCCFB59F163CD64800D89F0B /* ColorMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E163CD64700D89F0B /* ColorMatrixCell.m */; };
 		BCEBB03D163C3370005D4196 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEBB03C163C3370005D4196 /* MobileCoreServices.framework */; };
@@ -126,6 +127,8 @@
 		BC91D2911682C4B300895BA4 /* VideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCaptureController.h; sourceTree = "<group>"; };
 		BC91D2921682C4B300895BA4 /* VideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCaptureController.m; sourceTree = "<group>"; };
 		BC91D29616834E3A00895BA4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BCA2C4531AE67F7D00DE23CB /* MinimalistInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistInputViewController.h; sourceTree = "<group>"; };
+		BCA2C4541AE67F7D00DE23CB /* MinimalistInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistInputViewController.m; sourceTree = "<group>"; };
 		BCCFB59A163C9FEB00D89F0B /* UIImage+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Transform.h"; sourceTree = "<group>"; };
 		BCCFB59B163C9FEB00D89F0B /* UIImage+Transform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Transform.m"; sourceTree = "<group>"; };
 		BCCFB59D163CD64700D89F0B /* ColorMatrixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrixCell.h; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */,
 				9474C79C13C8B7EB122B1349 /* ImageInputViewController.h */,
 				9474C0C5E9E9694EC748427E /* ImageInputViewController.m */,
+				BCA2C4531AE67F7D00DE23CB /* MinimalistInputViewController.h */,
+				BCA2C4541AE67F7D00DE23CB /* MinimalistInputViewController.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				BC24E6B01629B58E006C7116 /* main.m in Sources */,
 				BC24E6B41629B58E006C7116 /* AppDelegate.m in Sources */,
 				BC24E6CA1629B58E006C7116 /* FilterBrowserTableViewController.m in Sources */,
+				BCA2C4551AE67F7D00DE23CB /* MinimalistInputViewController.m in Sources */,
 				BC24E6DC1629F8B0006C7116 /* OldFilterControlsViewController.m in Sources */,
 				BC61F146162E19AA008EE219 /* BaseInputControlCell.m in Sources */,
 				BC61F14B162E1CEB008EE219 /* NumericSliderCell.m in Sources */,
