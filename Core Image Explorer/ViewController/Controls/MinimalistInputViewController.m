@@ -7,13 +7,12 @@
 //
 
 #import "MinimalistInputViewController.h"
+#import "MinimalistControlView.h"
 
 @interface MinimalistInputViewController ()
 
 @property (assign, nonatomic) NSInteger inputCount;
-@property (strong, nonatomic) UIView *indicator;
 @property (strong, nonatomic) NSArray *sectionDividers;
-@property (strong, nonatomic) NSArray *sectionLabels;
 
 @end
 
@@ -39,11 +38,21 @@
 - (void)loadView
 {
     CGRect screenBounds = [UIScreen mainScreen].bounds;
+    NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:(NSUInteger)self.inputCount];
     BOOL isHorizontal = screenBounds.size.width > screenBounds.size.height;
-    UIView *view = [[UIView alloc] initWithFrame:screenBounds];
-    for (NSInteger i = 0; i < self.inputCount; i++) {
-        
+    if (isHorizontal) {
+        CGFloat w = screenBounds.size.width / self.inputCount;
+        CGFloat h = screenBounds.size.height;
+        for (NSInteger i = 0; i < self.inputCount; i++) {
+            CGRect inputFrame = CGRectMake(w * i, 0.0f, w, h);
+            MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithFrame:inputFrame];
+            [inputs addObject:inputControl];
+        }
+    } else {
+        CGFloat w = screenBounds.size.width;
+        CGFloat h = screenBounds.size.height / self.inputCount;
     }
+    UIView *view = [[UIView alloc] initWithFrame:screenBounds];
     self.view = view;
 }
 
