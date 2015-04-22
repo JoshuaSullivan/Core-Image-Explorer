@@ -10,6 +10,7 @@
 		4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */; };
 		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
 		4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90A102F853CFE0A418794 /* MinimalistControlView.m */; };
+		4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
 		7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */; };
 		7B16EC671AE17ED600D2E160 /* ImageInputCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */; };
@@ -66,8 +67,10 @@
 		4BA909518943943910261215 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
 		4BA90A102F853CFE0A418794 /* MinimalistControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistControlView.m; sourceTree = "<group>"; };
 		4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalarInputViewController.m; sourceTree = "<group>"; };
+		4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VanishingValueLabel.m; sourceTree = "<group>"; };
 		4BA90D3829D20BE993BD8C02 /* MinimalistControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistControlView.h; sourceTree = "<group>"; };
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
+		4BA90F5CD4A2863C0BADC5D6 /* VanishingValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VanishingValueLabel.h; sourceTree = "<group>"; };
 		7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlAttributesTableViewController.h; sourceTree = "<group>"; };
 		7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlAttributesTableViewController.m; sourceTree = "<group>"; };
 		7B16EC651AE17ED600D2E160 /* ImageInputCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputCollectionViewCell.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */,
 				4BA90A102F853CFE0A418794 /* MinimalistControlView.m */,
 				4BA90D3829D20BE993BD8C02 /* MinimalistControlView.h */,
+				4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */,
+				4BA90F5CD4A2863C0BADC5D6 /* VanishingValueLabel.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */,
 				9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */,
 				4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */,
+				4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
