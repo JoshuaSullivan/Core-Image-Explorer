@@ -9,5 +9,6 @@
 
 @property (assign, nonatomic) CGFloat minValue;
 @property (assign, nonatomic) CGFloat maxValue;
+@property (assign, nonatomic) CGFloat value;
 
 @end

@@ -12,7 +12,7 @@ static const NSTimeInterval kDefaultAppearanceDuration = 1.0;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 
-@property (strong, nonatomic)
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -67,12 +67,36 @@ static const NSTimeInterval kDefaultAppearanceDuration = 1.0;
 
 - (void)appear
 {
+    self.titleLabel.textColor = self.tintColor;
+    self.valueLabel.textColor = self.tintColor;
 
+    self.hidden = NO;
+    if (self.alpha < 1.0) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.alpha = 1.0f;
+        }];
+    }
+
+    [self.timer invalidate];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.appearanceDuration
+                                                  target:self
+                                                selector:@selector(timerFired:)
+                                                userInfo:nil
+                                                 repeats:NO];
 }
 
 - (void)vanish
 {
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+    }];
+}
 
+- (void)timerFired:(NSTimer *)timer
+{
+    [self vanish];
 }
 
 - (void)setTitle:(NSString *)title

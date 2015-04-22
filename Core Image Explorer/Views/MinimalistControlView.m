@@ -9,6 +9,7 @@
 
 @property (assign, nonatomic, getter=isHorizontal) BOOL horizontal;
 @property (strong, nonatomic) UIView *indicator;
+@property (strong, nonatomic)
 
 @end
 
@@ -33,6 +34,24 @@
     return self;
 }
 
+#pragma mark - Getters & Setters
 
+- (void)setMinValue:(CGFloat)minValue
+{
+    _minValue = minValue;
+    self.value = fmaxf(minValue, self.value);
+}
+
+- (void)setMaxValue:(CGFloat)maxValue
+{
+    _maxValue = maxValue;
+    self.value = fminf(maxValue, self.value);
+}
+
+- (void)setValue:(CGFloat)value
+{
+    _value = value;
+
+}
 
 @end
