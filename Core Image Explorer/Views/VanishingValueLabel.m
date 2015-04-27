@@ -4,6 +4,7 @@
 //
 
 #import "VanishingValueLabel.h"
+@import QuartzCore;
 
 static const NSTimeInterval kDefaultAppearanceDuration = 1.0;
 
@@ -63,6 +64,9 @@ static const NSTimeInterval kDefaultAppearanceDuration = 1.0;
 - (void)commonInit
 {
     _appearanceDuration = kDefaultAppearanceDuration;
+    self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.5f];
+    self.layer.cornerRadius = 4.0f;
+    self.clipsToBounds = YES;
 }
 
 - (void)appear
@@ -71,11 +75,8 @@ static const NSTimeInterval kDefaultAppearanceDuration = 1.0;
     self.valueLabel.textColor = self.tintColor;
 
     self.hidden = NO;
-    if (self.alpha < 1.0) {
-        [UIView animateWithDuration:0.1 animations:^{
-            self.alpha = 1.0f;
-        }];
-    }
+    self.alpha = 1.0f;
+    [self.layer removeAllAnimations];
 
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.appearanceDuration

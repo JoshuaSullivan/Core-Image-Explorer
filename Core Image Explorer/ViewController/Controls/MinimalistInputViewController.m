@@ -51,6 +51,11 @@
     } else {
         CGFloat w = screenBounds.size.width;
         CGFloat h = screenBounds.size.height / self.inputCount;
+        for (NSInteger i = 0; i < self.inputCount; i++) {
+            CGRect inputFrame = CGRectMake(0.0f, i * h, w, h);
+            MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithFrame:inputFrame];
+            [inputs addObject:inputControl];
+        }
     }
     UIView *view = [[UIView alloc] initWithFrame:screenBounds];
     self.view = view;
@@ -60,6 +65,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.view.tintColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
