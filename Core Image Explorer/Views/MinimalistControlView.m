@@ -12,6 +12,7 @@
 @property (strong, nonatomic) UIView *indicator;
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
 @property (assign, nonatomic, getter=isTracking) BOOL tracking;
+@property (assign, nonatomic) CGPoint lastTouch;
 
 @end
 
@@ -23,7 +24,9 @@
     if (!self) {
         return nil;
     }
-    _edgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+    CGFloat d = kDefaultControlInsetsDistance;
+    _edgeInsets = UIEdgeInsetsMake(d, d, d, d);
+    _lastTouch = CGPointZero;
     _horizontal = frame.size.width > frame.size.height;
     _indicator = [[UIView alloc] initWithFrame:CGRectZero];
     if (_horizontal) {
@@ -41,6 +44,7 @@
 
 - (void)setValueForPoint:(CGPoint)location
 {
+    self.lastTouch = location;
     CGFloat ratio = 0.0f;
     if (self.isHorizontal) {
         if (self.bounds.size.width != 0.0f) {

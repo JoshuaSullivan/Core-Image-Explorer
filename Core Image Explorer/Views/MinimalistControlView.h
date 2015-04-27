@@ -5,6 +5,8 @@
 
 @import UIKit;
 
+static const CGFloat kDefaultControlInsetsDistance = 20.0f;
+
 @interface MinimalistControlView : UIView
 
 @property (strong, nonatomic) NSString *valueName;
