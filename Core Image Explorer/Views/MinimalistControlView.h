@@ -12,7 +12,9 @@ static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 @property (strong, nonatomic) NSString *valueName;
 @property (assign, nonatomic) CGFloat minValue;
 @property (assign, nonatomic) CGFloat maxValue;
-@property (assign, nonatomic) CGFloat value;
+@property (readonly, nonatomic) CGFloat value;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
+
+- (void)setValue:(CGFloat)value animated:(BOOL)animated;
 
 @end

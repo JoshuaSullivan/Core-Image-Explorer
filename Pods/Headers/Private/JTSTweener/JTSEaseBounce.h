@@ -1,0 +1,1 @@
+../../../JTSTweener/Pod/Classes/Easing/JTSEaseBounce.h

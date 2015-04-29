@@ -5,14 +5,18 @@
 
 #import "MinimalistControlView.h"
 #import "VanishingValueLabel.h"
+#import "JTSTweener.h"
+#import "JTSEaseQuadratic.h"
 
 @interface MinimalistControlView ()
 
+@property (assign, nonatomic) CGFloat value;
 @property (assign, nonatomic, getter=isHorizontal) BOOL horizontal;
 @property (strong, nonatomic) UIView *indicator;
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
 @property (assign, nonatomic, getter=isTracking) BOOL tracking;
 @property (assign, nonatomic) CGPoint lastTouch;
+@property (strong, nonatomic) JTSTweener *valueTweener;
 
 @end
 
@@ -58,11 +62,19 @@
         }
     }
     ratio = fmaxf(0.0f, fminf(ratio, 1.0f));
-    DLog(@"ratio: %f", ratio);
     self.value = ratio * (self.maxValue - self.minValue) + self.minValue;
+    CGRect indicatorFrame = self.indicator.frame;
+    if (self.isHorizontal) {
+        CGFloat x = roundf(location.x);
+        indicatorFrame.origin.x = x;
+    } else {
+        CGFloat y = roundf(location.y);
+        indicatorFrame.origin.y = y;
+    }
+    self.indicator.frame = indicatorFrame;
 }
 
-- (void)updateIndicator
+- (void)updateIndicatorAnimated:(BOOL)animated
 {
     CGFloat ratio = 0.0f;
     if (self.minValue != self.maxValue) {
@@ -76,7 +88,13 @@
         CGFloat h = self.bounds.size.height - self.edgeInsets.top - self.edgeInsets.bottom;
         indicatorFrame.origin.y = h * ratio + self.edgeInsets.top;
     }
-    self.indicator.frame = indicatorFrame;
+    if (animated) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.indicator.frame = indicatorFrame;
+        }];
+    } else {
+        self.indicator.frame = indicatorFrame;
+    }
 }
 
 #pragma mark - Touches
@@ -113,12 +131,33 @@
     self.value = fminf(maxValue, self.value);
 }
 
+- (void)setValue:(CGFloat)value animated:(BOOL)animated
+{
+    if (self.value == value) {
+        return;
+    }
+    if (animated) {
+        self.valueTweener = [JTSTweener tweenerWithDuration:0.2
+                                              startingValue:self.value
+                                                endingValue:value
+                                                easingCurve:[JTSEaseQuadratic easeInOut]
+                                                    options:nil
+                                              progressBlock:^(JTSTweener *tween, CGFloat value, NSTimeInterval elapsedTime) {
+                                                  self.value = value;
+                                              }
+                                            completionBlock:^(JTSTweener *tween, BOOL completedSuccessfully) {
+                                                self.valueTweener = nil;
+                                            }];
+    } else {
+        self.value = value;
+    }
+    [self updateIndicatorAnimated:animated];
+}
+
 - (void)setValue:(CGFloat)value
 {
     _value = fmaxf(self.minValue, fminf(value, self.maxValue));
-    DLog(@"value: %@", @(_value));
     self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", _value];
-    [self updateIndicator];
 }
 
 @end

@@ -24,6 +24,7 @@
 		9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */; };
 		9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C0C5E9E9694EC748427E /* ImageInputViewController.m */; };
 		9474CD7E394B5C8390F5885B /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9474C7C1DC9AC76905D8E474 /* Old.storyboard */; };
+		B51367F1E4F88AC67AC46F14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8310086907D9725AF6ACB669 /* libPods.a */; };
 		BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0F2241162EF48200BE0663 /* QuartzCore.framework */; };
 		BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC10D3C2164564850031A7A2 /* OffsetInputCell.m */; };
 		BC2298621636C8DC006D98D7 /* ColorPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2298611636C8DC006D98D7 /* ColorPickerCell.m */; };
@@ -81,6 +82,9 @@
 		7B18393D1ACF0B78003CC4F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7BC573A71ACF2F7200C4E2EA /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		7BC573A91ACF447300C4E2EA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		82B8D42EA63F0424EC4E4333 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8310086907D9725AF6ACB669 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A7B52CE11802D3B92F7BD2A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9474C0C5E9E9694EC748427E /* ImageInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInputViewController.m; sourceTree = "<group>"; };
 		9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterDetailViewController.m; sourceTree = "<group>"; };
 		9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDetailViewController.h; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				BC24E6A41629B58E006C7116 /* UIKit.framework in Frameworks */,
 				BC24E6A61629B58E006C7116 /* Foundation.framework in Frameworks */,
 				BC24E6A81629B58E006C7116 /* CoreGraphics.framework in Frameworks */,
+				B51367F1E4F88AC67AC46F14 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +191,15 @@
 				BCA2C4541AE67F7D00DE23CB /* MinimalistInputViewController.m */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		7F20876505208D3E421E0AF9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82B8D42EA63F0424EC4E4333 /* Pods.debug.xcconfig */,
+				8A7B52CE11802D3B92F7BD2A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9474C34B2E8A1144C12089E0 /* Data */ = {
@@ -236,6 +250,7 @@
 				BC24E6A91629B58E006C7116 /* Core Image Explorer */,
 				BC24E6A21629B58E006C7116 /* Frameworks */,
 				BC24E6A01629B58E006C7116 /* Products */,
+				7F20876505208D3E421E0AF9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -262,6 +277,7 @@
 				BC24E6A31629B58E006C7116 /* UIKit.framework */,
 				BC24E6A51629B58E006C7116 /* Foundation.framework */,
 				BC24E6A71629B58E006C7116 /* CoreGraphics.framework */,
+				8310086907D9725AF6ACB669 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -380,9 +396,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC24E6D11629B58E006C7116 /* Build configuration list for PBXNativeTarget "Core Image Explorer" */;
 			buildPhases = (
+				FACEFE332A69225A4679F344 /* Check Pods Manifest.lock */,
 				BC24E69B1629B58E006C7116 /* Sources */,
 				BC24E69C1629B58E006C7116 /* Frameworks */,
 				BC24E69D1629B58E006C7116 /* Resources */,
+				8345A7E24DF297422B75F197 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -445,6 +463,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8345A7E24DF297422B75F197 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FACEFE332A69225A4679F344 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BC24E69B1629B58E006C7116 /* Sources */ = {
@@ -557,6 +608,7 @@
 		};
 		BC24E6D21629B58E006C7116 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82B8D42EA63F0424EC4E4333 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -569,12 +621,14 @@
 				PRODUCT_NAME = "Core Image Explorer";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		BC24E6D31629B58E006C7116 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A7B52CE11802D3B92F7BD2A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -589,6 +643,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

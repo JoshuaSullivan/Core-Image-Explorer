@@ -1,0 +1,10 @@
+PODS:
+  - JTSTweener (0.3.0)
+
+DEPENDENCIES:
+  - JTSTweener (~> 0.3)
+
+SPEC CHECKSUMS:
+  JTSTweener: fa04763ccaa466184791418cb66d9489fa205cca
+
+COCOAPODS: 0.36.4
