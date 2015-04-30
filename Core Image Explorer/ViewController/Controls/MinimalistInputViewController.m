@@ -12,18 +12,19 @@
 @interface MinimalistInputViewController ()
 
 @property (assign, nonatomic) NSInteger inputCount;
+@property (strong, nonatomic) NSArray *valueRanges;
 @property (strong, nonatomic) NSArray *sectionDividers;
 
 @end
 
 @implementation MinimalistInputViewController
 
-+ (MinimalistInputViewController *)minimalistControlForInputCount:(NSInteger)inputCount
++ (MinimalistInputViewController *)minimalistControlForInputCount:(NSInteger)inputCount valueRanges:(NSArray *)ranges
 {
-    return [[self alloc] initWithInputCount:inputCount];
+    return [[self alloc] initWithInputCount:inputCount valueRanges:ranges];
 }
 
-- (instancetype)initWithInputCount:(NSInteger)inputCount
+- (instancetype)initWithInputCount:(NSInteger)inputCount valueRanges:(NSArray *)ranges
 {
     NSAssert(inputCount > 0, @"ERROR: You must specify at least 1 input.");
     self = [super initWithNibName:nil bundle:nil];
@@ -32,6 +33,7 @@
         return nil;
     }
     _inputCount = MAX(1, inputCount);
+    _valueRanges = ranges;
     return self;
 }
 
