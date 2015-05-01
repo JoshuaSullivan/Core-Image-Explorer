@@ -8,11 +8,12 @@
 
 #import "MinimalistInputViewController.h"
 #import "MinimalistControlView.h"
+#import "MinimalistInputDescriptor.h"
 
 @interface MinimalistInputViewController ()
 
 @property (assign, nonatomic) NSUInteger inputCount;
-@property (strong, nonatomic) NSArray *valueRanges;
+@property (strong, nonatomic) NSArray *inputDescriptors;
 @property (strong, nonatomic) NSArray *sectionDividers;
 
 @property (strong, nonatomic) NSArray *inputControls;
@@ -21,48 +22,46 @@
 
 @implementation MinimalistInputViewController
 
-+ (MinimalistInputViewController *)minimalistControlForInputCount:(NSUInteger)inputCount valueRanges:(NSArray *)ranges
++ (MinimalistInputViewController *)minimalistControlForInputCount:(NSUInteger)inputCount inputDescriptors:(NSArray *)descriptors
 {
-    return [[self alloc] initWithInputCount:inputCount valueRanges:ranges];
+    return [[self alloc] initWithInputCount:inputCount inputDescriptors:descriptors];
 }
 
-- (instancetype)initWithInputCount:(NSUInteger)inputCount valueRanges:(NSArray *)ranges
+- (instancetype)initWithInputCount:(NSUInteger)inputCount inputDescriptors:(NSArray *)descriptors
 {
-    NSAssert(inputCount > 0, @"ERROR: You must specify at least 1 input.");
+    NSAssert(inputCount > 0, @"WARNING: You must specify at least 1 input. Value of 1 will be used for inputCount.");
+    if (inputCount > descriptors.count) {
+        NSAssert(NO, @"ERROR: You must provide enough descriptors to cover all inputs.");
+        return nil;
+    }
     self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    if (!self) {
         NSLog(@"ERROR: Unable to create MinimalistInputViewController.");
         return nil;
     }
     _inputCount = MAX(1, inputCount);
-    _valueRanges = ranges;
+    _inputDescriptors = descriptors;
+    self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     return self;
 }
 
 - (void)loadView
 {
+    // Base view is just a generic UIView.
     CGRect screenBounds = [UIScreen mainScreen].bounds;
-    NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:self.inputCount];
-    BOOL isHorizontal = screenBounds.size.width > screenBounds.size.height;
-    if (isHorizontal) {
-        CGFloat w = screenBounds.size.width / self.inputCount;
-        CGFloat h = screenBounds.size.height;
-        for (NSInteger i = 0; i < self.inputCount; i++) {
-            CGRect inputFrame = CGRectMake(w * i, 0.0f, w, h);
-            MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithFrame:inputFrame];
-            [inputs addObject:inputControl];
-        }
-    } else {
-        CGFloat w = screenBounds.size.width;
-        CGFloat h = screenBounds.size.height / self.inputCount;
-        for (NSInteger i = 0; i < self.inputCount; i++) {
-            CGRect inputFrame = CGRectMake(0.0f, i * h, w, h);
-            MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithFrame:inputFrame];
-            [inputs addObject:inputControl];
-        }
-    }
     UIView *view = [[UIView alloc] initWithFrame:screenBounds];
     self.view = view;
+
+    // Create the input subviews.
+    NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:self.inputCount];
+    for (NSInteger i = 0; i < self.inputCount; i++) {
+        MinimalistInputDescriptor *descriptor = self.inputDescriptors[i];
+        MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithDescriptor:descriptor];
+        [inputs addObject:inputControl];
+        [self.view addSubview:inputControl];
+    }
+    self.inputControls = [NSArray arrayWithArray:inputs];
+    [self updateControlFramesForBounds:screenBounds];
 }
 
 
@@ -88,9 +87,31 @@
 }
 */
 
+- (void)updateControlFramesForBounds:(CGRect)bounds
+{
+
+    BOOL isHorizontal = bounds.size.width > bounds.size.height;
+    CGFloat dx = 0.0f;
+    CGFloat dy = 0.0f;
+    CGFloat w = bounds.size.width;
+    CGFloat h = bounds.size.height;
+    if (isHorizontal) {
+        w = bounds.size.width / self.inputCount;
+        dx = w;
+    } else {
+        h = bounds.size.height / self.inputCount;
+        dy = h;
+    }
+    for (NSUInteger i = 0; i < self.inputCount; i++) {
+        UIView *input = self.inputControls[i];
+        CGRect inputFrame = CGRectIntegral(CGRectMake(dx * i, dy * i, w, h));
+        input.frame = inputFrame;
+    }
+}
+
 #pragma mark - Getters & Setters
 
-- (void)setMinimumValue:(CGFloat)minVal maximumValue:(CGFloat)maxVal forInputIndex:(NSUInteger)index
+- (void)setDescriptor:(MinimalistInputDescriptor *)descriptor forInputIndex:(NSUInteger)index
 {
 
 }
@@ -99,6 +120,5 @@
 {
     return 0;
 }
-
 
 @end

@@ -9,6 +9,9 @@
 #import "FilterDetailViewController.h"
 #import "FilterControlsViewController.h"
 #import "MinimalistControlView.h"
+#import "SampleImageManager.h"
+#import "MinimalistInputViewController.h"
+#import "MinimalistInputDescriptor.h"
 
 @interface FilterDetailViewController ()
 
@@ -36,17 +39,11 @@
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handleTapGesture:)];
-//    [self.view addGestureRecognizer:tapGesture];
+    [self.view addGestureRecognizer:tapGesture];
 
     self.navigationItem.title = self.filter.attributes[kCIAttributeFilterDisplayName];
+    self.view.tintColor = [UIColor blackColor];
 
-    MinimalistControlView *mcView = [[MinimalistControlView alloc] initWithMinimumValue:0.0f maximumValue:100.0f currentValue:50.0f];
-    CGFloat top = self.topLayoutGuide.length + 10.0f;
-    CGFloat bottom = self.bottomLayoutGuide.length + 10.0f;
-    mcView.edgeInsets = UIEdgeInsetsMake(top, 10.0f, bottom, 10.0f);
-    mcView.valueName = @"angstroms";
-    mcView.frame = self.view.bounds;
-    [self.view addSubview:mcView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -58,19 +55,23 @@
 
 - (void)renderImage
 {
-    CIImage *inputImage = self.filter.outputImage;
-    CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
-    UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
-    self.imageView.image = finalImage;
-    CGImageRelease(renderImage);
+//    CIImage *inputImage = self.filter.outputImage;
+//    CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
+//    UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
+//    self.imageView.image = finalImage;
+//    CGImageRelease(renderImage);
+    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample1 completion:^(UIImage *image) {
+        self.imageView.image = image;
+    }];
 }
 
 #pragma mark - IBActions
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGesture
 {
-    FilterControlsViewController *controlsVC = [[FilterControlsViewController alloc] initWithFilter:self.filter];
-    [self presentViewController:controlsVC animated:YES completion:nil];
+    MinimalistInputDescriptor *descriptor = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Warp Factor" minValue:0.0f maxValue:10.0f startingValue:0.0f];
+    MinimalistInputViewController *minimalistVC = [MinimalistInputViewController minimalistControlForInputCount:1 inputDescriptors:@[descriptor]];
+    [self presentViewController:minimalistVC animated:YES completion:nil];
 }
 
 @end

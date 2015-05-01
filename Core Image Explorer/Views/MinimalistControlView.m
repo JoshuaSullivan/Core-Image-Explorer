@@ -7,14 +7,18 @@
 #import "VanishingValueLabel.h"
 #import "JTSTweener.h"
 #import "JTSEaseQuadratic.h"
+#import "MinimalistInputDescriptor.h"
 
 @interface MinimalistControlView ()
 
+@property (assign, nonatomic) CGFloat minValue;
+@property (assign, nonatomic) CGFloat maxValue;
 @property (assign, nonatomic) CGFloat value;
 @property (assign, nonatomic, getter=isHorizontal) BOOL horizontal;
 @property (strong, nonatomic) UIView *indicator;
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
 @property (assign, nonatomic, getter=isTracking) BOOL tracking;
+@property (assign, nonatomic) BOOL userChangedValue;
 @property (assign, nonatomic) CGPoint lastTouch;
 @property (strong, nonatomic) JTSTweener *valueTweener;
 
@@ -22,16 +26,18 @@
 
 @implementation MinimalistControlView
 
-- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue currentValue:(CGFloat)value
+- (instancetype)initWithDescriptor:(MinimalistInputDescriptor *)descriptor
 {
     self = [super initWithFrame:CGRectZero];
     if (!self) {
         NSAssert(NO, @"ERROR: Unable to instantiate MinimalistControlView.");
         return nil;
     }
-    _minValue = minValue;
-    _maxValue = maxValue;
-    _value = value;
+    _descriptor = descriptor;
+    _minValue = descriptor.minValue;
+    _maxValue = descriptor.maxValue;
+    _value = descriptor.startingValue;
+
     [self commonInit];
 
     return self;
@@ -48,14 +54,25 @@
 - (void)commonInit
 {
     CGFloat d = kDefaultControlInsetsDistance;
-    _edgeInsets = UIEdgeInsetsMake(d, d, d, d);
-    _lastTouch = CGPointZero;
-    _indicator = [[UIView alloc] initWithFrame:CGRectZero];
-    [self addSubview:_indicator];
+    self.edgeInsets = UIEdgeInsetsMake(d, d, d, d);
+    self.lastTouch = CGPointZero;
+    self.indicator = [[UIView alloc] initWithFrame:CGRectZero];
+    [self addSubview:self.indicator];
+
+    if (!self.valueLabel) {
+        self.valueLabel = [[VanishingValueLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 120.0f, 80.0f)];
+        [self addSubview:self.valueLabel];
+    }
+
+    if (self.descriptor) {
+        self.valueLabel.title = self.descriptor.title;
+        self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", self.descriptor.startingValue];
+    }
 }
 
 - (void)setValueForPoint:(CGPoint)location
 {
+    self.userChangedValue = YES;
     self.lastTouch = location;
     CGFloat ratio = 0.0f;
     if (self.isHorizontal) {
@@ -105,6 +122,15 @@
     }
 }
 
+- (void)updateLabelPosition
+{
+    CGFloat w = self.valueLabel.bounds.size.width;
+    CGFloat h = self.valueLabel.bounds.size.height;
+    CGFloat y =  roundf((self.bounds.size.height - h) / 2.0f);
+    CGFloat x = roundf((self.bounds.size.width - w) / 2.0f);
+    self.valueLabel.frame = CGRectMake(x, y, w, h);
+}
+
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -119,12 +145,6 @@
     [self setValueForPoint:[touch locationInView:self]];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    [self setValueForPoint:[touch locationInView:self]];
-}
-
 #pragma mark - Getters & Setters
 
 - (void)setFrame:(CGRect)frame
@@ -132,6 +152,18 @@
     [super setFrame:frame];
     self.horizontal = frame.size.width > frame.size.height;
     [self updateIndicatorAnimated:NO];
+    [self updateLabelPosition];
+}
+
+- (void)setDescriptor:(MinimalistInputDescriptor *)descriptor
+{
+    _descriptor = descriptor;
+    self.valueLabel.title = descriptor.title;
+    self.minValue = descriptor.minValue;
+    self.maxValue = descriptor.maxValue;
+    if (!self.userChangedValue) {
+        self.value = descriptor.startingValue;
+    }
 }
 
 - (void)setMinValue:(CGFloat)minValue
@@ -178,15 +210,24 @@
 - (void)setHorizontal:(BOOL)horizontal
 {
     _horizontal = horizontal;
+    CGFloat w = self.bounds.size.width;
+    CGFloat h = self.bounds.size.height;
     if (horizontal) {
-        _indicator.frame = CGRectMake(0.0f, 0.0f, 1.0f, self.bounds.size.height);
+        self.indicator.frame = CGRectMake(0.0f, 0.0f, 1.0f, h);
 //        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternVertical"]];
-        _indicator.backgroundColor = [UIColor blackColor];
+        self.indicator.backgroundColor = [UIColor blackColor];
     } else {
-        _indicator.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, 1.0f);
+        self.indicator.frame = CGRectMake(0.0f, 0.0f, w, 1.0f);
 //        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternHorizontal"]];
-        _indicator.backgroundColor = [UIColor blackColor];
+        self.indicator.backgroundColor = [UIColor blackColor];
     }
+    [self updateLabelPosition];
+}
+
+- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets
+{
+    _edgeInsets = edgeInsets;
+    [self updateLabelPosition];
 }
 
 @end

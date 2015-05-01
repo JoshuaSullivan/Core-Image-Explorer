@@ -20,6 +20,7 @@
 		7B18393E1ACF0B78003CC4F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B18393D1ACF0B78003CC4F8 /* Images.xcassets */; };
 		7BC573A81ACF2F7200C4E2EA /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC573A71ACF2F7200C4E2EA /* Main-iPad.storyboard */; };
 		7BC573AA1ACF447300C4E2EA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC573A91ACF447300C4E2EA /* GLKit.framework */; };
+		9474C14AEABC41757E09B822 /* MinimalistInputDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */; };
 		9474C8355080B42B5C5D9447 /* FilterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */; };
 		9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */; };
 		9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C0C5E9E9694EC748427E /* ImageInputViewController.m */; };
@@ -90,7 +91,9 @@
 		9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDetailViewController.h; sourceTree = "<group>"; };
 		9474C79C13C8B7EB122B1349 /* ImageInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputViewController.h; sourceTree = "<group>"; };
 		9474C8492F31D9247B5D7756 /* SampleImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleImageManager.h; sourceTree = "<group>"; };
+		9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistInputDescriptor.m; sourceTree = "<group>"; };
 		9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleImageManager.m; sourceTree = "<group>"; };
+		9474C9D35F5E164BA9AE7C6E /* MinimalistInputDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistInputDescriptor.h; sourceTree = "<group>"; };
 		9474CDF84F4D49B2237CBDF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "Core Image Explorer/en.lproj/Old.storyboard"; sourceTree = SOURCE_ROOT; };
 		BC0F2241162EF48200BE0663 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BC10D3C1164564850031A7A2 /* OffsetInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffsetInputCell.h; sourceTree = "<group>"; };
@@ -235,6 +238,15 @@
 			path = UserInterfaces;
 			sourceTree = "<group>";
 		};
+		9474CA56730CC55CC19A0957 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */,
+				9474C9D35F5E164BA9AE7C6E /* MinimalistInputDescriptor.h */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9474CEE35A6A490308C6E06C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +308,7 @@
 				BC24E6AA1629B58E006C7116 /* Supporting Files */,
 				9474C9274F6760614E59425E /* UserInterfaces */,
 				7B18393D1ACF0B78003CC4F8 /* Images.xcassets */,
+				9474CA56730CC55CC19A0957 /* Models */,
 			);
 			path = "Core Image Explorer";
 			sourceTree = "<group>";
@@ -529,6 +542,7 @@
 				9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */,
 				4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */,
 				4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */,
+				9474C14AEABC41757E09B822 /* MinimalistInputDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
