@@ -40,14 +40,12 @@
 
     self.navigationItem.title = self.filter.attributes[kCIAttributeFilterDisplayName];
 
-    MinimalistControlView *mcView = [[MinimalistControlView alloc] initWithFrame:self.view.bounds];
-    mcView.minValue = 0.0f;
-    mcView.maxValue = 100.0f;
-    [mcView setValue:50.0f animated:NO];
+    MinimalistControlView *mcView = [[MinimalistControlView alloc] initWithMinimumValue:0.0f maximumValue:100.0f currentValue:50.0f];
     CGFloat top = self.topLayoutGuide.length + 10.0f;
     CGFloat bottom = self.bottomLayoutGuide.length + 10.0f;
     mcView.edgeInsets = UIEdgeInsetsMake(top, 10.0f, bottom, 10.0f);
     mcView.valueName = @"angstroms";
+    mcView.frame = self.view.bounds;
     [self.view addSubview:mcView];
 }
 

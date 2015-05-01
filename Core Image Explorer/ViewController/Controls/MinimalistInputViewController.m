@@ -11,20 +11,22 @@
 
 @interface MinimalistInputViewController ()
 
-@property (assign, nonatomic) NSInteger inputCount;
+@property (assign, nonatomic) NSUInteger inputCount;
 @property (strong, nonatomic) NSArray *valueRanges;
 @property (strong, nonatomic) NSArray *sectionDividers;
+
+@property (strong, nonatomic) NSArray *inputControls;
 
 @end
 
 @implementation MinimalistInputViewController
 
-+ (MinimalistInputViewController *)minimalistControlForInputCount:(NSInteger)inputCount valueRanges:(NSArray *)ranges
++ (MinimalistInputViewController *)minimalistControlForInputCount:(NSUInteger)inputCount valueRanges:(NSArray *)ranges
 {
     return [[self alloc] initWithInputCount:inputCount valueRanges:ranges];
 }
 
-- (instancetype)initWithInputCount:(NSInteger)inputCount valueRanges:(NSArray *)ranges
+- (instancetype)initWithInputCount:(NSUInteger)inputCount valueRanges:(NSArray *)ranges
 {
     NSAssert(inputCount > 0, @"ERROR: You must specify at least 1 input.");
     self = [super initWithNibName:nil bundle:nil];
@@ -40,7 +42,7 @@
 - (void)loadView
 {
     CGRect screenBounds = [UIScreen mainScreen].bounds;
-    NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:(NSUInteger)self.inputCount];
+    NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:self.inputCount];
     BOOL isHorizontal = screenBounds.size.width > screenBounds.size.height;
     if (isHorizontal) {
         CGFloat w = screenBounds.size.width / self.inputCount;
@@ -85,5 +87,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Getters & Setters
+
+- (void)setMinimumValue:(CGFloat)minVal maximumValue:(CGFloat)maxVal forInputIndex:(NSUInteger)index
+{
+
+}
+
+- (CGFloat)valueForInputIndex:(NSUInteger)index
+{
+    return 0;
+}
+
 
 @end

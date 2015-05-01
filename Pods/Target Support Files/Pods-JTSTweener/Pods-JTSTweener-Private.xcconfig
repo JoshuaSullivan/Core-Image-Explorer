@@ -1,6 +1,5 @@
 #include "Pods-JTSTweener.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/JTSTweener" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JTSTweener"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/JTSTweener" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JTSTweener"
 OTHER_LDFLAGS = ${PODS_JTSTWEENER_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}
-SKIP_INSTALL = YES

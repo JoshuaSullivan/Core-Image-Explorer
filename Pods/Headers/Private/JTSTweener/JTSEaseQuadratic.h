@@ -1,1 +1,0 @@
-../../../JTSTweener/Pod/Classes/Easing/JTSEaseQuadratic.h

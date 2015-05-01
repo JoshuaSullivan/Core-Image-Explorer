@@ -22,28 +22,36 @@
 
 @implementation MinimalistControlView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue currentValue:(CGFloat)value
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectZero];
     if (!self) {
+        NSAssert(NO, @"ERROR: Unable to instantiate MinimalistControlView.");
         return nil;
     }
+    _minValue = minValue;
+    _maxValue = maxValue;
+    _value = value;
+    [self commonInit];
+
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self commonInit];
+    self.horizontal = self.bounds.size.width > self.bounds.size.height;
+    [self updateIndicatorAnimated:NO];
+}
+
+- (void)commonInit
+{
     CGFloat d = kDefaultControlInsetsDistance;
     _edgeInsets = UIEdgeInsetsMake(d, d, d, d);
     _lastTouch = CGPointZero;
-    _horizontal = frame.size.width > frame.size.height;
     _indicator = [[UIView alloc] initWithFrame:CGRectZero];
-    if (_horizontal) {
-        _indicator.frame = CGRectMake(0.0f, 0.0f, 1.0f, frame.size.height);
-//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternVertical"]];
-        _indicator.backgroundColor = [UIColor blackColor];
-    } else {
-        _indicator.frame = CGRectMake(0.0f, 0.0f, frame.size.width, 1.0f);
-//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternHorizontal"]];
-        _indicator.backgroundColor = [UIColor blackColor];
-    }
     [self addSubview:_indicator];
-    return self;
 }
 
 - (void)setValueForPoint:(CGPoint)location
@@ -119,6 +127,13 @@
 
 #pragma mark - Getters & Setters
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    self.horizontal = frame.size.width > frame.size.height;
+    [self updateIndicatorAnimated:NO];
+}
+
 - (void)setMinValue:(CGFloat)minValue
 {
     _minValue = minValue;
@@ -158,6 +173,20 @@
 {
     _value = fmaxf(self.minValue, fminf(value, self.maxValue));
     self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", _value];
+}
+
+- (void)setHorizontal:(BOOL)horizontal
+{
+    _horizontal = horizontal;
+    if (horizontal) {
+        _indicator.frame = CGRectMake(0.0f, 0.0f, 1.0f, self.bounds.size.height);
+//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternVertical"]];
+        _indicator.backgroundColor = [UIColor blackColor];
+    } else {
+        _indicator.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, 1.0f);
+//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternHorizontal"]];
+        _indicator.backgroundColor = [UIColor blackColor];
+    }
 }
 
 @end
