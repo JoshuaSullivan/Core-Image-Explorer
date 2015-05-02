@@ -53,6 +53,14 @@
     [self renderImage];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:nil
+                                 completion:^(id <UIViewControllerTransitionCoordinatorContext> context) {
+                                     [self renderImage];
+                                 }];
+}
+
 - (void)renderImage
 {
 //    CIImage *inputImage = self.filter.outputImage;

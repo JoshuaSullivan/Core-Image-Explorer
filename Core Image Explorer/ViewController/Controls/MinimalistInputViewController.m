@@ -87,6 +87,13 @@
 }
 */
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:nil completion:^(id <UIViewControllerTransitionCoordinatorContext> context) {
+        [self updateControlFramesForBounds:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+    }];
+}
+
 - (void)updateControlFramesForBounds:(CGRect)bounds
 {
 
