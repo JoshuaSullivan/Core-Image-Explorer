@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "HairlinePatternHorizontal.png"
+      "filename" : "HairlineHorizontal.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "HairlinePatternHorizontal@2x.png"
+      "filename" : "HairlineHorizontal@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "HairlinePatternHorizontal@3x.png"
+      "filename" : "HairlineHorizontal@3x.png"
     }
   ],
   "info" : {

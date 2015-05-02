@@ -51,6 +51,10 @@
     [super viewWillAppear:animated];
 
     [self renderImage];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                            withAnimation:UIStatusBarAnimationSlide];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
@@ -77,9 +81,14 @@
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGesture
 {
-    MinimalistInputDescriptor *descriptor = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Warp Factor" minValue:0.0f maxValue:10.0f startingValue:0.0f];
-    MinimalistInputViewController *minimalistVC = [MinimalistInputViewController minimalistControlForInputCount:1 inputDescriptors:@[descriptor]];
+    MinimalistInputDescriptor *descriptor1 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Alpha" minValue:0.0f maxValue:10.0f startingValue:0.0f];
+    MinimalistInputDescriptor *descriptor2 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Beta" minValue:2.0f maxValue:20.0f startingValue:2.0f];
+    MinimalistInputViewController *minimalistVC = [MinimalistInputViewController minimalistControlForInputCount:2 inputDescriptors:@[descriptor1, descriptor2]];
     [self presentViewController:minimalistVC animated:YES completion:nil];
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                            withAnimation:UIStatusBarAnimationSlide];
 }
 
 @end

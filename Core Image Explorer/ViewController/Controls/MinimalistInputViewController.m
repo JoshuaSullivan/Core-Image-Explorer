@@ -69,7 +69,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.view.tintColor = [UIColor blueColor];
+    self.view.tintColor = [UIColor greenColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,8 +89,15 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
 {
-    [coordinator animateAlongsideTransition:nil completion:^(id <UIViewControllerTransitionCoordinatorContext> context) {
+    for (MinimalistControlView *minView in self. inputControls) {
+        minView.indicatorHidden = YES;
+    }
+    [coordinator animateAlongsideTransition:^(id <UIViewControllerTransitionCoordinatorContext> context) {
         [self updateControlFramesForBounds:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+    } completion:^(id <UIViewControllerTransitionCoordinatorContext> context) {
+        for (MinimalistControlView *minView in self. inputControls) {
+            minView.indicatorHidden = NO;
+        }
     }];
 }
 

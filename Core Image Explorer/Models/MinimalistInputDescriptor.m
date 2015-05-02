@@ -8,10 +8,6 @@
 
 #import "MinimalistInputDescriptor.h"
 
-@interface MinimalistInputDescriptor ()
-
-@end
-
 @implementation MinimalistInputDescriptor
 
 + (MinimalistInputDescriptor *)inputDescriptorWithTitle:(NSString *)title

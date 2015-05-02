@@ -15,7 +15,7 @@
 @property (assign, nonatomic) CGFloat maxValue;
 @property (assign, nonatomic) CGFloat value;
 @property (assign, nonatomic, getter=isHorizontal) BOOL horizontal;
-@property (strong, nonatomic) UIView *indicator;
+@property (strong, nonatomic) UIImageView *indicator;
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
 @property (assign, nonatomic, getter=isTracking) BOOL tracking;
 @property (assign, nonatomic) BOOL userChangedValue;
@@ -56,7 +56,9 @@
     CGFloat d = kDefaultControlInsetsDistance;
     self.edgeInsets = UIEdgeInsetsMake(d, d, d, d);
     self.lastTouch = CGPointZero;
-    self.indicator = [[UIView alloc] initWithFrame:CGRectZero];
+    self.indicator = [[UIImageView alloc] initWithImage:nil];
+    self.indicator.contentMode = UIViewContentModeTopLeft;
+    self.indicator.clipsToBounds = YES;
     [self addSubview:self.indicator];
 
     if (!self.valueLabel) {
@@ -183,6 +185,10 @@
     if (self.value == value) {
         return;
     }
+    if (self.valueTweener) {
+        [self.valueTweener cancel];
+        self.valueTweener = nil;
+    }
     if (animated) {
         self.valueTweener = [JTSTweener tweenerWithDuration:0.2
                                               startingValue:self.value
@@ -214,12 +220,10 @@
     CGFloat h = self.bounds.size.height;
     if (horizontal) {
         self.indicator.frame = CGRectMake(0.0f, 0.0f, 1.0f, h);
-//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternVertical"]];
-        self.indicator.backgroundColor = [UIColor blackColor];
+        self.indicator.image = [UIImage imageNamed:@"HairlineVertical"];
     } else {
         self.indicator.frame = CGRectMake(0.0f, 0.0f, w, 1.0f);
-//        _indicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"HairlinePatternHorizontal"]];
-        self.indicator.backgroundColor = [UIColor blackColor];
+        self.indicator.image = [UIImage imageNamed:@"HairlineHorizontal"];
     }
     [self updateLabelPosition];
 }
@@ -228,6 +232,14 @@
 {
     _edgeInsets = edgeInsets;
     [self updateLabelPosition];
+}
+
+- (void)setIndicatorHidden:(BOOL)indicatorHidden
+{
+    _indicatorHidden = indicatorHidden;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.indicator.alpha = indicatorHidden ? 0.0f : 1.0f;
+    }];
 }
 
 @end

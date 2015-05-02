@@ -12,6 +12,7 @@ static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 @property (readonly, nonatomic) CGFloat value;
 @property (strong, nonatomic) MinimalistInputDescriptor *descriptor;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
+@property (assign, nonatomic) BOOL indicatorHidden;
 
 - (instancetype)initWithDescriptor:(MinimalistInputDescriptor *)descriptor;
 

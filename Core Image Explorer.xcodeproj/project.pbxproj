@@ -241,8 +241,8 @@
 		9474CA56730CC55CC19A0957 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */,
 				9474C9D35F5E164BA9AE7C6E /* MinimalistInputDescriptor.h */,
+				9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,13 +302,13 @@
 				BCCFB599163C9D7B00D89F0B /* Categories */,
 				4BA904BF0DF122C8E9F32C3F /* Protocols */,
 				9474CEE35A6A490308C6E06C /* Controllers */,
+				9474CA56730CC55CC19A0957 /* Models */,
 				BC24E6D51629B614006C7116 /* View Controllers */,
 				9474C8218BF3838922D1FD2A /* Views */,
 				BC24E6D41629B5EA006C7116 /* Resources */,
 				BC24E6AA1629B58E006C7116 /* Supporting Files */,
 				9474C9274F6760614E59425E /* UserInterfaces */,
 				7B18393D1ACF0B78003CC4F8 /* Images.xcassets */,
-				9474CA56730CC55CC19A0957 /* Models */,
 			);
 			path = "Core Image Explorer";
 			sourceTree = "<group>";
