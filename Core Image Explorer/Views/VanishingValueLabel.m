@@ -54,6 +54,22 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
     NSArray *allConstraints = [[verticalConstraints arrayByAddingObjectsFromArray:titleHorizontalConstraints] arrayByAddingObjectsFromArray:valueHorizontalConstraints];
     [self addConstraints:allConstraints];
 
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:nil
+                                                                       multiplier:1.0f
+                                                                         constant:80.0f];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:nil
+                                                                      multiplier:1.0f
+                                                                        constant:120.0f];
+    [self addConstraints:@[heightConstraint, widthConstraint]];
+
     [self commonInit];
 
     return self;
@@ -67,7 +83,7 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 
 - (void)commonInit
 {
-    self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
+    self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
     self.layer.cornerRadius = 4.0f;
     self.clipsToBounds = YES;
     self.hidden = YES;

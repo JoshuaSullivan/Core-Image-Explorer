@@ -63,7 +63,23 @@
 
     if (!self.valueLabel) {
         self.valueLabel = [[VanishingValueLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 120.0f, 80.0f)];
+        self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.valueLabel];
+        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.valueLabel
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:self
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                  multiplier:1.0f
+                                                                    constant:0.0f];
+        NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.valueLabel
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:self
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                  multiplier:1.0f
+                                                                    constant:0.0f];
+        [self addConstraints:@[centerX, centerY]];
     }
 
     if (self.descriptor) {
@@ -125,15 +141,6 @@
     }
 }
 
-- (void)updateLabelPosition
-{
-    CGFloat w = self.valueLabel.bounds.size.width;
-    CGFloat h = self.valueLabel.bounds.size.height;
-    CGFloat y =  roundf((self.bounds.size.height - h) / 2.0f);
-    CGFloat x = roundf((self.bounds.size.width - w) / 2.0f);
-    self.valueLabel.frame = CGRectMake(x, y, w, h);
-}
-
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -166,7 +173,6 @@
     [super setFrame:frame];
     self.horizontal = frame.size.width > frame.size.height;
     [self updateIndicatorAnimated:NO];
-    [self updateLabelPosition];
 }
 
 - (void)setDescriptor:(MinimalistInputDescriptor *)descriptor
@@ -238,13 +244,6 @@
         self.indicator.frame = CGRectMake(0.0f, 0.0f, w, 1.0f);
         self.indicator.image = [UIImage imageNamed:@"HairlineHorizontal"];
     }
-    [self updateLabelPosition];
-}
-
-- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets
-{
-    _edgeInsets = edgeInsets;
-    [self updateLabelPosition];
 }
 
 - (void)setIndicatorHidden:(BOOL)indicatorHidden
