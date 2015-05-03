@@ -212,6 +212,7 @@
 {
     _value = fmaxf(self.minValue, fminf(value, self.maxValue));
     self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", _value];
+    [self.delegate minimalistInput:self didSetValue:_value];
 }
 
 - (void)setHorizontal:(BOOL)horizontal

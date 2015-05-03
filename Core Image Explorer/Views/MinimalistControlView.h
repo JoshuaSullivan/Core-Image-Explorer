@@ -7,15 +7,26 @@
 
 static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 
+@protocol MinimalistInputDelegate;
+
 @interface MinimalistControlView : UIView
 
+@property (assign, nonatomic) NSInteger index;
 @property (readonly, nonatomic) CGFloat value;
 @property (strong, nonatomic) MinimalistInputDescriptor *descriptor;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) BOOL indicatorHidden;
 
+@property (weak, nonatomic) id <MinimalistInputDelegate> delegate;
+
 - (instancetype)initWithDescriptor:(MinimalistInputDescriptor *)descriptor;
 
 - (void)setValue:(CGFloat)value animated:(BOOL)animated;
+
+@end
+
+@protocol MinimalistInputDelegate <NSObject>
+
+- (void)minimalistInput:(MinimalistControlView *)control didSetValue:(CGFloat)value;
 
 @end

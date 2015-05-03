@@ -13,7 +13,7 @@
 #import "MinimalistInputViewController.h"
 #import "MinimalistInputDescriptor.h"
 
-@interface FilterDetailViewController ()
+@interface FilterDetailViewController () <MinimalistControlDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (assign, nonatomic) CGRect sourceRect;
@@ -83,12 +83,19 @@
 {
     MinimalistInputDescriptor *descriptor1 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Alpha" minValue:0.0f maxValue:10.0f startingValue:0.0f];
     MinimalistInputDescriptor *descriptor2 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Beta" minValue:2.0f maxValue:20.0f startingValue:2.0f];
+    descriptor2.tintColor = [UIColor redColor];
     MinimalistInputViewController *minimalistVC = [MinimalistInputViewController minimalistControlForInputCount:2 inputDescriptors:@[descriptor1, descriptor2]];
+    minimalistVC.delegate = self;
     [self presentViewController:minimalistVC animated:YES completion:nil];
-
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES
                                             withAnimation:UIStatusBarAnimationSlide];
 }
+
+- (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index
+{
+    DLog(@"[%li] value: %0.2f", (long)index, value);
+}
+
 
 @end

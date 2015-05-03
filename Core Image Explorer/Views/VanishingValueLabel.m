@@ -78,6 +78,7 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 
 - (void)appear
 {
+    //TODO: I may want to refactor this to prevent repeated instantiation of timers every time the value changes.
     self.titleLabel.textColor = self.tintColor;
     self.valueLabel.textColor = self.tintColor;
 

@@ -10,7 +10,7 @@
 #import "MinimalistControlView.h"
 #import "MinimalistInputDescriptor.h"
 
-@interface MinimalistInputViewController ()
+@interface MinimalistInputViewController () <MinimalistInputDelegate>
 
 @property (assign, nonatomic) NSUInteger inputCount;
 @property (strong, nonatomic) NSArray *inputDescriptors;
@@ -58,6 +58,8 @@
         MinimalistInputDescriptor *descriptor = self.inputDescriptors[i];
         MinimalistControlView *inputControl = [[MinimalistControlView alloc] initWithDescriptor:descriptor];
         [inputs addObject:inputControl];
+        inputControl.index = i;
+        inputControl.delegate = self;
         [self.view addSubview:inputControl];
     }
     self.inputControls = [NSArray arrayWithArray:inputs];
@@ -69,12 +71,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.view.tintColor = [UIColor greenColor];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*
@@ -127,12 +123,30 @@
 
 - (void)setDescriptor:(MinimalistInputDescriptor *)descriptor forInputIndex:(NSUInteger)index
 {
-
+    if (index >= self.inputControls.count) {
+        NSAssert(NO, @"ERROR: index value out of range.");
+        return;
+    }
+    MinimalistControlView *control = self.inputControls[index];
+    control.descriptor = descriptor;
 }
 
 - (CGFloat)valueForInputIndex:(NSUInteger)index
 {
-    return 0;
+    if (index >= self.inputControls.count) {
+        NSAssert(NO, @"ERROR: index value out of range.");
+        return 0;
+    }
+    MinimalistControlView *control = self.inputControls[index];
+    return control.value;
 }
+
+#pragma mark - MinimalistInputDelegate
+
+- (void)minimalistInput:(MinimalistControlView *)control didSetValue:(CGFloat)value
+{
+    [self.delegate minimalistControl:self didSetValue:value forInputIndex:control.index];
+}
+
 
 @end
