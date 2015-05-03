@@ -67,7 +67,7 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 
 - (void)commonInit
 {
-    self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.5f];
+    self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
     self.layer.cornerRadius = 4.0f;
     self.clipsToBounds = YES;
     self.hidden = YES;
