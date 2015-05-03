@@ -69,6 +69,7 @@
     if (self.descriptor) {
         self.valueLabel.title = self.descriptor.title;
         self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", self.descriptor.startingValue];
+        self.tintColor = self.descriptor.tintColor;
     }
 }
 
