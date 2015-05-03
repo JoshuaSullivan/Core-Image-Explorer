@@ -34,5 +34,6 @@
 @protocol MinimalistControlDelegate <NSObject>
 
 - (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index;
+- (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController;
 
 @end

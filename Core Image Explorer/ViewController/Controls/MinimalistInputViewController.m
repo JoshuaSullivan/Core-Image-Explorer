@@ -15,6 +15,7 @@
 @property (assign, nonatomic) NSUInteger inputCount;
 @property (strong, nonatomic) NSArray *inputDescriptors;
 @property (strong, nonatomic) NSArray *sectionDividers;
+@property (strong, nonatomic) UIButton *closeButton;
 
 @property (strong, nonatomic) NSArray *inputControls;
 
@@ -64,6 +65,30 @@
     }
     self.inputControls = [NSArray arrayWithArray:inputs];
     [self updateControlFramesForBounds:screenBounds];
+    UIImage *closeIcon = [UIImage imageNamed:@"CloseIcon"];
+    UIImage *closeIconSelected = [UIImage imageNamed:@"CloseIconSelected"];
+    self.closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, closeIcon.size.width, closeIcon.size.height)];
+    self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.closeButton setImage:closeIcon forState:UIControlStateNormal];
+    [self.closeButton setImage:closeIconSelected forState:UIControlStateHighlighted];
+    [self.closeButton addTarget:self action:@selector(closeTapped:) forControlEvents:UIControlEventTouchUpInside];
+    NSLayoutConstraint *closeTopConstraint = [NSLayoutConstraint constraintWithItem:self.closeButton
+                                                                          attribute:NSLayoutAttributeTop
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.topLayoutGuide
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                         multiplier:1.0f
+                                                                           constant:10.0f];
+    NSLayoutConstraint *closeRightConstraint = [NSLayoutConstraint constraintWithItem:self.closeButton
+                                                                            attribute:NSLayoutAttributeRight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.view
+                                                                            attribute:NSLayoutAttributeRight
+                                                                           multiplier:1.0f
+                                                                             constant:-16.0f];
+    [self.view addSubview:self.closeButton];
+    [self.view addConstraints:@[closeTopConstraint, closeRightConstraint]];
+
 }
 
 
@@ -145,8 +170,18 @@
 
 - (void)minimalistInput:(MinimalistControlView *)control didSetValue:(CGFloat)value
 {
-    [self.delegate minimalistControl:self didSetValue:value forInputIndex:control.index];
+    if ([self.delegate respondsToSelector:@selector(minimalistControl:didSetValue:forInputIndex:)]) {
+        [self.delegate minimalistControl:self didSetValue:value forInputIndex:control.index];
+    }
 }
 
+#pragma mark - IBAction
+
+- (IBAction)closeTapped:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(minimalistControlShouldClose:)]) {
+        [self.delegate minimalistControlShouldClose:self];
+    }
+}
 
 @end

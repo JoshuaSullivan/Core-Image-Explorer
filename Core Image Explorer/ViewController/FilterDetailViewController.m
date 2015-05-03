@@ -97,5 +97,10 @@
     DLog(@"[%li] value: %0.2f", (long)index, value);
 }
 
+- (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
