@@ -10,6 +10,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *value;
 
-@property (assign, nonatomic) NSTimeInterval appearanceDuration;
+- (void)appear;
+- (void)vanish;
 
 @end

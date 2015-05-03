@@ -13,8 +13,6 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 
-@property (strong, nonatomic) NSTimer *timer;
-
 @end
 
 @implementation VanishingValueLabel
@@ -69,7 +67,6 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 
 - (void)commonInit
 {
-    _appearanceDuration = kDefaultAppearanceDuration;
     self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.5f];
     self.layer.cornerRadius = 4.0f;
     self.clipsToBounds = YES;
@@ -78,34 +75,22 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 
 - (void)appear
 {
-    //TODO: I may want to refactor this to prevent repeated instantiation of timers every time the value changes.
     self.titleLabel.textColor = self.tintColor;
     self.valueLabel.textColor = self.tintColor;
 
     self.hidden = NO;
-    self.alpha = 1.0f;
-    [self.layer removeAllAnimations];
-
-    [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.appearanceDuration
-                                                  target:self
-                                                selector:@selector(timerFired:)
-                                                userInfo:nil
-                                                 repeats:NO];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.alpha = 1.0f;
+    }];
 }
 
 - (void)vanish
 {
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.4 delay:0.6 options:0 animations:^{
         self.alpha = 0.0f;
     } completion:^(BOOL finished) {
         self.hidden = YES;
     }];
-}
-
-- (void)timerFired:(NSTimer *)timer
-{
-    [self vanish];
 }
 
 - (void)setTitle:(NSString *)title
@@ -118,7 +103,6 @@ static const NSTimeInterval kDefaultAppearanceDuration = 0.8;
 {
     _value = value;
     self.valueLabel.text = value;
-    [self appear];
 }
 
 

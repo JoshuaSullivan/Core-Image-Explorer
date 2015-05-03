@@ -140,12 +140,23 @@
 {
     UITouch *touch = [touches anyObject];
     [self setValueForPoint:[touch locationInView:self]];
+    [self.valueLabel appear];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
     [self setValueForPoint:[touch locationInView:self]];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.valueLabel vanish];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.valueLabel vanish];
 }
 
 #pragma mark - Getters & Setters
