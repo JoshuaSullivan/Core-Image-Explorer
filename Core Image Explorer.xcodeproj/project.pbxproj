@@ -25,6 +25,7 @@
 		9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */; };
 		9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C0C5E9E9694EC748427E /* ImageInputViewController.m */; };
 		9474CD7E394B5C8390F5885B /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9474C7C1DC9AC76905D8E474 /* Old.storyboard */; };
+		9474CE6336D560C2FDBE2E49 /* FilterControlsPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9474C346C0C2D7FE34CC7C76 /* FilterControlsPresentationController.m */; };
 		B51367F1E4F88AC67AC46F14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8310086907D9725AF6ACB669 /* libPods.a */; };
 		BC0F2242162EF48200BE0663 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0F2241162EF48200BE0663 /* QuartzCore.framework */; };
 		BC10D3C3164564850031A7A2 /* OffsetInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC10D3C2164564850031A7A2 /* OffsetInputCell.m */; };
@@ -88,12 +89,14 @@
 		8A7B52CE11802D3B92F7BD2A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9474C0C5E9E9694EC748427E /* ImageInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInputViewController.m; sourceTree = "<group>"; };
 		9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterDetailViewController.m; sourceTree = "<group>"; };
+		9474C346C0C2D7FE34CC7C76 /* FilterControlsPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlsPresentationController.m; sourceTree = "<group>"; };
 		9474C5CB7431995D01EAC29E /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDetailViewController.h; sourceTree = "<group>"; };
 		9474C79C13C8B7EB122B1349 /* ImageInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputViewController.h; sourceTree = "<group>"; };
 		9474C8492F31D9247B5D7756 /* SampleImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleImageManager.h; sourceTree = "<group>"; };
 		9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistInputDescriptor.m; sourceTree = "<group>"; };
 		9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleImageManager.m; sourceTree = "<group>"; };
 		9474C9D35F5E164BA9AE7C6E /* MinimalistInputDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistInputDescriptor.h; sourceTree = "<group>"; };
+		9474CB5552623EFED693F887 /* FilterControlsPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsPresentationController.h; sourceTree = "<group>"; };
 		9474CDF84F4D49B2237CBDF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "Core Image Explorer/en.lproj/Old.storyboard"; sourceTree = SOURCE_ROOT; };
 		BC0F2241162EF48200BE0663 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BC10D3C1164564850031A7A2 /* OffsetInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffsetInputCell.h; sourceTree = "<group>"; };
@@ -252,6 +255,8 @@
 			children = (
 				9474C8492F31D9247B5D7756 /* SampleImageManager.h */,
 				9474C8A5E2F2CF1EE120E2D6 /* SampleImageManager.m */,
+				9474C346C0C2D7FE34CC7C76 /* FilterControlsPresentationController.m */,
+				9474CB5552623EFED693F887 /* FilterControlsPresentationController.h */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 				4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */,
 				4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */,
 				9474C14AEABC41757E09B822 /* MinimalistInputDescriptor.m in Sources */,
+				9474CE6336D560C2FDBE2E49 /* FilterControlsPresentationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,8 @@
 
 - (instancetype)initWithFilter:(CIFilter *)filter;
 
+- (CGFloat)contentHeight;
+
 @end
 
 @protocol FilterControlsDelegate

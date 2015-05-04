@@ -206,6 +206,7 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     NSDictionary *attributes = filter.attributes;
     NSString *enumString = [NSString stringWithFormat:@"%@ {\n%@}\n", attributes[kCIAttributeFilterName], [self recursivelyDescribeDictionary:attributes
                                                                                                                                  currentDepth:1]];
+//    NSLog(@"%@ outputs: %@", attributes[kCIAttributeFilterName],[filter outputKeys]);
     return enumString;
 }
 
@@ -226,6 +227,9 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
             [dictString appendFormat:@"%@%@ : [%@]\n", prefix, key, [(NSArray *)value componentsJoinedByString:@", "]];
         } else {
             [dictString appendFormat:@"%@%@ : %@\n", prefix, key, value];
+        }
+        if ([key rangeOfString:@"Image"].location != NSNotFound) {
+            NSLog(@"image key: %@", key);
         }
     }
     return [NSString stringWithString:dictString];

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oHF-Lh-gZ6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Filter Attributes-->
@@ -10,7 +9,7 @@
             <objects>
                 <tableViewController id="FbB-OA-zRS" customClass="FilterControlAttributesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kP7-cj-nSq">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -42,80 +41,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Filter Attributes" id="rPp-TU-JGM"/>
                     <connections>
-                        <segue destination="iFB-AS-lRo" kind="show" identifier="kScalarInputSegueIdentifier" id="ALC-mB-EFO"/>
                         <segue destination="bWI-kt-mBJ" kind="show" identifier="kImageInputSegueIdentifier" id="QSG-kG-CTO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5k-CN-Q5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="914" y="361"/>
-        </scene>
-        <!--Scalar Input-->
-        <scene sceneID="cOI-WK-5eL">
-            <objects>
-                <viewController id="iFB-AS-lRo" customClass="ScalarInputViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EV6-hL-mTH"/>
-                        <viewControllerLayoutGuide type="bottom" id="9Wl-ha-CyL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="onM-eT-luC">
-                        <rect key="frame" x="0.0" y="44" width="300" height="116"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Kh-1dj">
-                                <rect key="frame" x="0.0" y="52" width="300" height="64"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ScalarControlGauge" translatesAutoresizingMaskIntoConstraints="NO" id="MSr-zY-VFR">
-                                        <rect key="frame" x="0.0" y="30" width="400" height="32"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="Bj8-Df-AKC"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="iFB-AS-lRo" id="qWv-oO-86b"/>
-                                </connections>
-                            </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScalarCenterBar" translatesAutoresizingMaskIntoConstraints="NO" id="p80-uQ-aRe">
-                                <rect key="frame" x="150" y="52" width="1" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="1" id="o3B-Uo-azy"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoL-0T-u3K" userLabel="Value Label">
-                                <rect key="frame" x="16" y="3" width="268" height="46"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="40"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="leading" secondItem="onM-eT-luC" secondAttribute="leading" id="3kv-Ls-6ab"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RoL-0T-u3K" secondAttribute="trailing" id="GQ4-kC-B3d"/>
-                            <constraint firstItem="9Wl-ha-CyL" firstAttribute="top" secondItem="hoV-Kh-1dj" secondAttribute="bottom" id="GaC-7k-Y54"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="p80-uQ-aRe" secondAttribute="bottom" id="NLv-Wq-imJ"/>
-                            <constraint firstAttribute="trailing" secondItem="hoV-Kh-1dj" secondAttribute="trailing" id="QHB-lR-Fwx"/>
-                            <constraint firstAttribute="centerY" secondItem="RoL-0T-u3K" secondAttribute="centerY" constant="32" id="YgF-CJ-Qz2"/>
-                            <constraint firstItem="RoL-0T-u3K" firstAttribute="leading" secondItem="onM-eT-luC" secondAttribute="leadingMargin" id="rPt-Kb-542"/>
-                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="height" secondItem="p80-uQ-aRe" secondAttribute="height" id="smm-a5-z0e"/>
-                            <constraint firstItem="hoV-Kh-1dj" firstAttribute="centerX" secondItem="p80-uQ-aRe" secondAttribute="centerX" id="zfk-wq-DzE"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Scalar Input" id="l76-1p-GSX"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="160"/>
-                    <connections>
-                        <outlet property="gaugeImageView" destination="MSr-zY-VFR" id="Ni9-bY-wtw"/>
-                        <outlet property="scrollView" destination="hoV-Kh-1dj" id="Qqr-C3-CXE"/>
-                        <outlet property="valueLabel" destination="RoL-0T-u3K" id="exN-fV-l61"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QVC-2E-2n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1363" y="-131"/>
         </scene>
         <!--Image Input-->
         <scene sceneID="Ipl-Pq-Utz">
@@ -203,11 +134,11 @@
         <!--Filter Controls View Controller-->
         <scene sceneID="Ecf-AP-Ya6">
             <objects>
-                <navigationController id="oHF-Lh-gZ6" customClass="FilterControlsViewController" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="oHF-Lh-gZ6" customClass="FilterControlsViewController" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="400"/>
+                    <size key="freeformSize" width="320" height="300"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Se-D3-sRn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -221,8 +152,4 @@
             <point key="canvasLocation" x="515" y="361"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ScalarCenterBar" width="1" height="64"/>
-        <image name="ScalarControlGauge" width="400" height="32"/>
-    </resources>
 </document>

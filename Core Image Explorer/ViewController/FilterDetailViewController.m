@@ -12,13 +12,18 @@
 #import "SampleImageManager.h"
 #import "MinimalistInputViewController.h"
 #import "MinimalistInputDescriptor.h"
+#import "FilterControlsPresentationController.h"
 
-@interface FilterDetailViewController () <MinimalistControlDelegate>
+@interface FilterDetailViewController () <FilterControlsDelegate, UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (assign, nonatomic) CGRect sourceRect;
 @property (assign, nonatomic) CGRect targetRect;
 @property (strong, nonatomic) CIContext *ciContext;
+@property (assign, atomic) BOOL isRendering;
+
+@property (strong, nonatomic) FilterControlsViewController *filterControls;
+@property (strong, nonatomic) FilterControlsPresentationController *filterPresentationController;
 
 @property (assign, nonatomic, getter=isFullScreen) BOOL fullScreen;
 
@@ -46,6 +51,11 @@
     self.navigationItem.title = self.filter.attributes[kCIAttributeFilterDisplayName];
     self.view.tintColor = [UIColor blackColor];
 
+    self.filterControls = [[FilterControlsViewController alloc] initWithFilter:self.filter];
+    self.filterControls.filterControlsDelegate = self;
+    self.filterControls.modalPresentationStyle = UIModalPresentationCustom;
+    self.filterControls.transitioningDelegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,7 +63,7 @@
     [super viewWillAppear:animated];
 
     [self renderImage];
-    
+
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO
                                             withAnimation:UIStatusBarAnimationSlide];
@@ -69,14 +79,35 @@
 
 - (void)renderImage
 {
-    CIImage *inputImage = self.filter.outputImage;
-    CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
-    UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
-    self.imageView.image = finalImage;
-    CGImageRelease(renderImage);
+    if (self.isRendering) {
+        // Only start a render while one is not in progress.
+        return;
+    }
+    self.isRendering = YES;
+    // Since the filter is mutable and could be modified by another class while rendering is in progress, we'll duplicate it.
+    CIFilter *workingFilter = [self.filter copy];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        CIImage *inputImage = workingFilter.outputImage;
+        CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
+        UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
+        CGImageRelease(renderImage);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageView.image = finalImage;
+            self.isRendering = NO;
+        });
+    });
+
 //    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample2 completion:^(UIImage *image) {
 //        self.imageView.image = image;
 //    }];
+}
+
+#pragma mark - Filter Controls
+
+- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
+        didChangeFilterConfiguration:(CIFilter *)filter
+{
+    [self renderImage];
 }
 
 #pragma mark - IBActions
@@ -86,20 +117,9 @@
     [self setFullScreen:!self.isFullScreen];
 }
 
-- (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index
-{
-    DLog(@"[%li] value: %0.2f", (long)index, value);
-}
-
-- (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self setFullScreen:NO];
-}
-
 - (IBAction)configTapped:(id)sender
 {
-    DLog(@"Config!");
+    [self presentViewController:self.filterControls animated:YES completion:nil];
 }
 
 #pragma mark - Getters & Setters
@@ -114,6 +134,18 @@
 - (BOOL)prefersStatusBarHidden
 {
     return self.fullScreen;
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+                                                      presentingViewController:(UIViewController *)presenting
+                                                          sourceViewController:(UIViewController *)source
+{
+    if (presented == self.filterControls) {
+        return [[FilterControlsPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+    }
+    return nil;
 }
 
 

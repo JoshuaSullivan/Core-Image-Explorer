@@ -29,15 +29,13 @@ static NSString * const kImageInputSegueIdentifier = @"kImageInputSegueIdentifie
     [super viewDidLoad];
 
     self.navigationItem.title = self.filter.attributes[kCIAttributeDisplayName];
-
-
 }
 
-- (void)didReceiveMemoryWarning
+- (CGFloat)contentHeight
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return self.filter.inputKeys.count * 60.0f;
 }
+
 
 #pragma mark - Table view data source
 
@@ -77,6 +75,11 @@ static NSString * const kImageInputSegueIdentifier = @"kImageInputSegueIdentifie
         return;
     }
     [self performSegueWithIdentifier:identifier sender:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60.0f;
 }
 
 #pragma mark - Navigation

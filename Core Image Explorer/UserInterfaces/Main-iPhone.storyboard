@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dqr-A6-jEA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Compose-->
@@ -90,23 +89,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-5w-iRk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwS-q2-Jqt">
-                                <rect key="frame" x="0.0" y="334" width="375" height="333"/>
-                                <connections>
-                                    <segue destination="yUY-ur-KJa" kind="embed" id="FG7-Yp-Qt6"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="7eU-5w-iRk" secondAttribute="bottom" id="4sR-MV-ENF"/>
-                            <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="fwS-q2-Jqt" secondAttribute="bottom" id="9cl-fI-qn8"/>
-                            <constraint firstItem="7eU-5w-iRk" firstAttribute="height" secondItem="fwS-q2-Jqt" secondAttribute="height" multiplier="2" id="A7N-GX-4jJ"/>
-                            <constraint firstItem="fwS-q2-Jqt" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="dP5-pz-Uzv"/>
                             <constraint firstItem="7eU-5w-iRk" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="dgG-us-9JS"/>
                             <constraint firstAttribute="trailing" secondItem="7eU-5w-iRk" secondAttribute="trailing" id="mQH-wl-Tdx"/>
                             <constraint firstItem="7eU-5w-iRk" firstAttribute="top" secondItem="fRC-63-XYj" secondAttribute="top" id="n7M-wk-9PH"/>
-                            <constraint firstAttribute="trailing" secondItem="fwS-q2-Jqt" secondAttribute="trailing" id="ujB-oT-WSV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sPD-kI-lmv">
@@ -165,25 +154,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v91-En-TC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="390" y="607"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="oZt-u2-R8k">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yUY-ur-KJa" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="K4p-rL-3Yj"/>
-                        <viewControllerLayoutGuide type="bottom" id="i6u-Ku-MbB"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="986-IA-MJf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="333"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="76C-ZG-P4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2408.5" y="365.5"/>
         </scene>
     </scenes>
     <resources>

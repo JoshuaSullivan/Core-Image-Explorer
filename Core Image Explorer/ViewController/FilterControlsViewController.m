@@ -5,6 +5,7 @@
 
 #import "FilterControlsViewController.h"
 #import "FilterControlAttributesTableViewController.h"
+#import "SampleImageManager.h"
 
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
@@ -25,6 +26,7 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
         return nil;
     }
     _filter = filter;
+    [self setDefaultImagesOnFilter:_filter];
     self.delegate = self;
     return self;
 }
@@ -36,6 +38,57 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
     FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
     attributesVC.filter = self.filter;
 }
+
+- (void)setDefaultImagesOnFilter:(CIFilter *)filter
+{
+    for (NSString *key in filter.inputKeys) {
+        if ([key isEqualToString:kCIInputImageKey]) {
+            UIImage *existingImage = [filter valueForKey:key];
+            if (!existingImage) {
+                [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample1 completion:^(UIImage *sampleImage) {
+                    [filter setValue:sampleImage forKey:key];
+                }];
+            }
+        } else if ([key isEqualToString:kCIInputTargetImageKey] || [key isEqualToString:kCIInputBackgroundImageKey]) {
+            UIImage *existingImage = [filter valueForKey:key];
+            if (!existingImage) {
+                [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample2 completion:^(UIImage *sampleImage) {
+                    [filter setValue:sampleImage forKey:key];
+                }];
+            }
+        } else if ([key isEqualToString:kCIInputMaskImageKey]) {
+            NSString *filterName = filter.name;
+            if ([filterName isEqualToString:@"CIBlendWithAlphaMask"]) {
+                UIImage *existingImage = [filter valueForKey:key];
+                if (!existingImage) {
+                    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample4 completion:^(UIImage *sampleImage) {
+                        [filter setValue:sampleImage forKey:key];
+                    }];
+                }
+            } else {
+                UIImage *existingImage = [filter valueForKey:key];
+                if (!existingImage) {
+                    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample3 completion:^(UIImage *sampleImage) {
+                        [filter setValue:sampleImage forKey:key];
+                    }];
+                }
+            }
+        } else if ([key isEqualToString:kCIInputGradientImageKey]) {
+            //TODO: Figure out what the proper form of this input is.
+            NSLog(@"Curse you CIColorMap!!!");
+        } else {
+            NSAssert(NO, @"Encountered unhandled image input: %@", key);
+        }
+    }
+
+}
+
+- (CGFloat)contentHeight
+{
+    FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
+    return [attributesVC contentHeight];
+}
+
 
 #pragma mark - UINavigationControllerDelegate
 
