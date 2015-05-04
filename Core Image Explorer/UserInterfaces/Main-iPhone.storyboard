@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dqr-A6-jEA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dqr-A6-jEA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Compose-->
@@ -44,7 +45,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z11-mU-hwj">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -60,7 +61,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Filters" id="5Sx-YM-S9S">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="Hxk-aU-1s9">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="Hxk-aU-1s9">
                             <connections>
                                 <action selector="tableModeButtonTapped:" destination="nfv-aP-Ymg" id="xaj-75-e9p"/>
                             </connections>
@@ -89,15 +90,32 @@
                             <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-5w-iRk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwS-q2-Jqt">
+                                <rect key="frame" x="0.0" y="334" width="375" height="333"/>
+                                <connections>
+                                    <segue destination="yUY-ur-KJa" kind="embed" id="FG7-Yp-Qt6"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="7eU-5w-iRk" secondAttribute="bottom" id="4sR-MV-ENF"/>
+                            <constraint firstItem="jAV-rU-xLE" firstAttribute="top" secondItem="fwS-q2-Jqt" secondAttribute="bottom" id="9cl-fI-qn8"/>
+                            <constraint firstItem="7eU-5w-iRk" firstAttribute="height" secondItem="fwS-q2-Jqt" secondAttribute="height" multiplier="2" id="A7N-GX-4jJ"/>
+                            <constraint firstItem="fwS-q2-Jqt" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="dP5-pz-Uzv"/>
                             <constraint firstItem="7eU-5w-iRk" firstAttribute="leading" secondItem="fRC-63-XYj" secondAttribute="leading" id="dgG-us-9JS"/>
                             <constraint firstAttribute="trailing" secondItem="7eU-5w-iRk" secondAttribute="trailing" id="mQH-wl-Tdx"/>
                             <constraint firstItem="7eU-5w-iRk" firstAttribute="top" secondItem="fRC-63-XYj" secondAttribute="top" id="n7M-wk-9PH"/>
+                            <constraint firstAttribute="trailing" secondItem="fwS-q2-Jqt" secondAttribute="trailing" id="ujB-oT-WSV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="sPD-kI-lmv">
+                        <barButtonItem key="rightBarButtonItem" image="GearIcon" id="ah3-S9-tjZ" userLabel="Config Button">
+                            <connections>
+                                <action selector="configTapped:" destination="366-g5-TeM" id="kPJ-mD-aOR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="7eU-5w-iRk" id="hlN-2e-t1z"/>
@@ -148,8 +166,28 @@
             </objects>
             <point key="canvasLocation" x="390" y="607"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="oZt-u2-R8k">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yUY-ur-KJa" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K4p-rL-3Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="i6u-Ku-MbB"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="986-IA-MJf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="333"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76C-ZG-P4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2408.5" y="365.5"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="GearIcon" width="28" height="28"/>
         <image name="rocket_off" width="28" height="28"/>
         <image name="rocket_on" width="28" height="28"/>
         <image name="telescope_off" width="28" height="27"/>

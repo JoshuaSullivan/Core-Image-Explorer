@@ -3,21 +3,22 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "HairlineVertical.png"
+      "filename" : "GearIconSelected.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "HairlineVertical@2x.png"
+      "filename" : "GearIconSelected@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "HairlineVertical@3x.png"
+      "filename" : "GearIconSelected@3x.png"
     }
   ],
   "info" : {
     "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "template-rendering-intent" : "template"
   }
 }
