@@ -20,6 +20,8 @@
 @property (assign, nonatomic) CGRect targetRect;
 @property (strong, nonatomic) CIContext *ciContext;
 
+@property (assign, nonatomic) BOOL fullScreen;
+
 @end
 
 @implementation FilterDetailViewController
@@ -72,7 +74,7 @@
 //    UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
 //    self.imageView.image = finalImage;
 //    CGImageRelease(renderImage);
-    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample1 completion:^(UIImage *image) {
+    [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample2 completion:^(UIImage *image) {
         self.imageView.image = image;
     }];
 }
@@ -81,15 +83,13 @@
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGesture
 {
+    [self setFullScreen:YES];
     MinimalistInputDescriptor *descriptor1 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Alpha" minValue:0.0f maxValue:10.0f startingValue:0.0f];
     MinimalistInputDescriptor *descriptor2 = [MinimalistInputDescriptor inputDescriptorWithTitle:@"Beta" minValue:2.0f maxValue:20.0f startingValue:2.0f];
     descriptor2.tintColor = [UIColor redColor];
     MinimalistInputViewController *minimalistVC = [MinimalistInputViewController minimalistControlForInputCount:2 inputDescriptors:@[descriptor1, descriptor2]];
     minimalistVC.delegate = self;
     [self presentViewController:minimalistVC animated:YES completion:nil];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES
-                                            withAnimation:UIStatusBarAnimationSlide];
 }
 
 - (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index
@@ -100,6 +100,21 @@
 - (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self setFullScreen:NO];
+}
+
+#pragma mark - Getters & Setters
+
+- (void)setFullScreen:(BOOL)fullScreen
+{
+    _fullScreen = fullScreen;
+    [self.navigationController setNavigationBarHidden:fullScreen animated:YES];
+    [UIApplication sharedApplication].statusBarHidden = YES;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.fullScreen;
 }
 
 

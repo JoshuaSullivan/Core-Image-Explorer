@@ -166,6 +166,11 @@
     return control.value;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 #pragma mark - MinimalistInputDelegate
 
 - (void)minimalistInput:(MinimalistControlView *)control didSetValue:(CGFloat)value
