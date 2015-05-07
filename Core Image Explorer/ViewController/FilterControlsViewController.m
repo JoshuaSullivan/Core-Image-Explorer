@@ -10,6 +10,8 @@
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
 
+static NSString * const kGradientImageKey = @"inputGradientImage";
+
 @interface FilterControlsViewController () <UINavigationControllerDelegate>
 
 @property (strong, nonatomic) CIFilter *filter;
@@ -46,14 +48,16 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
             UIImage *existingImage = [filter valueForKey:key];
             if (!existingImage) {
                 [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample1 completion:^(UIImage *sampleImage) {
-                    [filter setValue:sampleImage forKey:key];
+                    [filter setValue:[CIImage imageWithCGImage:sampleImage.CGImage] forKey:key];
+                    [self notifyDelegateOfFilterChange];
                 }];
             }
         } else if ([key isEqualToString:kCIInputTargetImageKey] || [key isEqualToString:kCIInputBackgroundImageKey]) {
             UIImage *existingImage = [filter valueForKey:key];
             if (!existingImage) {
                 [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample2 completion:^(UIImage *sampleImage) {
-                    [filter setValue:sampleImage forKey:key];
+                    [filter setValue:[CIImage imageWithCGImage:sampleImage.CGImage] forKey:key];
+                    [self notifyDelegateOfFilterChange];
                 }];
             }
         } else if ([key isEqualToString:kCIInputMaskImageKey]) {
@@ -62,31 +66,37 @@ static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControll
                 UIImage *existingImage = [filter valueForKey:key];
                 if (!existingImage) {
                     [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample4 completion:^(UIImage *sampleImage) {
-                        [filter setValue:sampleImage forKey:key];
+                        [filter setValue:[CIImage imageWithCGImage:sampleImage.CGImage] forKey:key];
+                        [self notifyDelegateOfFilterChange];
                     }];
                 }
             } else {
                 UIImage *existingImage = [filter valueForKey:key];
                 if (!existingImage) {
                     [[SampleImageManager sharedManager] getCompositionImageForSourceInCurrentOrientation:ImageSourceSample3 completion:^(UIImage *sampleImage) {
-                        [filter setValue:sampleImage forKey:key];
+                        [filter setValue:[CIImage imageWithCGImage:sampleImage.CGImage] forKey:key];
+                        [self notifyDelegateOfFilterChange];
                     }];
                 }
             }
-        } else if ([key isEqualToString:kCIInputGradientImageKey]) {
+        } else if ([key isEqualToString:kGradientImageKey]) {
             //TODO: Figure out what the proper form of this input is.
             NSLog(@"Curse you CIColorMap!!!");
-        } else {
-            NSAssert(NO, @"Encountered unhandled image input: %@", key);
         }
     }
-
 }
 
 - (CGFloat)contentHeight
 {
     FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
     return [attributesVC contentHeight];
+}
+
+- (void)notifyDelegateOfFilterChange
+{
+    if ([self.filterControlsDelegate respondsToSelector:@selector(filterControlsViewController:didChangeFilterConfiguration:)]) {
+        [self.filterControlsDelegate filterControlsViewController:self didChangeFilterConfiguration:self.filter];
+    }
 }
 
 

@@ -13,17 +13,15 @@
 #import "MinimalistInputViewController.h"
 #import "MinimalistInputDescriptor.h"
 #import "FilterControlsPresentationController.h"
+#import "SlideFromRightAnimationController.h"
 
 @interface FilterDetailViewController () <FilterControlsDelegate, UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (assign, nonatomic) CGRect sourceRect;
-@property (assign, nonatomic) CGRect targetRect;
 @property (strong, nonatomic) CIContext *ciContext;
 @property (assign, atomic) BOOL isRendering;
 
 @property (strong, nonatomic) FilterControlsViewController *filterControls;
-@property (strong, nonatomic) FilterControlsPresentationController *filterPresentationController;
 
 @property (assign, nonatomic, getter=isFullScreen) BOOL fullScreen;
 
@@ -38,11 +36,7 @@
     EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     self.ciContext = [CIContext contextWithEAGLContext:eaglContext];
 
-    CGFloat screenScale = [UIScreen mainScreen].scale;
-    CGRect screenSize = [UIScreen mainScreen].bounds;
-    self.sourceRect = screenSize;
-    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(screenScale, screenScale);
-    self.targetRect = CGRectApplyAffineTransform(screenSize, scaleTransform);
+
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handleTapGesture:)];
@@ -53,9 +47,10 @@
 
     self.filterControls = [[FilterControlsViewController alloc] initWithFilter:self.filter];
     self.filterControls.filterControlsDelegate = self;
+
+    // Set up the custom presentation.
     self.filterControls.modalPresentationStyle = UIModalPresentationCustom;
     self.filterControls.transitioningDelegate = self;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,11 +80,15 @@
     }
     self.isRendering = YES;
     // Since the filter is mutable and could be modified by another class while rendering is in progress, we'll duplicate it.
-    CIFilter *workingFilter = [self.filter copy];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        CIFilter *workingFilter = [self.filter copy];
         CIImage *inputImage = workingFilter.outputImage;
-        CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:self.sourceRect];
-        UIImage *finalImage = [UIImage imageWithCGImage:renderImage];
+        CGFloat screenScale = [UIScreen mainScreen].scale;
+        CGRect screenSize = [UIScreen mainScreen].bounds;
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(screenScale, screenScale);
+        CGRect sourceRect = CGRectApplyAffineTransform(screenSize, scaleTransform);
+        CGImageRef renderImage = [self.ciContext createCGImage:inputImage fromRect:sourceRect];
+        UIImage *finalImage = [UIImage imageWithCGImage:renderImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
         CGImageRelease(renderImage);
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = finalImage;
@@ -147,6 +146,5 @@
     }
     return nil;
 }
-
 
 @end

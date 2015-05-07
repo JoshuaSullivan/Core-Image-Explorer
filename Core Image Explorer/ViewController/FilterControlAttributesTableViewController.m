@@ -16,6 +16,8 @@ static NSString * const kDefaultCellIdentifier = @"kDefaultCellIdentifier";
 static NSString * const kScalarInputSegueIdentifier = @"kScalarInputSegueIdentifier";
 static NSString * const kImageInputSegueIdentifier = @"kImageInputSegueIdentifier";
 
+static NSString * const kGradientImageKey = @"inputGradientImage";
+
 @interface FilterControlAttributesTableViewController ()
 
 @property (strong, nonatomic) NSString *inputKeyToConfigure;
@@ -90,7 +92,7 @@ static NSString * const kImageInputSegueIdentifier = @"kImageInputSegueIdentifie
     configVC.filter = self.filter;
     configVC.inputKeyToConfigure = self.inputKeyToConfigure;
     if ([segue.identifier isEqualToString:kScalarInputSegueIdentifier]) {
-        // Reserved for control-specific configuraton.
+        // Reserved for control-specific configuration.
     }
 }
 
