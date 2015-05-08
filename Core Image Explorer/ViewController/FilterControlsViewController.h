@@ -18,9 +18,12 @@
 
 @end
 
-@protocol FilterControlsDelegate <NSObject>
+@protocol FilterControlsDelegate
 
 - (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
         didChangeFilterConfiguration:(CIFilter *)filter;
+
+- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
+                didRequestFullScreen:(BOOL)fullScreen;
 
 @end
