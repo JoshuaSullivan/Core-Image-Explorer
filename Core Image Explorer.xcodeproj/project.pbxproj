@@ -12,7 +12,7 @@
 		4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90A102F853CFE0A418794 /* MinimalistControlView.m */; };
 		4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
-		7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */; };
+		7B0EBC581ADC1AFD00A87C9A /* FilterAttributesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterAttributesListViewController.m */; };
 		7B16EC671AE17ED600D2E160 /* ImageInputCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */; };
 		7B16EC691AE182A400D2E160 /* ImageInputControlConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B16EC681AE182A400D2E160 /* ImageInputControlConfiguration.plist */; };
 		7B18393A1ACEE726003CC4F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1839391ACEE726003CC4F8 /* LaunchScreen.xib */; };
@@ -75,8 +75,8 @@
 		4BA90D3829D20BE993BD8C02 /* MinimalistControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistControlView.h; sourceTree = "<group>"; };
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
 		4BA90F5CD4A2863C0BADC5D6 /* VanishingValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VanishingValueLabel.h; sourceTree = "<group>"; };
-		7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlAttributesTableViewController.h; sourceTree = "<group>"; };
-		7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlAttributesTableViewController.m; sourceTree = "<group>"; };
+		7B0EBC561ADC1AFD00A87C9A /* FilterAttributesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterAttributesListViewController.h; sourceTree = "<group>"; };
+		7B0EBC571ADC1AFD00A87C9A /* FilterAttributesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterAttributesListViewController.m; sourceTree = "<group>"; };
 		7B16EC651AE17ED600D2E160 /* ImageInputCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputCollectionViewCell.h; sourceTree = "<group>"; };
 		7B16EC661AE17ED600D2E160 /* ImageInputCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInputCollectionViewCell.m; sourceTree = "<group>"; };
 		7B16EC681AE182A400D2E160 /* ImageInputControlConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ImageInputControlConfiguration.plist; sourceTree = "<group>"; };
@@ -356,8 +356,8 @@
 				9474C1EE49EACDBA41C3F7A7 /* FilterDetailViewController.m */,
 				4BA909518943943910261215 /* FilterControlsViewController.h */,
 				4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */,
-				7B0EBC561ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.h */,
-				7B0EBC571ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m */,
+				7B0EBC561ADC1AFD00A87C9A /* FilterAttributesListViewController.h */,
+				7B0EBC571ADC1AFD00A87C9A /* FilterAttributesListViewController.m */,
 				BC61F148162E19B2008EE219 /* Table Cells */,
 				4BA9071C696E6AA4B54EF914 /* Controls */,
 			);
@@ -547,7 +547,7 @@
 				4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */,
 				7B16EC671AE17ED600D2E160 /* ImageInputCollectionViewCell.m in Sources */,
 				4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */,
-				7B0EBC581ADC1AFD00A87C9A /* FilterControlAttributesTableViewController.m in Sources */,
+				7B0EBC581ADC1AFD00A87C9A /* FilterAttributesListViewController.m in Sources */,
 				9474CAB033600628036E10E3 /* ImageInputViewController.m in Sources */,
 				9474C92CDC9AE33424AEE53D /* SampleImageManager.m in Sources */,
 				4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */,

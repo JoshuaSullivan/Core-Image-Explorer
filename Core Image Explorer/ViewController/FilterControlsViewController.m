@@ -4,17 +4,20 @@
 //
 
 #import "FilterControlsViewController.h"
-#import "FilterControlAttributesTableViewController.h"
+#import "FilterAttributesListViewController.h"
 #import "SampleImageManager.h"
+#import "MinimalistInputDescriptor.h"
+#import "MinimalistInputViewController.h"
 
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
 
 static NSString * const kGradientImageKey = @"inputGradientImage";
 
-@interface FilterControlsViewController () <UINavigationControllerDelegate>
+@interface FilterControlsViewController () <UINavigationControllerDelegate, MinimalistControlDelegate, FilterAttributeListDelegate>
 
 @property (strong, nonatomic) CIFilter *filter;
+@property (strong, nonatomic) NSString *inputKeyToConfigure;
 
 @end
 
@@ -37,8 +40,9 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 {
     [super viewDidLoad];
 
-    FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
+    FilterAttributesListViewController *attributesVC = self.viewControllers[0];
     attributesVC.filter = self.filter;
+    attributesVC.attributeListDelegate = self;
 }
 
 - (void)setDefaultImagesOnFilter:(CIFilter *)filter
@@ -88,7 +92,7 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 
 - (CGFloat)contentHeight
 {
-    FilterControlAttributesTableViewController *attributesVC = self.viewControllers[0];
+    FilterAttributesListViewController *attributesVC = self.viewControllers[0];
     return [attributesVC contentHeight];
 }
 
@@ -109,6 +113,59 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 {
     return nil;
 }
+
+#pragma mark - Control Presentation
+
+- (void)presentControlForInput:(NSString *)inputKey
+{
+    self.inputKeyToConfigure = inputKey;
+    NSDictionary *attributes = self.filter.attributes[inputKey];
+    NSString *type = attributes[kCIAttributeType];
+    if ([type isEqualToString:kCIAttributeTypeScalar]) {
+        NSNumber *minValueNumber = attributes[kCIAttributeSliderMin];
+        NSNumber *maxValueNumber = attributes[kCIAttributeSliderMax];
+        NSNumber *currentValueNumber = [self.filter valueForKey:inputKey];
+        CGFloat minValue = minValueNumber ? [minValueNumber floatValue] : 0.0f;
+        CGFloat maxValue = maxValueNumber ? [maxValueNumber floatValue] : minValue + 1.0f;
+        CGFloat currentValue = currentValueNumber ? [currentValueNumber floatValue] : minValue;
+        MinimalistInputDescriptor *descriptor = [MinimalistInputDescriptor inputDescriptorWithTitle:inputKey
+                                                                                           minValue:minValue
+                                                                                           maxValue:maxValue
+                                                                                      startingValue:currentValue];
+        MinimalistInputViewController *scalarVC = [[MinimalistInputViewController alloc] initWithInputCount:1
+                                                                                           inputDescriptors:@[descriptor]];
+        scalarVC.delegate = self;
+        [self presentViewController:scalarVC
+                           animated:YES
+                         completion:nil];
+        self.view.hidden = YES;
+        [self.filterControlsDelegate filterControlsViewController:self didRequestFullScreen:YES];
+    }
+}
+
+#pragma mark - FilterAttributeListDelegate
+
+- (void)filterAttributesList:(FilterAttributesListViewController *)attributeListVC didSelectInput:(NSString *)input
+{
+    [self presentControlForInput:input];
+}
+
+#pragma mark - MinimalistControlDelegate
+
+- (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index
+{
+    [self.filter setValue:@(value) forKey:self.inputKeyToConfigure];
+    [self notifyDelegateOfFilterChange];
+}
+
+- (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.view.hidden = NO;
+        [self.filterControlsDelegate filterControlsViewController:self didRequestFullScreen:NO];
+    }];
+}
+
 
 
 @end

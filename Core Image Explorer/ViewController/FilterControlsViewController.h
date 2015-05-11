@@ -18,7 +18,7 @@
 
 @end
 
-@protocol FilterControlsDelegate
+@protocol FilterControlsDelegate <NSObject>
 
 - (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
         didChangeFilterConfiguration:(CIFilter *)filter;
