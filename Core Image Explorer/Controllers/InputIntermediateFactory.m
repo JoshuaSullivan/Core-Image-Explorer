@@ -62,7 +62,19 @@ static NSString *kCIInputCubeData = @"inputCubeData";
 /** Breaking this off into its own method because there are a lot of different data types encoded by CIVector. */
 + (AbstractInputIntermediate *)createIntermediateForVectorInput:(NSString *)inputName withAttributes:(NSDictionary *)inputAttributes
 {
-
+    NSString *inputType = inputAttributes[kCIAttributeType];
+    if (!inputType) {
+        // CIVector inputs with no type. Infer from name instead.
+    } else if ([inputType isEqualToString:kCIAttributeTypeOffset]) {
+        // Offset types
+    } else if ([inputType isEqualToString:kCIAttributeTypePosition]) {
+        // Position types
+    } else if ([inputType isEqualToString:kCIAttributeTypeRectangle]) {
+        // Rectangle types
+    } else {
+        NSAssert(NO, @"ERROR: Unhandled CIVector input type: %@", inputType);
+    }
+    return nil;
 }
 
 @end
