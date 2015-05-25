@@ -9,14 +9,15 @@
 
 @interface ScalarInputIntermediate () <MinimalistControlDelegate>
 
+@property (strong, nonatomic) MinimalistInputViewController *inputVC;
+
 @end
 
 @implementation ScalarInputIntermediate
 
 - (UIViewController *)inputViewController
 {
-    static MinimalistInputViewController *_inputVC;
-    if (!_inputVC) {
+    if (!self.inputVC) {
         NSNumber *minValueNumber = self.inputAttributes[kCIAttributeSliderMin];
         NSNumber *maxValueNumber = self.inputAttributes[kCIAttributeSliderMax];
         NSNumber *currentValueNumber = self.inputAttributes[kCIAttributeDefault];
@@ -27,10 +28,10 @@
                                                                                            minValue:minValue
                                                                                            maxValue:maxValue
                                                                                       startingValue:currentValue];
-        _inputVC = [[MinimalistInputViewController alloc] initWithInputDescriptors:@[descriptor]];
-        _inputVC.delegate = self;
+        self.inputVC = [[MinimalistInputViewController alloc] initWithInputDescriptors:@[descriptor]];
+        self.inputVC.delegate = self;
     }
-    return _inputVC;
+    return self.inputVC;
 }
 
 #pragma mark - MinimalistControlDelegate

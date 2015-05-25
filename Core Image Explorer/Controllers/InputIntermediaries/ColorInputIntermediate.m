@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, ColorComponent) {
 @property (assign, nonatomic) CGFloat g;
 @property (assign, nonatomic) CGFloat b;
 @property (assign, nonatomic) CGFloat a;
+@property (strong, nonatomic) MinimalistInputViewController *inputVC;
 
 @end
 
@@ -46,8 +47,7 @@ typedef NS_ENUM(NSInteger, ColorComponent) {
 
 - (UIViewController *)inputViewController
 {
-    static MinimalistInputViewController *_inputVC;
-    if (!_inputVC) {
+    if (!self.inputVC) {
         NSString *red = NSLocalizedString(@"Red", @"Red");
         NSString *green = NSLocalizedString(@"Green", @"Green");
         NSString *blue = NSLocalizedString(@"Blue", @"Blue");
@@ -71,11 +71,11 @@ typedef NS_ENUM(NSInteger, ColorComponent) {
                                                                                           startingValue:value];
             [descriptors addObject:descriptor];
         }
-        _inputVC = [MinimalistInputViewController minimalistControlForDescriptors:descriptors];
-        _inputVC.delegate = self;
+        self.inputVC = [MinimalistInputViewController minimalistControlForDescriptors:descriptors];
+        self.inputVC.delegate = self;
     }
 
-    return _inputVC;
+    return self.inputVC;
 }
 
 #pragma mark - MinimalistControlDelegate

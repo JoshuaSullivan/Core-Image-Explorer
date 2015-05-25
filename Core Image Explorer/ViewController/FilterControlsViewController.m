@@ -6,11 +6,8 @@
 #import "FilterControlsViewController.h"
 #import "FilterAttributesListViewController.h"
 #import "SampleImageManager.h"
-#import "MinimalistInputDescriptor.h"
-#import "MinimalistInputViewController.h"
 #import "AbstractInputIntermediate.h"
 #import "InputIntermediateFactory.h"
-#import "InputIntermediateDelegate.h"
 
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
@@ -156,6 +153,7 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 - (void)inputIntermedateDidComplete:(id)inputIntermediate
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    self.view.hidden = NO;
     self.currentIntermediate = nil;
 }
 

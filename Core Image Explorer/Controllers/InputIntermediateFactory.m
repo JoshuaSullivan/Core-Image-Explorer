@@ -7,6 +7,7 @@
 #import "AbstractInputIntermediate.h"
 #import "FilterControlsViewController.h"
 #import "ColorInputIntermediate.h"
+#import "ScalarInputIntermediate.h"
 
 @implementation InputIntermediateFactory
 
@@ -17,7 +18,8 @@
     NSString *inputClass = inputAttributes[kCIAttributeClass];
     
     if ([inputClass isEqualToString:@"NSNumber"]) {
-        //TODO: Create a scalar intermediate
+        ScalarInputIntermediate *scalarInt = [[ScalarInputIntermediate alloc] initWithInput:inputName forFilter:filter];
+        return scalarInt;
     } else if ([inputClass isEqualToString:@"CIColor"]) {
         ColorInputIntermediate *colorInt = [[ColorInputIntermediate alloc] initWithInput:inputName forFilter:filter];
         //TODO: Determine if we ever need to disable the alpha channel.
