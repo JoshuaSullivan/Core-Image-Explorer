@@ -20,8 +20,7 @@
 
 @protocol FilterControlsDelegate <NSObject>
 
-- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
-        didChangeFilterConfiguration:(CIFilter *)filter;
+- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController didSetValue:(id)value forAttribute:(NSString *)attribute onFilter:(CIFilter *)filter;
 
 - (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
                 didRequestFullScreen:(BOOL)fullScreen;

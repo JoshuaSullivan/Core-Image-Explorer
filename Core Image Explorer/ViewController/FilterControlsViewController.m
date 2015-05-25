@@ -8,16 +8,19 @@
 #import "SampleImageManager.h"
 #import "MinimalistInputDescriptor.h"
 #import "MinimalistInputViewController.h"
+#import "AbstractInputIntermediate.h"
+#import "InputIntermediateFactory.h"
+#import "InputIntermediateDelegate.h"
 
 static NSString * const kStoryboardIdentifier = @"FilterControls";
 static NSString * const kEmbedNavControllerSegueIdentifier = @"kEmbedNavControllerSegueIdentifier";
 
 static NSString * const kGradientImageKey = @"inputGradientImage";
 
-@interface FilterControlsViewController () <UINavigationControllerDelegate, MinimalistControlDelegate, FilterAttributeListDelegate>
+@interface FilterControlsViewController () <UINavigationControllerDelegate, FilterAttributeListDelegate, InputIntermediateDelegate>
 
 @property (strong, nonatomic) CIFilter *filter;
-@property (strong, nonatomic) NSString *inputKeyToConfigure;
+@property (strong, nonatomic) AbstractInputIntermediate *currentIntermediate;
 
 @end
 
@@ -47,6 +50,7 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 
 - (void)setDefaultImagesOnFilter:(CIFilter *)filter
 {
+    //TODO: I need to track which ImageSource is assigned to each image-based input so that it can be updated properly on orientation change.
     for (NSString *key in filter.inputKeys) {
         if ([key isEqualToString:kCIInputImageKey]) {
             UIImage *existingImage = [filter valueForKey:key];
@@ -98,8 +102,11 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 
 - (void)notifyDelegateOfFilterChange
 {
-    if ([self.filterControlsDelegate respondsToSelector:@selector(filterControlsViewController:didChangeFilterConfiguration:)]) {
-        [self.filterControlsDelegate filterControlsViewController:self didChangeFilterConfiguration:self.filter];
+    if ([self.filterControlsDelegate respondsToSelector:@selector(filterControlsViewController:didSetValue:forAttribute:onFilter:)]) {
+        [self.filterControlsDelegate filterControlsViewController:self
+                                                      didSetValue:self.filter
+                                                     forAttribute:nil
+                                                         onFilter:nil];
     }
 }
 
@@ -116,56 +123,41 @@ static NSString * const kGradientImageKey = @"inputGradientImage";
 
 #pragma mark - Control Presentation
 
-- (void)presentControlForInput:(NSString *)inputKey
+- (void)presentControlForInput:(NSString *)inputName
 {
-    self.inputKeyToConfigure = inputKey;
-    NSDictionary *attributes = self.filter.attributes[inputKey];
-    NSString *type = attributes[kCIAttributeType];
-    if ([type isEqualToString:kCIAttributeTypeScalar]) {
-        NSNumber *minValueNumber = attributes[kCIAttributeSliderMin];
-        NSNumber *maxValueNumber = attributes[kCIAttributeSliderMax];
-        NSNumber *currentValueNumber = [self.filter valueForKey:inputKey];
-        CGFloat minValue = minValueNumber ? [minValueNumber floatValue] : 0.0f;
-        CGFloat maxValue = maxValueNumber ? [maxValueNumber floatValue] : minValue + 1.0f;
-        CGFloat currentValue = currentValueNumber ? [currentValueNumber floatValue] : minValue;
-        MinimalistInputDescriptor *descriptor = [MinimalistInputDescriptor inputDescriptorWithTitle:inputKey
-                                                                                           minValue:minValue
-                                                                                           maxValue:maxValue
-                                                                                      startingValue:currentValue];
-        MinimalistInputViewController *scalarVC = [[MinimalistInputViewController alloc] initWithInputCount:1
-                                                                                           inputDescriptors:@[descriptor]];
-        scalarVC.delegate = self;
-        [self presentViewController:scalarVC
-                           animated:YES
-                         completion:nil];
-        self.view.hidden = YES;
-        [self.filterControlsDelegate filterControlsViewController:self didRequestFullScreen:YES];
-    }
+    self.currentIntermediate = [InputIntermediateFactory createIntermediateForInput:inputName forFilter:self.filter];
+    self.currentIntermediate.delegate = self;
+    UIViewController *inputVC = self.currentIntermediate.inputViewController;
+    [self presentViewController:inputVC animated:YES completion:nil];
+    self.view.hidden = YES;
+    [self.filterControlsDelegate filterControlsViewController:self didRequestFullScreen:YES];
 }
 
 #pragma mark - FilterAttributeListDelegate
 
-- (void)filterAttributesList:(FilterAttributesListViewController *)attributeListVC didSelectInput:(NSString *)input
+- (void)filterAttributesList:(FilterAttributesListViewController *)attributeListVC didSelectInput:(NSString *)inputName
 {
-    [self presentControlForInput:input];
+    [self presentControlForInput:inputName];
 }
 
-#pragma mark - MinimalistControlDelegate
+#pragma mark - InputIntermediateDelegate
 
-- (void)minimalistControl:(MinimalistInputViewController *)minimalistControl didSetValue:(CGFloat)value forInputIndex:(NSInteger)index
+- (void)inputIntermediate:(id)inputIntermediate didSetValue:(id)value forInput:(NSString *)inputName
 {
-    [self.filter setValue:@(value) forKey:self.inputKeyToConfigure];
-    [self notifyDelegateOfFilterChange];
+    [self.filter setValue:value forKey:inputName];
+    if ([self.filterControlsDelegate respondsToSelector:@selector(filterControlsViewController:didSetValue:forAttribute:onFilter:)]) {
+        [self.filterControlsDelegate filterControlsViewController:self
+                                                      didSetValue:value
+                                                     forAttribute:inputName
+                                                         onFilter:self.filter];
+    }
 }
 
-- (void)minimalistControlShouldClose:(MinimalistInputViewController *)minimalistController
+- (void)inputIntermedateDidComplete:(id)inputIntermediate
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.view.hidden = NO;
-        [self.filterControlsDelegate filterControlsViewController:self didRequestFullScreen:NO];
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.currentIntermediate = nil;
 }
-
 
 
 @end

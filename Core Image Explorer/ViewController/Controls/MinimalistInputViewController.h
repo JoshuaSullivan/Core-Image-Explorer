@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) id <MinimalistControlDelegate> delegate;
 
-+ (MinimalistInputViewController *)minimalistControlForInputCount:(NSUInteger)inputCount inputDescriptors:(NSArray *)descriptors;
++ (MinimalistInputViewController *)minimalistControlForDescriptors:(NSArray *)descriptors;
 
 /**
 * Creates and returns an initialized instance of MinimalistInputViewController.
@@ -23,7 +23,7 @@
 * @param inputCount The number of discrete inputs to create.
 * @param descriptors An array of MinimalistInputDescriptor objects. This array must have inputCount or greater members.
 */
-- (instancetype)initWithInputCount:(NSUInteger)inputCount inputDescriptors:(NSArray *)descriptors;
+- (instancetype)initWithInputDescriptors:(NSArray *)descriptors;
 
 - (void)setDescriptor:(MinimalistInputDescriptor *)descriptor forInputIndex:(NSUInteger)index;
 

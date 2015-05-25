@@ -23,6 +23,7 @@
 @property (assign, nonatomic) CGRect targetRect;
 @property (strong, nonatomic) CIContext *ciContext;
 @property (assign, atomic) BOOL isRendering;
+@property (assign, nonatomic) BOOL renderIsStale;
 
 @property (strong, nonatomic) FilterControlsViewController *filterControls;
 @property (strong, nonatomic) FilterControlsPresentationController *filterPresentationController;
@@ -54,7 +55,7 @@
     self.view.tintColor = [UIColor blackColor];
 
     self.filter = [CIFilter filterWithName:self.filterDescriptor[kCIAttributeFilterName]];
-    self.filterControls = [[FilterControlsViewController alloc] initWithFilter:self.filter];
+    self.filterControls = [[FilterControlsViewController alloc] initWithFilter:[self.filter copy]];
     self.filterControls.filterControlsDelegate = self;
     self.filterControls.modalPresentationStyle = UIModalPresentationCustom;
     self.filterControls.transitioningDelegate = self;
@@ -83,9 +84,11 @@
 {
     if (self.isRendering) {
         // Only start a render while one is not in progress.
+        self.renderIsStale = YES;
         return;
     }
     self.isRendering = YES;
+    self.renderIsStale = NO;
     // Since the filter is mutable and could be modified by another class while rendering is in progress, we'll duplicate it.
     CIFilter *workingFilter = [self.filter copy];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -96,6 +99,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = finalImage;
             self.isRendering = NO;
+            if (self.renderIsStale) {
+                [self renderImage];
+            }
         });
     });
 
@@ -106,9 +112,9 @@
 
 #pragma mark - Filter Controls
 
-- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController
-        didChangeFilterConfiguration:(CIFilter *)filter
+- (void)filterControlsViewController:(FilterControlsViewController *)filterControlsViewController didSetValue:(id)value forAttribute:(NSString *)attribute onFilter:(CIFilter *)filter
 {
+    [self.filter setValue:value forKey:attribute];
     [self renderImage];
 }
 

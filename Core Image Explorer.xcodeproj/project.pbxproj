@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */; };
 		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
+		4BA901682CB8ECA3B4AD7B3F /* InputIntermediateFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90AF64112BE03B4DD0DDF /* InputIntermediateFactory.m */; };
+		4BA90494BBC4FEB70422634C /* ScalarInputIntermediate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA904BECFD89BE8C8936F32 /* ScalarInputIntermediate.m */; };
+		4BA9054C98C699BF806250B3 /* AbstractInputIntermediate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90FEB4B5A4E7455A8448F /* AbstractInputIntermediate.m */; };
 		4BA905B461A461CC9453A7BF /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA907F486167749030EB646 /* AppConstants.m */; };
 		4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90A102F853CFE0A418794 /* MinimalistControlView.m */; };
+		4BA90B394E8B8931D7863DC7 /* ColorInputIntermediate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90FEE5F6EF03289C69B8B /* ColorInputIntermediate.m */; };
 		4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
 		7B0EBC581ADC1AFD00A87C9A /* FilterAttributesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EBC571ADC1AFD00A87C9A /* FilterAttributesListViewController.m */; };
@@ -65,19 +69,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BA900117A7C2BC913703194 /* InputIntermediateDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputIntermediateDelegate.h; sourceTree = "<group>"; };
 		4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseConfigurationViewController.m; sourceTree = "<group>"; };
+		4BA901619ED81D445BBB2A9E /* ScalarInputIntermediate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalarInputIntermediate.h; sourceTree = "<group>"; };
+		4BA90212374379BC04237A07 /* ColorInputIntermediate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorInputIntermediate.h; sourceTree = "<group>"; };
 		4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlsViewController.m; sourceTree = "<group>"; };
 		4BA9049AF802C44A2966710C /* BaseConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConfigurationViewController.h; sourceTree = "<group>"; };
+		4BA904BECFD89BE8C8936F32 /* ScalarInputIntermediate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalarInputIntermediate.m; sourceTree = "<group>"; };
 		4BA905E1CA9F609BC7C31EB2 /* ScalarInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalarInputViewController.h; sourceTree = "<group>"; };
 		4BA907F486167749030EB646 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConstants.m; sourceTree = "<group>"; };
 		4BA909518943943910261215 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
 		4BA90A102F853CFE0A418794 /* MinimalistControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistControlView.m; sourceTree = "<group>"; };
+		4BA90A50AB2AB495C59E4673 /* InputIntermediateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputIntermediateFactory.h; sourceTree = "<group>"; };
+		4BA90AF64112BE03B4DD0DDF /* InputIntermediateFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputIntermediateFactory.m; sourceTree = "<group>"; };
 		4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalarInputViewController.m; sourceTree = "<group>"; };
+		4BA90BFCBDEA4E3E390A6017 /* AbstractInputIntermediate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractInputIntermediate.h; sourceTree = "<group>"; };
 		4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VanishingValueLabel.m; sourceTree = "<group>"; };
 		4BA90D3829D20BE993BD8C02 /* MinimalistControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistControlView.h; sourceTree = "<group>"; };
 		4BA90E3BB9D147FA8208D908 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
 		4BA90F5CD4A2863C0BADC5D6 /* VanishingValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VanishingValueLabel.h; sourceTree = "<group>"; };
+		4BA90FEB4B5A4E7455A8448F /* AbstractInputIntermediate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractInputIntermediate.m; sourceTree = "<group>"; };
+		4BA90FEE5F6EF03289C69B8B /* ColorInputIntermediate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorInputIntermediate.m; sourceTree = "<group>"; };
 		7B0EBC561ADC1AFD00A87C9A /* FilterAttributesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterAttributesListViewController.h; sourceTree = "<group>"; };
 		7B0EBC571ADC1AFD00A87C9A /* FilterAttributesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterAttributesListViewController.m; sourceTree = "<group>"; };
 		7B16EC651AE17ED600D2E160 /* ImageInputCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputCollectionViewCell.h; sourceTree = "<group>"; };
@@ -186,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */,
+				4BA900117A7C2BC913703194 /* InputIntermediateDelegate.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -203,6 +217,19 @@
 				BCA2C4541AE67F7D00DE23CB /* MinimalistInputViewController.m */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		4BA90CC517FF10A0F8677400 /* InputIntermediaries */ = {
+			isa = PBXGroup;
+			children = (
+				4BA90FEE5F6EF03289C69B8B /* ColorInputIntermediate.m */,
+				4BA90212374379BC04237A07 /* ColorInputIntermediate.h */,
+				4BA90FEB4B5A4E7455A8448F /* AbstractInputIntermediate.m */,
+				4BA90BFCBDEA4E3E390A6017 /* AbstractInputIntermediate.h */,
+				4BA904BECFD89BE8C8936F32 /* ScalarInputIntermediate.m */,
+				4BA901619ED81D445BBB2A9E /* ScalarInputIntermediate.h */,
+			);
+			path = InputIntermediaries;
 			sourceTree = "<group>";
 		};
 		7F20876505208D3E421E0AF9 /* Pods */ = {
@@ -267,6 +294,9 @@
 				9474CB5552623EFED693F887 /* FilterControlsPresentationController.h */,
 				9474C18328A6D08090E54C4E /* SlideFromRightAnimationController.m */,
 				9474C4B00437ACBF2072004C /* SlideFromRightAnimationController.h */,
+				4BA90CC517FF10A0F8677400 /* InputIntermediaries */,
+				4BA90AF64112BE03B4DD0DDF /* InputIntermediateFactory.m */,
+				4BA90A50AB2AB495C59E4673 /* InputIntermediateFactory.h */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -561,6 +591,10 @@
 				9474CE6336D560C2FDBE2E49 /* FilterControlsPresentationController.m in Sources */,
 				9474C0715A03A4F995DA2F8C /* SlideFromRightAnimationController.m in Sources */,
 				4BA905B461A461CC9453A7BF /* AppConstants.m in Sources */,
+				4BA90B394E8B8931D7863DC7 /* ColorInputIntermediate.m in Sources */,
+				4BA9054C98C699BF806250B3 /* AbstractInputIntermediate.m in Sources */,
+				4BA90494BBC4FEB70422634C /* ScalarInputIntermediate.m in Sources */,
+				4BA901682CB8ECA3B4AD7B3F /* InputIntermediateFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
