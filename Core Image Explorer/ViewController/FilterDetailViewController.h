@@ -10,6 +10,6 @@
 
 @interface FilterDetailViewController : UIViewController
 
-@property (strong, nonatomic) CIFilter *filter;
+@property (strong, nonatomic) NSDictionary *filterDescriptor;
 
 @end

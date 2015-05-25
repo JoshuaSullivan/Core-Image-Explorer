@@ -16,6 +16,8 @@
 
 @interface FilterDetailViewController () <FilterControlsDelegate, UIViewControllerTransitioningDelegate>
 
+@property (strong, nonatomic) CIFilter *filter;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (assign, nonatomic) CGRect sourceRect;
 @property (assign, nonatomic) CGRect targetRect;
@@ -48,9 +50,10 @@
                                                                                  action:@selector(handleTapGesture:)];
     [self.view addGestureRecognizer:tapGesture];
 
-    self.navigationItem.title = self.filter.attributes[kCIAttributeFilterDisplayName];
+    self.navigationItem.title = self.filterDescriptor[kCIAttributeFilterDisplayName];
     self.view.tintColor = [UIColor blackColor];
 
+    self.filter = [CIFilter filterWithName:self.filterDescriptor[kCIAttributeFilterName]];
     self.filterControls = [[FilterControlsViewController alloc] initWithFilter:self.filter];
     self.filterControls.filterControlsDelegate = self;
     self.filterControls.modalPresentationStyle = UIModalPresentationCustom;

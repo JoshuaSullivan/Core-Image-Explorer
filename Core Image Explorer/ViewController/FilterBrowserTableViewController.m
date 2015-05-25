@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 Joshua Sullivan. All rights reserved.
 //
 
-#import <CoreImage/CoreImage.h>
 #import "FilterBrowserTableViewController.h"
-#import "OldFilterControlsViewController.h"
 #import "FilterDetailViewController.h"
+#import "AppConstants.h"
 
 typedef enum {
     TableDisplayModeAlphabetical,
@@ -40,56 +39,15 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 {
     [super viewDidLoad];
 
-
-    [self createFilterData];
+    NSDictionary *filterData = [NSDictionary dictionaryWithContentsOfURL:[AppConstants filterDataURL]];
+    self.categories = filterData[FilterDataSections.allCategories];
+    self.filterMap = filterData[FilterDataSections.filterMap];
+    self.allFilters = filterData[FilterDataSections.allFilters];
 
     self.tableModeButton.title = kAlphabeticalButtonLabel;
     self.tableMode = TableDisplayModeAlphabetical;
 }
 
-- (void)createFilterData
-{
-//    NSArray *exclusionList = @[@"CIColorCube", @"CIMaskToAlpha", @"CICrop"];
-    NSArray *exclusionList = @[];
-
-    NSArray *allFilterNames = [CIFilter filterNamesInCategory:kCICategoryBuiltIn];
-    NSMutableArray *categories = [NSMutableArray array];
-    NSMutableDictionary *filterMap = [NSMutableDictionary dictionary];
-    NSMutableArray *allFilters = [NSMutableArray arrayWithCapacity:allFilterNames.count];
-
-//    NSMutableString *outString = [NSMutableString string];
-
-    for (NSString *name in allFilterNames) {
-        if ([exclusionList containsObject:name]) {
-            continue;
-        }
-        CIFilter *filter = [CIFilter filterWithName:name];
-        [allFilters addObject:filter];
-//        [outString appendFormat:@"%@\n\n", [self enumerateFilter:filter]];
-
-        NSArray *filterCategories = filter.attributes[kCIAttributeFilterCategories];
-        for (NSString *categoryName in filterCategories) {
-            if (![categories containsObject:categoryName]) {
-                [categories addObject:categoryName];
-            }
-
-            if (!filterMap[categoryName]) {
-                filterMap[categoryName] = [NSMutableArray array];
-            }
-
-            [((NSMutableArray *)filterMap[categoryName]) addObject:filter];
-        }
-    }
-
-    [categories removeObject:kCICategoryBuiltIn];
-    [filterMap removeObjectForKey:kCICategoryBuiltIn];
-
-    self.allFilters = [NSArray arrayWithArray:allFilters];
-    self.filterMap = [NSDictionary dictionaryWithDictionary:filterMap];
-    self.categories = [NSArray arrayWithArray:categories];
-
-//    NSLog(@"Filter enumerations:\n\n%@", outString);
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -126,18 +84,18 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reuseIdentifier = @"FilterCell";
-    CIFilter *filter;
+    NSDictionary *filterDescriptor;
 
     if (self.tableMode == TableDisplayModeAlphabetical) {
-        filter = self.allFilters[indexPath.row];
+        filterDescriptor = self.allFilters[indexPath.row];
     } else {
         NSString *category = self.categories[indexPath.section];
-        filter = ((NSArray *)self.filterMap[category])[indexPath.row];
+        filterDescriptor = ((NSArray *)self.filterMap[category])[indexPath.row];
     }
 
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 
-    cell.textLabel.text = filter.attributes[kCIAttributeFilterDisplayName];
+    cell.textLabel.text = filterDescriptor[kCIAttributeFilterDisplayName];
     return cell;
 }
 
@@ -163,16 +121,16 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     if ([segue.identifier isEqualToString:kBrowserToDetailSegueIdentifier]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
 
-        CIFilter * filter;
+        NSDictionary * filterDescriptor;
         if (self.tableMode == TableDisplayModeAlphabetical) {
-            filter = self.allFilters[indexPath.row];
+            filterDescriptor = self.allFilters[indexPath.row];
         } else {
             NSString *category = self.categories[indexPath.section];
-            filter = ((NSArray *)self.filterMap[category])[indexPath.row];
+            filterDescriptor = ((NSArray *)self.filterMap[category])[indexPath.row];
         }
 
         FilterDetailViewController *detailVC = (FilterDetailViewController *)segue.destinationViewController;
-        detailVC.filter = filter;
+        detailVC.filterDescriptor = filterDescriptor;
     }
 
 }
@@ -199,40 +157,6 @@ static NSString * const kBrowserToDetailSegueIdentifier = @"kBrowserToDetailSegu
     // Reserved for future post-info actions, I guess.
 }
 
-#pragma mark - Helper Methods
 
-- (NSString *)enumerateFilter:(CIFilter *)filter
-{
-    NSDictionary *attributes = filter.attributes;
-    NSString *enumString = [NSString stringWithFormat:@"%@ {\n%@}\n", attributes[kCIAttributeFilterName], [self recursivelyDescribeDictionary:attributes
-                                                                                                                                 currentDepth:1]];
-//    NSLog(@"%@ outputs: %@", attributes[kCIAttributeFilterName],[filter outputKeys]);
-    return enumString;
-}
-
-- (NSString *)recursivelyDescribeDictionary:(NSDictionary *)dict currentDepth:(NSInteger)depth
-{
-    NSMutableString *dictString = [NSMutableString string];
-    NSString *prefix = @"";
-    for (NSInteger i = 0; i < depth; i++) {
-        prefix = [prefix stringByAppendingString:@"\t"];
-    }
-    NSArray *allKeys = [[dict allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString *key in allKeys) {
-        id value = dict[key];
-        if ([value isKindOfClass:[NSDictionary class]]) {
-            NSString *dictEnum = [self recursivelyDescribeDictionary:value currentDepth:depth + 1];
-            [dictString appendFormat:@"%@%@ : {\n%@%@}\n", prefix, key, dictEnum, prefix];
-        } else if ([value isKindOfClass:[NSArray class]]) {
-            [dictString appendFormat:@"%@%@ : [%@]\n", prefix, key, [(NSArray *)value componentsJoinedByString:@", "]];
-        } else {
-            [dictString appendFormat:@"%@%@ : %@\n", prefix, key, value];
-        }
-        if ([key rangeOfString:@"Image"].location != NSNotFound) {
-            NSLog(@"image key: %@", key);
-        }
-    }
-    return [NSString stringWithString:dictString];
-}
 
 @end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4BA90032F4AAC6908B3E7CF3 /* ScalarInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */; };
 		4BA900DC34D63A30B0C15A01 /* FilterControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */; };
+		4BA905B461A461CC9453A7BF /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA907F486167749030EB646 /* AppConstants.m */; };
 		4BA9060965661D1CE33673C3 /* MinimalistControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90A102F853CFE0A418794 /* MinimalistControlView.m */; };
 		4BA90D5694DBF300D1D88299 /* VanishingValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */; };
 		4BA90DF91FFFF2873A377BBA /* BaseConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9009075CA2A6C5B0CF8AF /* BaseConfigurationViewController.m */; };
@@ -68,11 +69,13 @@
 		4BA90461C15278FE9C5052F8 /* FilterControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlsViewController.m; sourceTree = "<group>"; };
 		4BA9049AF802C44A2966710C /* BaseConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConfigurationViewController.h; sourceTree = "<group>"; };
 		4BA905E1CA9F609BC7C31EB2 /* ScalarInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalarInputViewController.h; sourceTree = "<group>"; };
+		4BA907F486167749030EB646 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConstants.m; sourceTree = "<group>"; };
 		4BA909518943943910261215 /* FilterControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlsViewController.h; sourceTree = "<group>"; };
 		4BA90A102F853CFE0A418794 /* MinimalistControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinimalistControlView.m; sourceTree = "<group>"; };
 		4BA90B8798F2CE141BF44C81 /* ScalarInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalarInputViewController.m; sourceTree = "<group>"; };
 		4BA90C25FB1A6B4F29FBC7BA /* VanishingValueLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VanishingValueLabel.m; sourceTree = "<group>"; };
 		4BA90D3829D20BE993BD8C02 /* MinimalistControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalistControlView.h; sourceTree = "<group>"; };
+		4BA90E3BB9D147FA8208D908 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
 		4BA90F49AE949A82DE542568 /* FilterConfigurationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConfigurationControl.h; sourceTree = "<group>"; };
 		4BA90F5CD4A2863C0BADC5D6 /* VanishingValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VanishingValueLabel.h; sourceTree = "<group>"; };
 		7B0EBC561ADC1AFD00A87C9A /* FilterAttributesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterAttributesListViewController.h; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 			children = (
 				9474C9D35F5E164BA9AE7C6E /* MinimalistInputDescriptor.h */,
 				9474C8A4B8C36DF9E6044E95 /* MinimalistInputDescriptor.m */,
+				4BA907F486167749030EB646 /* AppConstants.m */,
+				4BA90E3BB9D147FA8208D908 /* AppConstants.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				9474C14AEABC41757E09B822 /* MinimalistInputDescriptor.m in Sources */,
 				9474CE6336D560C2FDBE2E49 /* FilterControlsPresentationController.m in Sources */,
 				9474C0715A03A4F995DA2F8C /* SlideFromRightAnimationController.m in Sources */,
+				4BA905B461A461CC9453A7BF /* AppConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
