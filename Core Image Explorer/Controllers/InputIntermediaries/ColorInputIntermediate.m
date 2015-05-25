@@ -58,6 +58,12 @@ typedef NS_ENUM(NSInteger, ColorComponent) {
                 blue : @(self.b),
                 alpha : @(self.a)
         };
+        NSDictionary *tintColors = @{
+                red : [UIColor redColor],
+                green : [UIColor greenColor],
+                blue : [UIColor blueColor],
+                alpha : [UIColor whiteColor]
+        };
         NSArray *components = @[red, green, blue];
         if (self.includeAlphaComponent) {
             components = [components arrayByAddingObject:alpha];
@@ -69,6 +75,7 @@ typedef NS_ENUM(NSInteger, ColorComponent) {
                                                                                                minValue:0.0f
                                                                                                maxValue:1.0f
                                                                                           startingValue:value];
+            descriptor.tintColor = tintColors[component];
             [descriptors addObject:descriptor];
         }
         self.inputVC = [MinimalistInputViewController minimalistControlForDescriptors:descriptors];
