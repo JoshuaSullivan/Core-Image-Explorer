@@ -11,6 +11,8 @@
 
 @implementation InputIntermediateFactory
 
+// Input Classes: CIImage, NSNumber, NSValue, CIVector, NSData, CIColor, NSObject, NSString
+
 + (AbstractInputIntermediate *)createIntermediateForInput:(NSString *)inputName
                                                 forFilter:(CIFilter *)filter
 {
