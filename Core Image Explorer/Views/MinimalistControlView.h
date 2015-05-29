@@ -3,7 +3,8 @@
 // Copyright (c) 2015 Joshua Sullivan. All rights reserved.
 //
 
-@import UIKit;@class MinimalistInputDescriptor;
+@import UIKit;
+@class MinimalistInputDescriptor;
 
 static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 
@@ -16,6 +17,7 @@ static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 @property (strong, nonatomic) MinimalistInputDescriptor *descriptor;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) BOOL indicatorHidden;
+@property (assign, nonatomic) BOOL integralValues;
 
 @property (weak, nonatomic) id <MinimalistInputDelegate> delegate;
 

@@ -17,9 +17,7 @@
 @property (assign, nonatomic, getter=isHorizontal) BOOL horizontal;
 @property (strong, nonatomic) UIImageView *indicator;
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
-@property (assign, nonatomic, getter=isTracking) BOOL tracking;
 @property (assign, nonatomic) BOOL userChangedValue;
-@property (assign, nonatomic) CGPoint lastTouch;
 @property (strong, nonatomic) JTSTweener *valueTweener;
 
 @end
@@ -55,7 +53,6 @@
 {
     CGFloat d = kDefaultControlInsetsDistance;
     self.edgeInsets = UIEdgeInsetsMake(d, d, d, d);
-    self.lastTouch = CGPointZero;
     self.indicator = [[UIImageView alloc] initWithImage:nil];
     self.indicator.contentMode = UIViewContentModeTopLeft;
     self.indicator.clipsToBounds = YES;
@@ -92,7 +89,6 @@
 - (void)setValueForPoint:(CGPoint)location
 {
     self.userChangedValue = YES;
-    self.lastTouch = location;
     CGFloat ratio = 0.0f;
     if (self.isHorizontal) {
         if (self.bounds.size.width != 0.0f) {
@@ -228,8 +224,16 @@
 - (void)setValue:(CGFloat)value
 {
     _value = fmaxf(self.minValue, fminf(value, self.maxValue));
-    self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", _value];
-    [self.delegate minimalistInput:self didSetValue:_value];
+    CGFloat reportedValue = _value;
+    if (self.integralValues) {
+        self.valueLabel.value = [NSString stringWithFormat:@"%li", (long)_value];
+        reportedValue = floorf(reportedValue);
+    } else {
+        self.valueLabel.value = [NSString stringWithFormat:@"%0.2f", _value];
+    }
+    if ([self.delegate respondsToSelector:@selector(minimalistInput:didSetValue:)]) {
+        [self.delegate minimalistInput:self didSetValue:reportedValue];
+    }
 }
 
 - (void)setHorizontal:(BOOL)horizontal
