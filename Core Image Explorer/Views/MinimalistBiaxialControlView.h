@@ -11,13 +11,24 @@
 
 static const CGFloat kDefaultControlInsetsDistance = 20.0f;
 
+@protocol MinimalistBiaxialInputDelegate;
+
 @interface MinimalistBiaxialControlView : UIView
 
 @property (readonly, nonatomic) CGPoint value;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
+@property (assign, nonatomic) BOOL integralValues;
+
+@property (weak, nonatomic) id <MinimalistBiaxialInputDelegate> delegate;
 
 - (instancetype)initWithTitle:(NSString *)title xRange:(FloatRange)xRange yRange:(FloatRange)yRange;
 
 - (void)setValue:(CGPoint)value animated:(BOOL)animated;
+
+@end
+
+@protocol MinimalistBiaxialInputDelegate <NSObject>
+
+- (void)minimalistBiaxialInput:(MinimalistBiaxialControlView *)input didSetValue:(CGPoint)value;
 
 @end

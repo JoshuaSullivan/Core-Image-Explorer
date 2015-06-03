@@ -11,13 +11,20 @@
 #import "MinimalistBiaxialControlView.h"
 #import "VanishingValueLabel.h"
 
+static inline CGFloat clampFloat(CGFloat f, CGFloat min, CGFloat max) {
+    return (CGFloat)fmax(min, fmin(max, f));
+}
+
 @interface MinimalistBiaxialControlView ()
 
 @property (assign, nonatomic) CGPoint value;
 @property (strong, nonatomic) NSString *title;
 @property (assign, nonatomic) FloatRange xRange;
 @property (assign, nonatomic) FloatRange yRange;
+
 @property (strong, nonatomic) VanishingValueLabel *valueLabel;
+@property (strong, nonatomic) UIImageView *indicatorHorizontal;
+@property (strong, nonatomic) UIImageView *indicatorVertical;
 
 @end
 
@@ -33,6 +40,34 @@
     _xRange = xRange;
     _yRange = yRange;
     _title = title;
+
+    _indicatorHorizontal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HairlineHorizontal"]];
+    _indicatorVertical = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HairlineVertical"]];
+    for (UIImageView *imageView in @[_indicatorHorizontal, _indicatorVertical]) {
+        imageView.contentMode = UIViewContentModeTopLeft;
+        imageView.clipsToBounds = YES;
+        [self addSubview:imageView];
+    }
+
+    self.valueLabel = [[VanishingValueLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 120.0f, 80.0f)];
+    self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:self.valueLabel];
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.valueLabel
+                                                               attribute:NSLayoutAttributeCenterX
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self
+                                                               attribute:NSLayoutAttributeCenterX
+                                                              multiplier:1.0f
+                                                                constant:0.0f];
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.valueLabel
+                                                               attribute:NSLayoutAttributeCenterY
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self
+                                                               attribute:NSLayoutAttributeCenterY
+                                                              multiplier:1.0f
+                                                                constant:0.0f];
+    [self addConstraints:@[centerX, centerY]];
+
     [self commonInit];
     return self;
 }
@@ -40,11 +75,14 @@
 - (void)commonInit
 {
     _edgeInsets = UIEdgeInsetsMake(kDefaultControlInsetsDistance, kDefaultControlInsetsDistance, kDefaultControlInsetsDistance, kDefaultControlInsetsDistance);
+    _indicatorVertical.layer.anchorPoint = CGPointZero;
+    _indicatorHorizontal.layer.anchorPoint = CGPointZero;
 }
 
 - (void)updateLayoutWithPoint:(CGPoint)point
 {
-
+    self.indicatorHorizontal.layer.position = CGPointMake(0.0f, point.y);
+    self.indicatorVertical.layer.position = CGPointMake(point.x, 0.0f);
 }
 
 #pragma mark - Touches
@@ -76,7 +114,24 @@
 
 - (void)setValue:(CGPoint)value
 {
-    _value = value;
+    CGFloat x = clampFloat(value.x, self.xRange.min, self.xRange.max);
+    CGFloat y = clampFloat(value.y, self.yRange.min, self.yRange.max);
+    NSString *valueString;
+    if (self.integralValues) {
+        x = roundf(x);
+        y = roundf(y);
+        valueString = [NSString stringWithFormat:@"%li, %li", (long)x, (long)y];
+    } else {
+        valueString = [NSString stringWithFormat:@"%0.2f, %0.2f", x, y];
+    }
+    CGPoint clampedValue = CGPointMake(x, y);
+    _value = clampedValue;
+
+    self.valueLabel.value = valueString;
+
+    if ([self.delegate respondsToSelector:@selector(minimalistBiaxialInput:didSetValue:)]) {
+        [self.delegate minimalistBiaxialInput:self didSetValue:clampedValue];
+    }
 
 }
 
